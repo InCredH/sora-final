@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="wrap grid items-center gap-12 py-12 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:gap-8 lg:py-16">
+      <div className="wrap grid items-center gap-12 py-12 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:gap-8 lg:py-1">
         <div className="order-2 lg:order-1 lg:col-span-6">
           <h1 className="hero-rise" style={{ animationDelay: "0.55s" }}>
             <Logo className="h-[clamp(4rem,10vw,8.5rem)]" />

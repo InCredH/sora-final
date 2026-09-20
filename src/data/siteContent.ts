@@ -33,6 +33,7 @@ export const FOOTER_NAV = [
 export const HERO = {
   line: "Timeless shades for modern days.",
   cta: { label: "SHOP NOW", to: "/shop" },
+  // secondary: { label: "OUR STORY", to: "/about" },
 };
 
 export const BRAND_STATEMENT = {
