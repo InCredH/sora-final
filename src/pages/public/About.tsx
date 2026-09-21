@@ -72,22 +72,22 @@ export default function About() {
       </div> */}
 
       {/* OUR STORY */}
-      <section className="wrap grid gap-12 py-20 md:py-32 lg:grid-cols-12 lg:gap-16">
+      <section className="wrap grid gap-5 lg:py-20 py-5 md:py-32 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
             <p className="text-[0.6875rem] uppercase tracking-[0.28em] text-olive">
               Our story
             </p>
             <h2 className="t-display mt-5 text-[clamp(2.25rem,4.5vw,4rem)]">
-              Why we
-              <br />
-              started.
+              Why we started
+              {/* <br /> */}
+              {/* started. */}
             </h2>
             <span className="mt-8 block h-px w-16 bg-champagne" />
           </div>
         </div>
 
-        <div className="space-y-14 lg:col-span-8 lg:space-y-20">
+        <div className="md:space-y-14 space-y-8 lg:col-span-8 lg:space-y-20">
           {STORY.map((c, i) => (
             <article
               key={c.label}

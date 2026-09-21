@@ -17,7 +17,7 @@ export function BrandTile({ kind, className = "" }: { kind: TileKind; className?
       <div className={`${shell} bg-olive text-ivory`} aria-hidden>
         <Logo className="h-9" />
         <span className="mt-6 h-8 w-px bg-ivory/50" />
-        <p className="t-label mt-6 text-[0.625rem] tracking-[0.42em]">SEE YOUR WAY.</p>
+        <p className="t-label mt-6 text-[0.625rem] tracking-[0.42em]">FOR EVERY MOOD.</p>
       </div>
     );
   if (kind === "burgundy")

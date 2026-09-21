@@ -24,13 +24,13 @@ export default function Contact() {
   const ph = "italic text-espresso/55";
 
   return (
-    <div className="wrap pb-28 pt-16 md:pt-24">
+    <div className="wrap pb-28 lg:pt-16 pt-10 md:pt-24">
       <h1 className="t-display text-[clamp(3rem,7vw,6rem)]">Contact</h1>
-      <div className="mt-14 grid gap-16 lg:grid-cols-12 lg:gap-24">
+      <div className="lg:mt-14 mt-5 grid gap-10 lg:gap-16 lg:grid-cols-12 lg:gap-24">
         <div className="space-y-8 lg:col-span-5">
           <p className="t-editorial text-[1.9rem] text-espresso/85">We'd love to hear from you.</p>
           <dl className="space-y-6 text-[0.9375rem]">
-            {[["Email", SITE.contact.email], ["Phone / WhatsApp", SITE.contact.phone], ["Studio", SITE.contact.address], ["Hours", SITE.contact.hours]].map(([k, v]) => (
+            {[["Email", SITE.contact.email], ["Phone / WhatsApp", SITE.contact.phone]].map(([k, v]) => (
               <div key={k} className="border-t hairline pt-4"><dt className="t-label text-[0.625rem] text-espresso/55">{k}</dt><dd className={`mt-1 ${ph}`}>{v}</dd></div>
             ))}
           </dl>
@@ -57,3 +57,4 @@ export default function Contact() {
     </div>
   );
 }
+// ["Studio", SITE.contact.address], ["Hours", SITE.contact.hours]

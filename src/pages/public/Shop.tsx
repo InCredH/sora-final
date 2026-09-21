@@ -81,8 +81,8 @@ export default function Shop() {
   );
 
   return (
-    <div className="wrap pb-24 pt-14 md:pt-20">
-      <header className="mb-10 md:mb-14">
+    <div className="wrap pb-24 lg:pt-14 pt-4 md:pt-20">
+      <header className="lg:mb-10 md:mb-14 mb-3">
         <h1 className="t-display text-[clamp(2.75rem,6vw,5rem)]">Shop</h1>
         <p className="mt-3 text-[0.9375rem] text-espresso/65" aria-live="polite">
           {status === "ready" ? `${results.length} ${results.length === 1 ? "piece" : "pieces"}` : "\u00a0"}

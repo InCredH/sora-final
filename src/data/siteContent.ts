@@ -4,7 +4,7 @@
  */
 export const SITE = {
   name: "SORA",
-  tagline: "SEE YOUR WAY.",
+  tagline: "FOR EVERY MOOD.",
   /** Replace with the real profile URL */
   instagramUrl: "https://www.instagram.com/",
   contact: {
@@ -32,12 +32,13 @@ export const FOOTER_NAV = [
 
 export const HERO = {
   line: "Timeless shades for modern days.",
+  // sub: "Premium sunglasses with full UV protection, designed to be worn every day.",
   cta: { label: "SHOP NOW", to: "/shop" },
-  // secondary: { label: "OUR STORY", to: "/about" },
+  secondary: { label: "OUR STORY", to: "/about" },
 };
 
 export const BRAND_STATEMENT = {
-  title: "SEE YOUR WAY.",
+  title: "FOR EVERY MOOD.",
   body: ["A person's style is not just what they wear.", "It is how they choose to see the world."],
   note: "Confidence looks good on you.",
   cta: { label: "OUR STORY", to: "/about" },
