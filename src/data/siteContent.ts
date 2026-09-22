@@ -6,7 +6,7 @@ export const SITE = {
   name: "SORA",
   tagline: "SEE YOUR WAY.",
   /** Replace with the real profile URL */
-  instagramUrl: "https://www.instagram.com/",
+  instagramUrl: "https://www.instagram.com/yoursora.shop?stkn=MXBueXprYXF0Z2Fxbg%3D%3D&utm_source=qr",
   contact: {
     email: "[email address]",
     phone: "[phone / WhatsApp]",
