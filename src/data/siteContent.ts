@@ -4,7 +4,7 @@
  */
 export const SITE = {
   name: "SORA",
-  tagline: "FOR EVERY MOOD.",
+  tagline: "SEE YOUR WAY.",
   /** Replace with the real profile URL */
   instagramUrl: "https://www.instagram.com/",
   contact: {
@@ -38,7 +38,7 @@ export const HERO = {
 };
 
 export const BRAND_STATEMENT = {
-  title: "FOR EVERY MOOD.",
+  title: "SEE YOUR WAY.",
   body: ["A person's style is not just what they wear.", "It is how they choose to see the world."],
   note: "Confidence looks good on you.",
   cta: { label: "OUR STORY", to: "/about" },

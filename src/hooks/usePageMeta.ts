@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export function usePageTitle(title?: string) {
   useEffect(() => {
-    document.title = title ? `${title} — SORA` : "SORA — For every mood.";
+    document.title = title ? `${title} — SORA` : "SORA — See your way.";
   }, [title]);
 }
 
