@@ -42,3 +42,5 @@ src/
 - Replace placeholder imagery (`src/assets/img`) and demo products with real ones
 - Fill `SITE.contact`, `SITE.instagramUrl`, FAQ, Shipping & Returns, Privacy, Terms in `siteContent.ts`
 - Connect a database (products/orders) and real auth; add a payment provider
+
+
