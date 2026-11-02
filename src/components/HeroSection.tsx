@@ -95,7 +95,7 @@ export const HeroSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] overflow-hidden px-4 sm:px-8 lg:px-12 pt-4 pb-0 select-none">
+    <section className="relative w-full min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] overflow-hidden px-4 sm:px-8 lg:px-12 pt-6 sm:pt-8 pb-0 select-none">
       
       {/* 1. Subtle Japanese Aesthetics: Animated Zen Circle & Pulsing Warm Mist */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -112,30 +112,7 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Top Minimal Telemetry Bar with Smooth Micro-Interaction */}
-      <div className="relative z-10 w-full flex items-center justify-between text-[10px] sm:text-[11px] font-mono-tech tracking-widest uppercase border-b border-[#2C211B]/10 pb-3">
-        <div className="flex items-center gap-2.5">
-          <span className="hanko-stamp text-xs px-1.5 py-0.5 cursor-pointer">空</span>
-          <span className="text-[#2C211B] font-bold">SORA // CONTEMPORARY LUXURY</span>
-          <span className="hidden sm:inline text-[#6B7055]">| CRAFTED IN SABAE, JAPAN</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-6 text-[#6B7055]">
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#861F3A] animate-ping" />
-            <span>200 ARTISANAL STEPS</span>
-          </span>
-          <span className="text-[#C8A96B] font-semibold">100% CARL ZEISS OPTICS</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] text-[#861F3A] font-bold bg-[#861F3A]/10 border border-[#861F3A]/25 px-2.5 py-0.5 rounded transition-transform hover:scale-105">
-            AUTUMN/WINTER 2026
-          </span>
-        </div>
-      </div>
-
-      {/* 3. Main Split Stage: Bold English Typography & Fashion Editorial Visual */}
+      {/* 2. Main Split Stage: Bold English Typography & Fashion Editorial Visual */}
       <div className="relative z-10 my-auto py-4 sm:py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full">
         
         {/* Left Column: Bold Editorial Narrative & Expressive Perspectives */}
