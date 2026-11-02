@@ -83,8 +83,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           {/* Left Column: Interactive Image Gallery (7 cols) */}
           <div className="lg:col-span-7 space-y-2.5 sm:space-y-3">
             
-            {/* Primary Hero Image Viewport - Box contained so the entire image fits on screen without scrolling */}
-            <div className="relative h-[310px] sm:h-[360px] lg:h-[390px] xl:h-[410px] w-full overflow-hidden bg-[#FAF7F0] border border-[#2C211B]/15 rounded-2xl shadow-sm group flex items-center justify-center">
+            {/* Primary Hero Image Viewport - Extended downward to eliminate empty space and showcase frame details */}
+            <div className="relative h-[360px] sm:h-[440px] lg:h-[490px] xl:h-[530px] w-full overflow-hidden bg-[#FAF7F0] border border-[#2C211B]/15 rounded-2xl shadow-sm group flex items-center justify-center">
               
               {/* Subtle ambient backdrop */}
               <img
@@ -149,14 +149,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               )}
             </div>
 
-            {/* Thumbnail Ribbon — Compact Height */}
-            <div className="grid grid-cols-5 gap-2">
+            {/* Thumbnail Ribbon — Extended & Balanced */}
+            <div className="grid grid-cols-5 gap-2 sm:gap-3">
               {product.images.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`h-12 sm:h-14 overflow-hidden bg-[#FAF7F0] border rounded-lg transition-all cursor-pointer relative group flex items-center justify-center p-1 ${
+                  className={`h-14 sm:h-16 lg:h-18 overflow-hidden bg-[#FAF7F0] border rounded-xl transition-all cursor-pointer relative group flex items-center justify-center p-1.5 ${
                     activeImageIndex === idx
                       ? 'border-[#861F3A] ring-2 ring-[#861F3A] opacity-100 shadow-md scale-102 bg-white'
                       : 'border-[#2C211B]/15 opacity-70 hover:opacity-100 hover:border-[#861F3A]'
@@ -167,7 +167,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                     alt={`SORA ${product.name} frame angle ${idx + 1}`}
                     className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
-                  <span className="absolute bottom-0.5 right-1 bg-black/60 text-[8px] font-mono-tech text-white px-1 rounded">
+                  <span className="absolute bottom-1 right-1.5 bg-black/60 text-[8px] font-mono-tech text-white px-1 rounded">
                     0{idx + 1}
                   </span>
                 </button>
