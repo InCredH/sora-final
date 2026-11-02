@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#2C211B"/>
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="none" stroke="#C8A96B" stroke-width="1.5" stroke-opacity="0.4"/>
+  <!-- Hanko Stamp Box -->
+  <rect x="14" y="14" width="36" height="36" rx="6" fill="#861F3A" stroke="#C8A96B" stroke-width="1.2"/>
+  <!-- Japanese Kanji '空' (SORA / Sky) -->
+  <text x="32" y="39" font-family="'Shippori Mincho', 'Noto Serif JP', serif, sans-serif" font-size="24" font-weight="bold" fill="#F5EFE3" text-anchor="middle">空</text>
+</svg>
