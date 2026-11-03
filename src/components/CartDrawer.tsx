@@ -135,7 +135,7 @@ export const CartDrawer: React.FC = () => {
         ) : (
           <>
             {/* Free Shipping Progress Indicator */}
-            <div className="px-6 py-3 bg-[#FAF7F0] border-b border-[#2C211B]/10">
+            {/* <div className="px-6 py-3 bg-[#FAF7F0] border-b border-[#2C211B]/10">
               <div className="flex items-center justify-between text-[11px] font-mono-tech mb-1.5">
                 <span className="text-[#6B7055]">
                   {remainingForFreeShipping > 0
@@ -150,7 +150,7 @@ export const CartDrawer: React.FC = () => {
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Cart Items List */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">

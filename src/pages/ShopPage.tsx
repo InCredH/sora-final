@@ -26,7 +26,7 @@ export const ShopPage: React.FC = () => {
       const priceB = b.salePrice ?? b.price;
       if (sortBy === 'price-asc') return priceA - priceB;
       if (sortBy === 'price-desc') return priceB - priceA;
-      if (sortBy === 'rating') return b.rating - a.rating;
+      if (sortBy === 'rating') return (b.rating ?? 0) - (a.rating ?? 0);
       return 0; // featured maintains default order
     });
   }, [selectedCategoryFilter, selectedShape, sortBy, inStockOnly]);
@@ -58,9 +58,9 @@ export const ShopPage: React.FC = () => {
             <h1 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
               THE FULL COLLECTION
             </h1>
-            <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
+            {/* <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
               Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli cellulose propionate. Each frame is fitted with certified 100% UV400 high-definition polarized optics.
-            </p>
+            </p> */}
           </div>
 
           <div className="flex items-center gap-4">

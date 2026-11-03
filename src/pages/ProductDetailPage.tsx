@@ -78,6 +78,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               alt="SORA Emblem"
               className="h-5 w-auto object-contain"
             />
+            <img
+              src="/logo-transparent.png"
+              alt="SORA Emblem"
+              className="h-5 w-auto object-contain"
+            />
           </div>
         </div>
 
@@ -187,7 +192,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 <span className="font-bold">{product.category} • {product.shape}</span>
                 <div className="flex items-center gap-1 text-[#C8A96B]">
                   <Star size={13} fill="currentColor" />
-                  <span className="text-[#2C211B] font-bold">{product.rating.toFixed(1)}</span>
+                  <span className="text-[#2C211B] font-bold">{(product.rating ?? 0).toFixed(1)}</span>
                   <span className="text-[#6B7055]">({product.reviewCount} reviews)</span>
                 </div>
               </div>
@@ -328,8 +333,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <Truck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">Free Courier</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Over ₹3,000</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">Free Delivery</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">On all orders</span>
                 </div>
 
                 <div
@@ -337,8 +342,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <RefreshCcw size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">30-Day Trial</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Free Returns</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">No exchange/Returns</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Unless damaged</span>
                 </div>
 
                 <div
@@ -346,8 +351,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <ShieldCheck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">2-Yr Warranty</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">UV400 Protected</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">UV400 Protected</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">All frames</span>
                 </div>
               </div>
             </div>
@@ -438,6 +443,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <div className="space-y-3 text-[#2C211B]/80 leading-relaxed font-normal p-3 rounded-lg bg-white border border-[#2C211B]/10">
                     <p>
                       Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
+                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
                     </p>
                   </div>
                 )}
@@ -523,16 +529,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                     <span className="text-[10px] font-mono-tech text-[#6B7055] uppercase tracking-wider block mb-1 font-bold">
                       PLATE 02 // STUDIO DISPLAY
                     </span>
-                    <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
+                    {/* <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
                       {product.category === 'Titanium' 
                         ? 'PRECISION TITANIUM WIREFRAME' 
+                        : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
                         : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
                     </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
                       {product.category === 'Titanium'
                         ? 'Forged in Sabae, Japan from Grade 4 titanium with micro-flex tension joints. Ultralight 16-17g profile that balances effortlessly all day.'
                         : 'Hand-tumbled with Japanese bamboo chips for 72 continuous hours, imparting a smooth, silky tactile finish that feels weightless against skin.'}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               )}

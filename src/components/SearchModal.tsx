@@ -35,7 +35,7 @@ export const SearchModal: React.FC = () => {
         return (
           p.name.toLowerCase().includes(query) ||
           p.category.toLowerCase().includes(query) ||
-          p.collection.toLowerCase().includes(query) ||
+          (p.collection?.toLowerCase().includes(query) ?? false) ||
           p.shape.toLowerCase().includes(query) ||
           p.shortDescription.toLowerCase().includes(query) ||
           p.specifications.frameMaterial.toLowerCase().includes(query) ||

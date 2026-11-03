@@ -21,13 +21,13 @@ export const Navbar: React.FC = () => {
       code: 'SORA10',
       tag: 'USE CODE'
     },
+    // {
+    //   title: 'LIMITED DROP: INSTANT ₹500 OFF ON PURCHASES OVER ₹2,499',
+    //   code: 'FLAGSHIP',
+    //   tag: 'USE CODE'
+    // },
     {
-      title: 'LIMITED DROP: INSTANT ₹500 OFF ON PURCHASES OVER ₹2,499',
-      code: 'FLAGSHIP',
-      tag: 'USE CODE'
-    },
-    {
-      title: 'FREE EXPRESS INSURED DISPATCH & 30-DAY IN-STUDIO TRIAL ACROSS INDIA',
+      title: 'Complimentary Shipping on Every Order',
       code: null,
       tag: 'NO CODE NEEDED'
     }
@@ -73,11 +73,12 @@ export const Navbar: React.FC = () => {
             </span>
           ) : (
             <span className="text-[#C8A96B] hidden sm:inline text-[9px] border border-[#C8A96B]/30 px-1.5 py-0.2 rounded shrink-0">
-              {OFFERS[currentOfferIndex].tag}
+              {OFFERS[ currentOfferIndex].tag}
             </span>
           )}
         </div>
       </div>
+      {/* Top Announcement Bar: Luxury Live Offers Strip */}
 
       {/* Main Sticky Navigation — Perfectly Centered 3-Column Layout */}
       <header
@@ -141,7 +142,7 @@ export const Navbar: React.FC = () => {
                     : 'text-[#2C211B]/70 hover:text-[#861F3A]'
                 }`}
               >
-                The Manifesto
+                Our Story
               </button>
             </nav>
           </div>
@@ -153,25 +154,30 @@ export const Navbar: React.FC = () => {
               onClick={() => handleNavClick('home')}
               className="group flex flex-col items-center focus:outline-none cursor-pointer"
             >
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <img
-                  src="/logo-transparent.png"
+                  src="/sora-logo-icon.png"
+                  alt="SORA Emblem"
+                  className="h-6 sm:h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+                <img
+                  src="/sora-logo-sora.png"
                   alt="SORA Emblem"
                   className="h-6 sm:h-7 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 />
-                <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-[0.24em] text-[#2C211B] transition-all duration-300 group-hover:text-[#861F3A]">
-                  SORA
-                </span>
+                <img
+                  src="/sora-logo-jap.png"
+                  alt="SORA Emblem"
+                  className="h-6 sm:h-7 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
-              <span className="text-[8px] font-mono-tech tracking-[0.35em] text-[#6B7055] uppercase font-semibold -mt-0.5">
-                TOKYO // S/S 2026
-              </span>
+              
             </button>
           </div>
 
           {/* Right Column (1fr): Search & Shopping Bag Triggers */}
           <div className="flex items-center justify-end gap-2.5 sm:gap-4">
-            <button
+            {/* <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
               className="flex items-center gap-2 px-3 py-2 text-[#2C211B]/80 hover:text-[#861F3A] hover:bg-black/5 rounded-lg text-xs font-mono-tech transition-colors cursor-pointer border border-[#2C211B]/15 bg-white/70 shadow-2xs"
@@ -182,7 +188,7 @@ export const Navbar: React.FC = () => {
               <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-[#FAF7F0] border border-[#2C211B]/15 rounded text-[#6B7055]">
                 ⌘K
               </kbd>
-            </button>
+            </button> */}
 
             <button
               type="button"
@@ -233,6 +239,22 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* Navigation links */}
+              <div className="py-6 flex flex-col gap-4 text-sm font-mono-tech tracking-wider uppercase">
+                {/* Mobile Search Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsSearchOpen(true);
+                  }}
+                  className="flex items-center gap-3 p-3 bg-white border border-[#2C211B]/15 rounded-xl text-xs font-mono-tech text-[#6B7055] hover:text-[#861F3A] hover:border-[#861F3A] transition-all cursor-pointer mb-2"
+                >
+                  <Search size={16} className="text-[#861F3A]" />
+                  <span>Search Silhouettes...</span>
+                </button>
+
+                </div>
+
               <div className="py-6 flex flex-col gap-4 text-sm font-mono-tech tracking-wider uppercase">
                 {/* Mobile Search Button */}
                 <button
