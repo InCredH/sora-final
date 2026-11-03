@@ -78,6 +78,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               alt="SORA Emblem"
               className="h-5 w-auto object-contain"
             />
+            <img
+              src="/logo-transparent.png"
+              alt="SORA Emblem"
+              className="h-5 w-auto object-contain"
+            />
           </div>
         </div>
 
@@ -438,6 +443,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <div className="space-y-3 text-[#2C211B]/80 leading-relaxed font-normal p-3 rounded-lg bg-white border border-[#2C211B]/10">
                     <p>
                       Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
+                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
                     </p>
                   </div>
                 )}
@@ -526,6 +532,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                     {/* <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
                       {product.category === 'Titanium' 
                         ? 'PRECISION TITANIUM WIREFRAME' 
+                        : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
                         : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
                     </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
