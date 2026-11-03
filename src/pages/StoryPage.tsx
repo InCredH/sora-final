@@ -86,17 +86,17 @@ export const StoryPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Chapter 03: Carl Zeiss Optics */}
+        {/* Chapter 03: Precision Optics */}
         <div className="py-16 sm:py-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-4">
             <span className="text-[11px] font-mono-tech text-[#861F3A] uppercase tracking-widest block font-bold">
-              CHAPTER 03 // OBERKOCHEN, GERMANY
+              CHAPTER 03 // OPTICAL PRECISION
             </span>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#2C211B]">
-              CARL ZEISS CERTIFIED PHOTOPROTECTION
+              HIGH-DEFINITION POLARIZED PHOTOPROTECTION
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7055] font-normal leading-relaxed">
-              An architectural frame is futile if the lenses induce visual strain. SORA integrates Carl Zeiss Vision polyamide and CR-39 lenses with 100% UV400 blocking.
+              An architectural frame is futile if the lenses induce visual strain. SORA integrates high-definition polyamide and CR-39 polarized lenses with 100% UV400 blocking.
             </p>
             <p className="text-xs sm:text-sm text-[#6B7055] font-normal leading-relaxed">
               Every lens features hydrophobic and oleophobic anti-smudge coatings, coupled with vacuum-deposited anti-reflective backside layers to eliminate internal ocular bounce-back glare.
@@ -106,11 +106,11 @@ export const StoryPage: React.FC = () => {
           <div className="md:col-span-6 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
               src="https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=1000&q=85"
-              alt="Carl Zeiss certified UV400 polarized optical clarity test with anti-reflective coating"
+              alt="Certified UV400 polarized optical clarity test with anti-reflective coating"
               className="w-full h-full object-cover filter contrast-[1.05]"
             />
             <div className="absolute bottom-3 left-3 bg-[#2C211B]/80 text-[#F5EFE3] px-2.5 py-1 text-[9px] font-mono-tech uppercase rounded backdrop-blur-md">
-              ANTI-REFLECTIVE ZEISS COATINGS
+              ANTI-REFLECTIVE HD COATINGS
             </div>
           </div>
         </div>

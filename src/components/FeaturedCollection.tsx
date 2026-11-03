@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PRODUCTS, Product } from '../data/products';
 import { ProductCard } from './ProductCard';
 import { useShop } from '../context/ShopContext';
-import { ArrowRight, Sparkles, ShieldCheck, Truck, RefreshCw, Award } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 export const FeaturedCollection: React.FC = () => {
   const { setCurrentView } = useShop();
@@ -29,7 +29,7 @@ export const FeaturedCollection: React.FC = () => {
               FEATURED EDITIONS
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
-              Precision-crafted in Sabae from Grade 4 Japanese titanium and Italian Mazzucchelli bio-acetate. Every piece includes 100% UV400 Carl Zeiss optics.
+              Precision-crafted in Sabae from Grade 4 Japanese titanium and Italian Mazzucchelli bio-acetate. Every piece includes certified 100% UV400 high-definition polarized optics.
             </p>
           </div>
 
@@ -84,57 +84,6 @@ export const FeaturedCollection: React.FC = () => {
             <span>EXPLORE ALL SILHOUETTES</span>
             <ArrowRight size={15} />
           </button>
-        </div>
-
-        {/* Genuine Brand Standards Ribbon */}
-        <div className="mt-16 pt-8 border-t border-[#2C211B]/10 grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-[#2C211B]/10">
-            <Award size={18} className="text-[#861F3A] shrink-0" />
-            <div>
-              <span className="text-[10px] font-mono-tech font-bold uppercase text-[#2C211B] block">
-                SABAE TITANIUM
-              </span>
-              <span className="text-[10px] text-[#6B7055] block">
-                180+ Cold-Forged Steps
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-[#2C211B]/10">
-            <ShieldCheck size={18} className="text-[#861F3A] shrink-0" />
-            <div>
-              <span className="text-[10px] font-mono-tech font-bold uppercase text-[#2C211B] block">
-                ZEISS CERTIFIED
-              </span>
-              <span className="text-[10px] text-[#6B7055] block">
-                100% UV400 Polarized
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-[#2C211B]/10">
-            <RefreshCw size={18} className="text-[#861F3A] shrink-0" />
-            <div>
-              <span className="text-[10px] font-mono-tech font-bold uppercase text-[#2C211B] block">
-                30-DAY HOME TRIAL
-              </span>
-              <span className="text-[10px] text-[#6B7055] block">
-                Risk-Free In-Home Fitting
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-[#2C211B]/10">
-            <Truck size={18} className="text-[#861F3A] shrink-0" />
-            <div>
-              <span className="text-[10px] font-mono-tech font-bold uppercase text-[#2C211B] block">
-                INSURED COURIER
-              </span>
-              <span className="text-[10px] text-[#6B7055] block">
-                Free Dispatch Over ₹3,000
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

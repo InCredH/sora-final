@@ -58,7 +58,7 @@ export const ShopPage: React.FC = () => {
               THE FULL COLLECTION
             </h1>
             <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
-              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli bio-acetate. Each frame is fitted with certified 100% UV400 Carl Zeiss polarized optics.
+              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli bio-acetate. Each frame is fitted with certified 100% UV400 high-definition polarized optics.
             </p>
           </div>
 

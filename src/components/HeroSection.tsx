@@ -52,7 +52,7 @@ export const HeroSection: React.FC = () => {
       feeling: 'Deep espresso shadows, city lights and quiet poise',
       icon: <Moon size={13} />,
       heroProduct: PRODUCTS[3] || PRODUCTS[0], // SORREL
-      quote: 'Midnight polarized Carl Zeiss optics framing the night.',
+      quote: 'Midnight polarized high-definition optics framing the night.',
       image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1600&q=90',
       accentColor: '#C8A96B', // Champagne
       tag: 'DEEP OBSIDIAN'
@@ -87,7 +87,7 @@ export const HeroSection: React.FC = () => {
   const marqueeItems = [
     'SORA MAISON // 空',
     'HANDCRAFTED IN SABAE, JAPAN',
-    'CARL ZEISS POLARIZED OPTICS',
+    '100% UV400 POLARIZED OPTICS',
     'GRADE 4 JAPANESE TITANIUM',
     'MAZZUCCHELLI BIO-ACETATE',
     '30-DAY IN-STUDIO TRIAL',

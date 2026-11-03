@@ -343,7 +343,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 >
                   <ShieldCheck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
                   <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">2-Yr Warranty</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Zeiss Protected</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">UV400 Protected</span>
                 </div>
               </div>
             </div>
@@ -433,7 +433,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 {activeTab === 'packaging' && (
                   <div className="space-y-3 text-[#2C211B]/80 leading-relaxed font-normal p-3 rounded-lg bg-white border border-[#2C211B]/10">
                     <p>
-                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified Carl Zeiss warranty documentation, and our 30-day home trial guarantee.
+                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
                     </p>
                   </div>
                 )}
@@ -539,7 +539,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <div className="h-64 sm:h-72 overflow-hidden bg-[#FAF7F0] p-4 flex items-center justify-center">
                     <img
                       src={product.images[4] || product.images[2]}
-                      alt={`SORA ${product.name} Carl Zeiss polarized lens daylight optical test`}
+                      alt={`SORA ${product.name} polarized lens daylight optical test`}
                       className="max-h-full max-w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
@@ -548,7 +548,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                       PLATE 03 // SKYLIGHT & OPTICS
                     </span>
                     <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
-                      CARL ZEISS LIGHT TRANSMISSION
+                      HIGH-DEFINITION LIGHT TRANSMISSION
                     </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
                       Captured directly against the evening twilight. Zero optical aberration, enhanced warm contrast, and 100% certified UV400 radiation protection.

@@ -22,7 +22,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
               <span className="hanko-stamp text-xs px-1.5 py-0.5 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10">空</span>
             </div>
             <p className="mt-4 text-xs text-[#F5EFE3]/75 font-normal leading-relaxed max-w-sm">
-              Contemporary luxury eyewear brand crafted in Sabae, Japan. Optical precision, certified Carl Zeiss polarized lenses, and architectural silhouettes sculpted for personal expression.
+              Contemporary luxury eyewear brand crafted in Sabae, Japan. Optical precision, certified 100% UV400 polarized lenses, and architectural silhouettes sculpted for personal expression.
             </p>
             <div className="mt-6 text-xs font-mono-tech text-[#C8A96B]">
               CONCIERGE: <a href="mailto:concierge@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">concierge@yoursora.shop</a>

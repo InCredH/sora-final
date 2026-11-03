@@ -42,7 +42,7 @@ export const BrandStatement: React.FC = () => {
               In Japanese, <strong className="text-white font-medium">SORA (空)</strong> signifies the open sky — boundless, ever-shifting in color, and completely free. We craft each frame in Sabae, Japan, using aerospace Grade 4 titanium and organic Italian Mazzucchelli bio-acetate.
             </p>
             <p>
-              Fitted with custom Carl Zeiss polarized optics, our silhouettes are designed to evoke an emotional response. Eyewear is simply the physical catalyst; the true medium is your identity, confidence, and self-expression.
+              Fitted with custom high-definition polarized optics, our silhouettes are designed to evoke an emotional response. Eyewear is simply the physical catalyst; the true medium is your identity, confidence, and self-expression.
             </p>
           </div>
         </div>

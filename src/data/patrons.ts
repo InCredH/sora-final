@@ -41,7 +41,7 @@ export const PATRON_POSTS: PatronPost[] = [
     productCategory: "Titanium",
     productPrice: 2999,
     productImage: "/images/hikari/frame-angle.jpg",
-    quote: "The 18K champagne gold hexagonal micro-frame is pure elegance. Featherlight 16 grams and crystal-clear Zeiss amber optics in the golden hour.",
+    quote: "The 18K champagne gold hexagonal micro-frame is pure elegance. Featherlight 16 grams and crystal-clear polarized amber optics in the golden hour.",
     verifiedBadge: true,
     featuredStory: "Verified Patron • Studio Highlight"
   },
