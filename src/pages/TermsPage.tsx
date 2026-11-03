@@ -64,7 +64,7 @@ export const TermsPage: React.FC = () => {
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed font-normal">
-              Every SORA silhouette is cold-forged in Sabae (Fukui Prefecture, Japan) using Grade 4 Japanese titanium and hand-cured Italian Mazzucchelli bio-acetate. Our releases are produced in strictly numbered, micro-batch ateliers. Due to natural striations in genuine bio-cellulose horn acetate and hand-buffed vegetable wax finishes, subtle organic variations are authentic hallmarks of artisanal craft rather than defects.
+              Every SORA silhouette is cold-forged in Sabae (Fukui Prefecture, Japan) using Grade 4 Japanese titanium and hand-cured Italian Mazzucchelli cellulose propionate. Our releases are produced in strictly numbered, micro-batch ateliers. Due to natural striations in genuine bio-cellulose horn acetate and hand-buffed vegetable wax finishes, subtle organic variations are authentic hallmarks of artisanal craft rather than defects.
             </p>
           </section>
 
@@ -137,11 +137,11 @@ export const TermsPage: React.FC = () => {
                 <ShieldCheck size={18} className="text-[#861F3A]" />
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                2-Year Atelier & Carl Zeiss Warranty
+                2-Year Atelier Optical Warranty
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed">
-              Every SORA frame is protected by a two-year international warranty covering cold-forged titanium solder joints, OBE German 5-barrel hinge tension, and Carl Zeiss UV400 lens optical coating integrity. Complimentary ultrasonic deep-cleansing and hinge re-tightening are provided at all SORA ateliers.
+              Every SORA frame is protected by a two-year international warranty covering cold-forged titanium solder joints, OBE German 5-barrel hinge tension, and UV400 polarized lens optical coating integrity. Complimentary ultrasonic deep-cleansing and hinge re-tightening are provided at all SORA ateliers.
             </p>
           </section>
 

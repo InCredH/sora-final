@@ -199,9 +199,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
               ? `Few left in stock (Only ${product.stockCount} remaining)`
               : 'In Stock • Ships in 24 hrs'}
           </span>
-          <span className="text-[#C8A96B] font-medium hidden sm:inline">
+          {/* <span className="text-[#C8A96B] font-medium hidden sm:inline">
             SABAE CRAFT
-          </span>
+          </span> */}
         </div>
 
         {/* Colorway Variant Dots */}

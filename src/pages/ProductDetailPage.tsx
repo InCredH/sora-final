@@ -73,7 +73,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           </button>
 
           <div className="flex items-center gap-2">
-            <span className="hanko-stamp text-[10px] px-1.5 py-0.5 border-[#861F3A] text-[#861F3A]">空</span>
+            <img
+              src="/logo-transparent.png"
+              alt="SORA Emblem"
+              className="h-5 w-auto object-contain"
+            />
           </div>
         </div>
 
@@ -324,8 +328,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <Truck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">Free Courier</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Over ₹3,000</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">Free Delivery</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">On all orders</span>
                 </div>
 
                 <div
@@ -333,8 +337,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <RefreshCcw size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">30-Day Trial</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Free Returns</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">No exchange/Returns</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Unless damaged</span>
                 </div>
 
                 <div
@@ -342,8 +346,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <ShieldCheck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">2-Yr Warranty</span>
-                  <span className="text-[8px] font-mono-tech text-[#6B7055]">Zeiss Protected</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">UV400 Protected</span>
+                  <span className="text-[8px] font-mono-tech text-[#6B7055]">All frames</span>
                 </div>
               </div>
             </div>
@@ -433,7 +437,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 {activeTab === 'packaging' && (
                   <div className="space-y-3 text-[#2C211B]/80 leading-relaxed font-normal p-3 rounded-lg bg-white border border-[#2C211B]/10">
                     <p>
-                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified Carl Zeiss warranty documentation, and our 30-day home trial guarantee.
+                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
                     </p>
                   </div>
                 )}
@@ -519,16 +523,16 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                     <span className="text-[10px] font-mono-tech text-[#6B7055] uppercase tracking-wider block mb-1 font-bold">
                       PLATE 02 // STUDIO DISPLAY
                     </span>
-                    <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
+                    {/* <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
                       {product.category === 'Titanium' 
                         ? 'PRECISION TITANIUM WIREFRAME' 
-                        : 'SCULPTED BIO-ACETATE GEOMETRY'}
+                        : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
                     </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
                       {product.category === 'Titanium'
                         ? 'Forged in Sabae, Japan from Grade 4 titanium with micro-flex tension joints. Ultralight 16-17g profile that balances effortlessly all day.'
                         : 'Hand-tumbled with Japanese bamboo chips for 72 continuous hours, imparting a smooth, silky tactile finish that feels weightless against skin.'}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               )}
@@ -539,7 +543,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <div className="h-64 sm:h-72 overflow-hidden bg-[#FAF7F0] p-4 flex items-center justify-center">
                     <img
                       src={product.images[4] || product.images[2]}
-                      alt={`SORA ${product.name} Carl Zeiss polarized lens daylight optical test`}
+                      alt={`SORA ${product.name} polarized lens daylight optical test`}
                       className="max-h-full max-w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
@@ -548,7 +552,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                       PLATE 03 // SKYLIGHT & OPTICS
                     </span>
                     <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
-                      CARL ZEISS LIGHT TRANSMISSION
+                      HIGH-DEFINITION LIGHT TRANSMISSION
                     </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
                       Captured directly against the evening twilight. Zero optical aberration, enhanced warm contrast, and 100% certified UV400 radiation protection.

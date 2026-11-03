@@ -54,7 +54,7 @@ export const SeenInSora: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#2C211B]/10">
           <div>
             <div className="flex items-center gap-2 text-[11px] font-mono-tech tracking-widest text-[#861F3A] uppercase mb-2">
-              <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A]">空</span>
+              <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
               <span className="font-bold">SEEN IN SORA // COMMUNITY RUNWAY</span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight leading-[1.05]">
@@ -64,8 +64,7 @@ export const SeenInSora: React.FC = () => {
               </span>
             </h2>
             <p className="mt-3 text-xs sm:text-sm text-[#6B7055] font-normal max-w-2xl leading-relaxed">
-              We replaced traditional agency models with real people who own and wear our frames. Post your SORA look on Instagram, tag <strong>@yoursora.shop</strong> with <strong>#SeenInSORA</strong>, and get verified to be featured on our global flagship runway.
-            </p>
+            Our frames, your individuality. Discover how the SORA community wears its own style.            </p>
           </div>
 
           {/* Action Buttons */}
@@ -110,7 +109,7 @@ export const SeenInSora: React.FC = () => {
               <div className="mt-6 space-y-2.5 text-xs font-mono-tech text-[#F5EFE3]/80">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C8A96B]" />
-                  <span>100% Real Faces & Voices</span>
+                  <span>Authentic community stories</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C8A96B]" />

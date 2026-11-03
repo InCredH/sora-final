@@ -44,7 +44,7 @@ export const SearchModal: React.FC = () => {
       })
     : [];
 
-  const quickTags = ['Titanium', 'Bio-Acetate', 'Square', 'Shield', 'Bestseller'];
+  const quickTags = ['Titanium', 'Cellulose Propionate', 'Square', 'Shield', 'Bestseller'];
 
   const handleSelectProduct = (p: Product) => {
     setIsSearchOpen(false);
@@ -129,7 +129,7 @@ export const SearchModal: React.FC = () => {
                     <img
                       src={p.images[0]}
                       alt={p.name}
-                      className="w-14 h-14 object-cover bg-[#F5EFE3] border border-[#2C211B]/10 rounded"
+                      className="w-14 h-14 object-contain p-1 bg-[#FAF7F0] border border-[#2C211B]/10 rounded-lg shadow-2xs"
                     />
                     <div>
                       <h4 className="font-display text-sm font-bold text-[#2C211B] uppercase group-hover:text-[#861F3A]">
@@ -142,9 +142,16 @@ export const SearchModal: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono-tech font-bold text-[#2C211B]">
-                      {formatPrice(p.salePrice ?? p.price)}
-                    </span>
+                    <div className="text-right">
+                      <span className="text-xs font-mono-tech font-bold text-[#2C211B] block">
+                        {formatPrice(p.salePrice ?? p.price)}
+                      </span>
+                      {p.salePrice && (
+                        <span className="text-[10px] font-mono-tech text-[#6B7055] line-through block">
+                          {formatPrice(p.price)}
+                        </span>
+                      )}
+                    </div>
                     <div className="w-8 h-8 rounded-full bg-[#2C211B]/5 group-hover:bg-[#861F3A] group-hover:text-white flex items-center justify-center transition-colors text-[#2C211B]">
                       <ArrowRight size={13} />
                     </div>

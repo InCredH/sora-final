@@ -1,22 +1,23 @@
 import React, { useState, useMemo } from 'react';
 import { PRODUCTS, Product } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
+import { useShop } from '../context/ShopContext';
 import { SlidersHorizontal, X, Grid, LayoutGrid, Check, Sparkles } from 'lucide-react';
 
 export const ShopPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const { selectedCategoryFilter, setSelectedCategoryFilter } = useShop();
   const [selectedShape, setSelectedShape] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [gridColumns, setGridColumns] = useState<'editorial' | 'dense'>('editorial');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
 
-  const categories = ['All', 'Bio-Acetate', 'Titanium', 'Shield & Rimless', 'Limited Edition'];
+  const categories = ['All', 'Cellulose Propionate', 'Titanium', 'Shield & Rimless', 'Limited Edition'];
   const shapes = ['All', 'Rectangular', 'Square', 'Aviator', 'Geometric', 'Cat-Eye', 'Round', 'Shield'];
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((p) => {
-      if (selectedCategory !== 'All' && p.category !== selectedCategory) return false;
+      if (selectedCategoryFilter !== 'All' && p.category !== selectedCategoryFilter) return false;
       if (selectedShape !== 'All' && p.shape !== selectedShape) return false;
       if (inStockOnly && !p.inStock) return false;
       return true;
@@ -28,15 +29,15 @@ export const ShopPage: React.FC = () => {
       if (sortBy === 'rating') return b.rating - a.rating;
       return 0; // featured maintains default order
     });
-  }, [selectedCategory, selectedShape, sortBy, inStockOnly]);
+  }, [selectedCategoryFilter, selectedShape, sortBy, inStockOnly]);
 
   const activeFiltersCount =
-    (selectedCategory !== 'All' ? 1 : 0) +
+    (selectedCategoryFilter !== 'All' ? 1 : 0) +
     (selectedShape !== 'All' ? 1 : 0) +
     (inStockOnly ? 1 : 0);
 
   const clearAllFilters = () => {
-    setSelectedCategory('All');
+    setSelectedCategoryFilter('All');
     setSelectedShape('All');
     setInStockOnly(false);
   };
@@ -49,7 +50,7 @@ export const ShopPage: React.FC = () => {
         <div className="pb-8 border-b border-[#2C211B]/10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
-              <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A] text-[#861F3A]">空</span>
+              <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
               <span>SORA ARCHIVE</span>
               <span>/</span>
               <span className="text-[#2C211B] font-bold">ALL SILHOUETTES</span>
@@ -57,9 +58,9 @@ export const ShopPage: React.FC = () => {
             <h1 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
               THE FULL COLLECTION
             </h1>
-            <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
-              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli bio-acetate. Each frame is fitted with certified 100% UV400 Carl Zeiss polarized optics.
-            </p>
+            {/* <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
+              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli cellulose propionate. Each frame is fitted with certified 100% UV400 high-definition polarized optics.
+            </p> */}
           </div>
 
           <div className="flex items-center gap-4">
@@ -109,9 +110,9 @@ export const ShopPage: React.FC = () => {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => setSelectedCategoryFilter(cat)}
                 className={`px-4 py-2 text-xs font-mono-tech tracking-wider uppercase border rounded-lg transition-all whitespace-nowrap cursor-pointer ${
-                  selectedCategory === cat
+                  selectedCategoryFilter === cat
                     ? 'border-[#2C211B] bg-[#2C211B] text-[#F5EFE3] font-bold shadow-md'
                     : 'border-[#2C211B]/15 text-[#2C211B] hover:border-[#861F3A] bg-white'
                 }`}
@@ -257,15 +258,15 @@ export const ShopPage: React.FC = () => {
                     <button
                       key={cat}
                       type="button"
-                      onClick={() => setSelectedCategory(cat)}
+                      onClick={() => setSelectedCategoryFilter(cat)}
                       className={`w-full text-left px-3 py-2 text-xs font-mono-tech flex items-center justify-between rounded cursor-pointer ${
-                        selectedCategory === cat
+                        selectedCategoryFilter === cat
                           ? 'bg-[#2C211B] text-[#F5EFE3] font-bold'
                           : 'text-[#2C211B] hover:bg-white'
                       }`}
                     >
                       <span>{cat}</span>
-                      {selectedCategory === cat && <Check size={14} className="text-[#C8A96B]" />}
+                      {selectedCategoryFilter === cat && <Check size={14} className="text-[#C8A96B]" />}
                     </button>
                   ))}
                 </div>
