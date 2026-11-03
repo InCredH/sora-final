@@ -28,6 +28,7 @@ export interface Product {
   tagline: string;
   slug: string;
   sku: string;
+  collection?: string;
 
   price: number;
   salePrice: number | null;
@@ -351,7 +352,17 @@ export const PRODUCT_INFO_SECTIONS = [
 // Empty until genuine customer reviews are available.
 // --------------------------------------------------
 
-export const REVIEWS = [];
+export interface Review {
+  id: string;
+  rating: number;
+  title: string;
+  comment: string;
+  author: string;
+  city: string;
+  product: string;
+}
+
+export const REVIEWS: Review[] = [];
 
 // --------------------------------------------------
 // BRAND VALUES / STORE POLICIES

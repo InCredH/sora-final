@@ -26,7 +26,7 @@ export const ShopPage: React.FC = () => {
       const priceB = b.salePrice ?? b.price;
       if (sortBy === 'price-asc') return priceA - priceB;
       if (sortBy === 'price-desc') return priceB - priceA;
-      if (sortBy === 'rating') return b.rating - a.rating;
+      if (sortBy === 'rating') return (b.rating ?? 0) - (a.rating ?? 0);
       return 0; // featured maintains default order
     });
   }, [selectedCategoryFilter, selectedShape, sortBy, inStockOnly]);

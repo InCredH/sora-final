@@ -192,7 +192,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 <span className="font-bold">{product.category} • {product.shape}</span>
                 <div className="flex items-center gap-1 text-[#C8A96B]">
                   <Star size={13} fill="currentColor" />
-                  <span className="text-[#2C211B] font-bold">{product.rating.toFixed(1)}</span>
+                  <span className="text-[#2C211B] font-bold">{(product.rating ?? 0).toFixed(1)}</span>
                   <span className="text-[#6B7055]">({product.reviewCount} reviews)</span>
                 </div>
               </div>
