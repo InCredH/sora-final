@@ -58,7 +58,7 @@ export const Navbar: React.FC = () => {
     <>
       {/* Top Announcement Bar: Luxury Live Offers Strip */}
       <div className="bg-[#2C211B] text-[#C8A96B] border-b border-[#C8A96B]/20 py-2 px-3 sm:px-4 text-center text-[10px] sm:text-[11px] font-mono-tech tracking-widest uppercase flex items-center justify-center gap-2 sm:gap-3 transition-all duration-500 overflow-hidden min-h-[34px]">
-        <span className="hanko-stamp text-[9px] py-0 px-1 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10 shrink-0">空</span>
+        <img src="/logo-transparent.png" alt="" className="h-3.5 w-auto object-contain shrink-0 brightness-110" />
         
         <div key={currentOfferIndex} className="flex items-center gap-2 animate-in fade-in duration-500 overflow-hidden">
           <span className="font-medium text-[#F5EFE3] truncate max-w-[280px] sm:max-w-none">
@@ -146,18 +146,22 @@ export const Navbar: React.FC = () => {
             </nav>
           </div>
 
-          {/* Center Column: Exactly Centered Luxury SORA Wordmark */}
+          {/* Center Column: Exactly Centered Luxury SORA Wordmark with Official Emblem */}
           <div className="flex flex-col items-center justify-center px-4">
             <button
               type="button"
               onClick={() => handleNavClick('home')}
               className="group flex flex-col items-center focus:outline-none cursor-pointer"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
+                <img
+                  src="/logo-transparent.png"
+                  alt="SORA Emblem"
+                  className="h-6 sm:h-7 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
                 <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-[0.24em] text-[#2C211B] transition-all duration-300 group-hover:text-[#861F3A]">
                   SORA
                 </span>
-                <span className="hanko-stamp text-xs px-1.5 py-0.5">空</span>
               </div>
               <span className="text-[8px] font-mono-tech tracking-[0.35em] text-[#6B7055] uppercase font-semibold -mt-0.5">
                 TOKYO // S/S 2026
@@ -208,11 +212,15 @@ export const Navbar: React.FC = () => {
           <div className="relative w-full max-w-xs bg-[#F5EFE3] border-r border-[#2C211B]/15 p-6 flex flex-col justify-between z-10 overflow-y-auto">
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-[#2C211B]/10">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src="/logo-transparent.png"
+                    alt="SORA Emblem"
+                    className="h-6 w-auto object-contain"
+                  />
                   <span className="font-display text-xl font-black tracking-[0.22em] text-[#2C211B]">
                     SORA
                   </span>
-                  <span className="hanko-stamp text-[10px] px-1 py-0.2">空</span>
                 </div>
                 <button
                   type="button"

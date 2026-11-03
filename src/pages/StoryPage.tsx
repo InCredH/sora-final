@@ -12,7 +12,7 @@ export const StoryPage: React.FC = () => {
         {/* Top Tag & Title */}
         <div className="pb-12 border-b border-[#2C211B]/10 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/80 border border-[#2C211B]/15 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-4 rounded">
-            <Compass size={12} className="text-[#861F3A]" />
+            <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
             <span>MAISON HERITAGE & METALLURGY</span>
           </div>
           <h1 className="font-display text-4xl sm:text-6xl font-black uppercase text-[#2C211B] tracking-tight leading-[1.05]">
@@ -62,7 +62,7 @@ export const StoryPage: React.FC = () => {
           <div className="md:col-span-6 order-2 md:order-1 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
               src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85"
-              alt="Hand-cured Italian Mazzucchelli bio-acetate frame polished with bamboo chips"
+              alt="Hand-cured Italian Mazzucchelli cellulose propionate frame polished with bamboo chips"
               className="w-full h-full object-cover filter contrast-[1.05]"
             />
             <div className="absolute bottom-3 left-3 bg-[#2C211B]/80 text-[#F5EFE3] px-2.5 py-1 text-[9px] font-mono-tech uppercase rounded backdrop-blur-md">
@@ -75,7 +75,7 @@ export const StoryPage: React.FC = () => {
               CHAPTER 02 // CASTIGLIONE OLONA, ITALY
             </span>
             <h2 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#2C211B]">
-              BIO-ACETATE FROM LIVING FOREST FIBRES
+              CELLULOSE PROPIONATE FROM LIVING FOREST FIBRES
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7055] font-normal leading-relaxed">
               Standard commercial sunglasses use crude petroleum plasticizers that discolor and embrittle over time. SORA sources exclusively from Mazzucchelli 1849, utilizing cotton linters and wood pulp polymerized with vegetable esters.

@@ -16,13 +16,13 @@ export const CollectionTiles: React.FC = () => {
       category: 'Titanium'
     },
     {
-      id: 'bio-acetate',
-      title: 'ORGANIC BIO-ACETATE',
+      id: 'cellulose propionate',
+      title: 'ORGANIC CELLULOSE PROPIONATE',
       subtitle: 'Sculpted from Italian Mazzucchelli block cellulose. Warm translucent finishes and deep tactile depth.',
       tag: 'TIMELESS SUBSTANCE',
       count: '9 Silhouettes',
       image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85',
-      category: 'Bio-Acetate'
+      category: 'Cellulose Propionate'
     },
     {
       id: 'shield',

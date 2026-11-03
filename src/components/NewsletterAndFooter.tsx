@@ -15,11 +15,15 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/logo-transparent.png"
+                alt="SORA Emblem"
+                className="h-7 w-auto object-contain brightness-110"
+              />
               <span className="font-display text-2xl font-black tracking-[0.22em] text-[#F5EFE3]">
                 SORA
               </span>
-              <span className="hanko-stamp text-xs px-1.5 py-0.5 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10">空</span>
             </div>
             <p className="mt-4 text-xs text-[#F5EFE3]/75 font-normal leading-relaxed max-w-sm">
               Contemporary luxury eyewear brand crafted in Sabae, Japan. Optical precision, certified 100% UV400 polarized lenses, and architectural silhouettes sculpted for personal expression.
@@ -65,13 +69,13 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedCategoryFilter('Bio-Acetate');
+                    setSelectedCategoryFilter('Cellulose Propionate');
                     setCurrentView('shop');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="hover:text-[#C8A96B] transition-colors cursor-pointer"
                 >
-                  Bio-Acetate Frames
+                  Cellulose Propionate Frames
                 </button>
               </li>
               <li>

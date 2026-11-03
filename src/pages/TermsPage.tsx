@@ -64,7 +64,7 @@ export const TermsPage: React.FC = () => {
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed font-normal">
-              Every SORA silhouette is cold-forged in Sabae (Fukui Prefecture, Japan) using Grade 4 Japanese titanium and hand-cured Italian Mazzucchelli bio-acetate. Our releases are produced in strictly numbered, micro-batch ateliers. Due to natural striations in genuine bio-cellulose horn acetate and hand-buffed vegetable wax finishes, subtle organic variations are authentic hallmarks of artisanal craft rather than defects.
+              Every SORA silhouette is cold-forged in Sabae (Fukui Prefecture, Japan) using Grade 4 Japanese titanium and hand-cured Italian Mazzucchelli cellulose propionate. Our releases are produced in strictly numbered, micro-batch ateliers. Due to natural striations in genuine bio-cellulose horn acetate and hand-buffed vegetable wax finishes, subtle organic variations are authentic hallmarks of artisanal craft rather than defects.
             </p>
           </section>
 

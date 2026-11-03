@@ -70,7 +70,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
         {/* Modal Header */}
         <div className="pb-6 border-b border-[#2C211B]/10">
           <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2 font-bold">
-            <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A] text-[#861F3A]">空</span>
+            <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
             <span>THE PATRON RUNWAY // COMMUNITY INITIATIVE</span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#2C211B] tracking-tight">

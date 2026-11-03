@@ -12,7 +12,7 @@ export const ShopPage: React.FC = () => {
   const [gridColumns, setGridColumns] = useState<'editorial' | 'dense'>('editorial');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
 
-  const categories = ['All', 'Bio-Acetate', 'Titanium', 'Shield & Rimless', 'Limited Edition'];
+  const categories = ['All', 'Cellulose Propionate', 'Titanium', 'Shield & Rimless', 'Limited Edition'];
   const shapes = ['All', 'Rectangular', 'Square', 'Aviator', 'Geometric', 'Cat-Eye', 'Round', 'Shield'];
 
   const filteredProducts = useMemo(() => {
@@ -50,7 +50,7 @@ export const ShopPage: React.FC = () => {
         <div className="pb-8 border-b border-[#2C211B]/10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
-              <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A] text-[#861F3A]">空</span>
+              <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
               <span>SORA ARCHIVE</span>
               <span>/</span>
               <span className="text-[#2C211B] font-bold">ALL SILHOUETTES</span>
@@ -59,7 +59,7 @@ export const ShopPage: React.FC = () => {
               THE FULL COLLECTION
             </h1>
             <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
-              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli bio-acetate. Each frame is fitted with certified 100% UV400 high-definition polarized optics.
+              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli cellulose propionate. Each frame is fitted with certified 100% UV400 high-definition polarized optics.
             </p>
           </div>
 

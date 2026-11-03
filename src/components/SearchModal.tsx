@@ -44,7 +44,7 @@ export const SearchModal: React.FC = () => {
       })
     : [];
 
-  const quickTags = ['Titanium', 'Bio-Acetate', 'Square', 'Shield', 'Bestseller'];
+  const quickTags = ['Titanium', 'Cellulose Propionate', 'Square', 'Shield', 'Bestseller'];
 
   const handleSelectProduct = (p: Product) => {
     setIsSearchOpen(false);

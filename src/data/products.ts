@@ -26,7 +26,7 @@ export interface Product {
   sku: string;
   price: number;
   salePrice: number | null;
-  category: 'Titanium' | 'Bio-Acetate' | 'Shield & Rimless' | 'Limited Edition';
+  category: 'Titanium' | 'Cellulose Propionate' | 'Shield & Rimless' | 'Limited Edition';
   collection: 'Chroma Noir' | 'Tokyo Minimal' | 'Sculptural Runway' | 'Core Studio';
   shape: 'Rectangular' | 'Square' | 'Aviator' | 'Geometric' | 'Cat-Eye' | 'Shield' | 'Round' | 'Oval';
   badge?: 'NEW ARRIVAL' | 'BESTSELLER' | 'LIMITED RUN' | 'SALE';
@@ -47,12 +47,12 @@ export const PRODUCTS: Product[] = [
   {
     id: "prod_kaizo",
     name: "KAIZŌ",
-    subtitle: "Striated Horn Bio-Acetate with Champagne Polarized Optics",
+    subtitle: "Striated Horn Cellulose Propionate with Champagne Polarized Optics",
     slug: "kaizo",
     sku: "SORA-KZ-001",
     price: 3499,
     salePrice: 2499,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Sculptural Runway",
     shape: "Square",
     badge: "BESTSELLER",
@@ -88,8 +88,8 @@ export const PRODUCTS: Product[] = [
         image: "/images/kaizo/frame-front.jpg"
       }
     ],
-    shortDescription: "Signature sculptural square frame crafted from hand-buffed Italian Mazzucchelli striated bio-acetate with double front rivets and custom light amber polarized optics.",
-    description: "KAIZŌ is SORA's definitive signature silhouette. Carved from block Italian Mazzucchelli bio-acetate featuring natural horn striations in smoked olive and warm taupe. Engineered with robust double-pin silver rivets, sculpted beveled browlines, and custom 7-barrel wire-core hinges. Fitted with high-definition polarized Light Amber CR-39 lenses that offer 100% UV400 clarity while accentuating sunset and golden hour hues.",
+    shortDescription: "Signature sculptural square frame crafted from hand-buffed Italian Mazzucchelli striated cellulose propionate with double front rivets and custom light amber polarized optics.",
+    description: "KAIZŌ is SORA's definitive signature silhouette. Carved from block Italian Mazzucchelli cellulose propionate featuring natural horn striations in smoked olive and warm taupe. Engineered with robust double-pin silver rivets, sculpted beveled browlines, and custom 7-barrel wire-core hinges. Fitted with high-definition polarized Light Amber CR-39 lenses that offer 100% UV400 clarity while accentuating sunset and golden hour hues.",
     specifications: {
       frameWidth: "144 mm",
       lensWidth: "52 mm",
@@ -97,7 +97,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "148 mm",
       weight: "31 g",
       lensMaterial: "HD Polarized CR-39 (Light Amber)",
-      frameMaterial: "Mazzucchelli Striated Bio-Acetate",
+      frameMaterial: "Mazzucchelli Striated Cellulose Propionate",
       uvProtection: "100% UV400 Category 2 Polarized",
       hingeType: "Custom 7-Barrel Reinforced Wire-Core"
     },
@@ -176,7 +176,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-002",
     price: 2999,
     salePrice: 2199,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Core Studio",
     shape: "Rectangular",
     badge: "SALE",
@@ -212,7 +212,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "142 mm",
       weight: "25 g",
       lensMaterial: "Warm Bronze Tint CR-39",
-      frameMaterial: "Organic Bio-Acetate",
+      frameMaterial: "Organic Cellulose Propionate",
       uvProtection: "100% UV400 Filter",
       hingeType: "Custom Triple-Pin Rivet"
     },
@@ -228,7 +228,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-003",
     price: 3699,
     salePrice: 2899,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Chroma Noir",
     shape: "Square",
     badge: "LIMITED RUN",
@@ -256,7 +256,7 @@ export const PRODUCTS: Product[] = [
       }
     ],
     shortDescription: "A deeper, bolder statement frame with a quiet matte finish.",
-    description: "Sorrel anchors any look with quiet architectural confidence. Cut from 8mm Italian block bio-acetate with anti-reflective high-definition polarized lenses.",
+    description: "Sorrel anchors any look with quiet architectural confidence. Cut from 8mm Italian block cellulose propionate with anti-reflective high-definition polarized lenses.",
     specifications: {
       frameWidth: "146 mm",
       lensWidth: "54 mm",
@@ -264,7 +264,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "146 mm",
       weight: "30 g",
       lensMaterial: "Deep Pitch Black Polarized CR-39",
-      frameMaterial: "8mm Block Bio-Acetate",
+      frameMaterial: "8mm Block Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "7-Barrel Reinforced Hinge"
     },
@@ -332,7 +332,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-006",
     price: 3299,
     salePrice: null,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Tokyo Minimal",
     shape: "Cat-Eye",
     badge: "NEW ARRIVAL",
@@ -367,7 +367,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "144 mm",
       weight: "27 g",
       lensMaterial: "High-Definition CR-39 Gradient",
-      frameMaterial: "Mazzucchelli Bio-Acetate",
+      frameMaterial: "Mazzucchelli Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "5-Barrel OBE German Hinges"
     },
@@ -515,7 +515,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-010",
     price: 2899,
     salePrice: null,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Core Studio",
     shape: "Square",
     badge: "BESTSELLER",
@@ -543,7 +543,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "145 mm",
       weight: "31 g",
       lensMaterial: "HD CR-39 Polarized",
-      frameMaterial: "Mazzucchelli Bio-Acetate",
+      frameMaterial: "Mazzucchelli Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "German 5-Barrel Hinge"
     },
@@ -559,7 +559,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-011",
     price: 2799,
     salePrice: 1999,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Tokyo Minimal",
     shape: "Rectangular",
     badge: "SALE",
@@ -587,7 +587,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "142 mm",
       weight: "24 g",
       lensMaterial: "High-Definition Polarized CR-39",
-      frameMaterial: "Organic Bio-Acetate",
+      frameMaterial: "Organic Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "Custom Triple-Pin Hinge"
     },
@@ -647,7 +647,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-013",
     price: 3499,
     salePrice: 2699,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Core Studio",
     shape: "Square",
     badge: "SALE",
@@ -667,7 +667,7 @@ export const PRODUCTS: Product[] = [
       }
     ],
     shortDescription: "Rich honey gradient browline with softened lower rim chamfers.",
-    description: "Asahi brings warm morning light to your daily wardrobe. Handcrafted from bio-acetate with amber UV400 polarized lenses.",
+    description: "Asahi brings warm morning light to your daily wardrobe. Handcrafted from cellulose propionate with amber UV400 polarized lenses.",
     specifications: {
       frameWidth: "142 mm",
       lensWidth: "50 mm",
@@ -675,7 +675,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "145 mm",
       weight: "27 g",
       lensMaterial: "Amber Gradient CR-39",
-      frameMaterial: "Mazzucchelli Bio-Acetate",
+      frameMaterial: "Mazzucchelli Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "German 5-Barrel Hinge"
     },
@@ -779,7 +779,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-016",
     price: 3199,
     salePrice: 2499,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Core Studio",
     shape: "Aviator",
     badge: "SALE",
@@ -798,7 +798,7 @@ export const PRODUCTS: Product[] = [
         image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=85"
       }
     ],
-    shortDescription: "A soft bio-acetate interpretation of the pilot silhouette in warm amber.",
+    shortDescription: "A soft cellulose propionate interpretation of the pilot silhouette in warm amber.",
     description: "Kumano rethinks the aviator with translucent organic acetate. Comfortable keyhole bridge and warm polarized lenses.",
     specifications: {
       frameWidth: "144 mm",
@@ -807,7 +807,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "145 mm",
       weight: "28 g",
       lensMaterial: "HD CR-39 Polarized",
-      frameMaterial: "Organic Bio-Acetate",
+      frameMaterial: "Organic Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "5-Barrel OBE Hinge"
     },
@@ -867,7 +867,7 @@ export const PRODUCTS: Product[] = [
     sku: "SORA-SG-018",
     price: 2999,
     salePrice: 2299,
-    category: "Bio-Acetate",
+    category: "Cellulose Propionate",
     collection: "Core Studio",
     shape: "Oval",
     badge: "SALE",
@@ -895,7 +895,7 @@ export const PRODUCTS: Product[] = [
       templeLength: "144 mm",
       weight: "26 g",
       lensMaterial: "Brown Gradient Polarized CR-39",
-      frameMaterial: "Mazzucchelli Bio-Acetate",
+      frameMaterial: "Mazzucchelli Cellulose Propionate",
       uvProtection: "100% UV400 Protection",
       hingeType: "Custom Triple-Pin Hinge"
     },
@@ -1029,8 +1029,8 @@ export const REVIEWS = [
 export const BRAND_VALUES = [
   {
     number: "01",
-    title: "JAPANESE TITANIUM & BIO-ACETATE",
-    description: "Every frame is sculpted from sustainably sourced cellulose bio-acetate or aerospace Grade 4 titanium in Sabae, Japan."
+    title: "JAPANESE TITANIUM & CELLULOSE PROPIONATE",
+    description: "Every frame is sculpted from sustainably sourced cellulose cellulose propionate or aerospace Grade 4 titanium in Sabae, Japan."
   },
   {
     number: "02",

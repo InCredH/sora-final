@@ -73,7 +73,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           </button>
 
           <div className="flex items-center gap-2">
-            <span className="hanko-stamp text-[10px] px-1.5 py-0.5 border-[#861F3A] text-[#861F3A]">空</span>
+            <img
+              src="/logo-transparent.png"
+              alt="SORA Emblem"
+              className="h-5 w-auto object-contain"
+            />
           </div>
         </div>
 
@@ -522,7 +526,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                     <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
                       {product.category === 'Titanium' 
                         ? 'PRECISION TITANIUM WIREFRAME' 
-                        : 'SCULPTED BIO-ACETATE GEOMETRY'}
+                        : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
                     </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
                       {product.category === 'Titanium'

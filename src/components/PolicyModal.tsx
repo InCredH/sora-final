@@ -100,7 +100,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            Our bio-acetate frames originate in Castiglione Olona, Italy. Formulated from FSC-certified cotton seed fibres and conifer wood pulp, plasticized using biodegradable plant esters instead of crude petroleum phthalates.
+            Our cellulose propionate frames originate in Castiglione Olona, Italy. Formulated from FSC-certified cotton seed fibres and conifer wood pulp, plasticized using biodegradable plant esters instead of crude petroleum phthalates.
           </p>
           <p>
             The material is 100% biodegradable in industrial composting conditions, hypoallergenic, and provides an organic warmth against the skin that petroleum synthetics cannot emulate.
