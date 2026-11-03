@@ -12,6 +12,25 @@ export const Navbar: React.FC = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
+
+  const OFFERS = [
+    {
+      title: 'SPECIAL LAUNCH OFFER: GET FLAT 10% OFF ON ALL ORDERS',
+      code: 'SORA10',
+      tag: 'USE CODE'
+    },
+    {
+      title: 'LIMITED DROP: INSTANT ₹500 OFF ON PURCHASES OVER ₹2,499',
+      code: 'FLAGSHIP',
+      tag: 'USE CODE'
+    },
+    {
+      title: 'FREE EXPRESS INSURED DISPATCH & 30-DAY IN-STUDIO TRIAL ACROSS INDIA',
+      code: null,
+      tag: 'NO CODE NEEDED'
+    }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +40,13 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentOfferIndex((prev) => (prev + 1) % OFFERS.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [OFFERS.length]);
+
   const handleNavClick = (view: 'home' | 'shop' | 'story' | 'privacy' | 'terms') => {
     setCurrentView(view);
     setIsMobileMenuOpen(false);
@@ -29,12 +55,27 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Top Announcement Bar: Rich Espresso with Champagne Gold text */}
-      <div className="bg-[#2C211B] text-[#C8A96B] border-b border-[#C8A96B]/20 py-2 px-4 text-center text-[10px] sm:text-[11px] font-mono-tech tracking-widest uppercase flex items-center justify-center gap-3">
-        <span className="hanko-stamp text-[9px] py-0 px-1 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10">空</span>
-        <span className="font-medium text-[#F5EFE3]">SORA TOKYO // FREE INSURED DISPATCH OVER ₹3,000</span>
-        <span className="hidden md:inline text-[#C8A96B]/50">|</span>
-        <span className="hidden md:inline text-[#C8A96B]">JAPANESE TITANIUM • ITALIAN BIO-ACETATE</span>
+      {/* Top Announcement Bar: Luxury Live Offers Strip */}
+      <div className="bg-[#2C211B] text-[#C8A96B] border-b border-[#C8A96B]/20 py-2 px-3 sm:px-4 text-center text-[10px] sm:text-[11px] font-mono-tech tracking-widest uppercase flex items-center justify-center gap-2 sm:gap-3 transition-all duration-500 overflow-hidden min-h-[34px]">
+        <span className="hanko-stamp text-[9px] py-0 px-1 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10 shrink-0">空</span>
+        
+        <div key={currentOfferIndex} className="flex items-center gap-2 animate-in fade-in duration-500 overflow-hidden">
+          <span className="font-medium text-[#F5EFE3] truncate max-w-[280px] sm:max-w-none">
+            {OFFERS[currentOfferIndex].title}
+          </span>
+          {OFFERS[currentOfferIndex].code ? (
+            <span className="inline-flex items-center gap-1.5 shrink-0">
+              <span className="text-[#C8A96B]/60 hidden sm:inline">//</span>
+              <span className="bg-[#861F3A] text-white px-2 py-0.5 rounded font-mono font-bold tracking-wider text-[9px] sm:text-[10px] shadow-sm">
+                {OFFERS[currentOfferIndex].code}
+              </span>
+            </span>
+          ) : (
+            <span className="text-[#C8A96B] hidden sm:inline text-[9px] border border-[#C8A96B]/30 px-1.5 py-0.2 rounded shrink-0">
+              {OFFERS[currentOfferIndex].tag}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Main Sticky Navigation — Perfectly Centered 3-Column Layout */}

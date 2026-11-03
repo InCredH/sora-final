@@ -242,6 +242,10 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setAppliedPromo('SORA10');
       return { success: true, message: 'VIP 10% Maison Privilège applied' };
     }
+    if (trimmed === 'SORA15') {
+      setAppliedPromo('SORA15');
+      return { success: true, message: 'Exclusive 15% Atelier discount applied' };
+    }
     if (trimmed === 'FLAGSHIP') {
       setAppliedPromo('FLAGSHIP');
       return { success: true, message: '₹500 Flagship Debut discount applied' };
@@ -256,6 +260,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   let discountAmount = 0;
   if (appliedPromo === 'SORA10') {
     discountAmount = Math.round(cartSubtotal * 0.1);
+  } else if (appliedPromo === 'SORA15') {
+    discountAmount = Math.round(cartSubtotal * 0.15);
   } else if (appliedPromo === 'FLAGSHIP') {
     discountAmount = Math.min(cartSubtotal, 500);
   }
