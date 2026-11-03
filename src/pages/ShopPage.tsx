@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { PRODUCTS, Product } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
+import { useShop } from '../context/ShopContext';
 import { SlidersHorizontal, X, Grid, LayoutGrid, Check, Sparkles } from 'lucide-react';
 
 export const ShopPage: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const { selectedCategoryFilter, setSelectedCategoryFilter } = useShop();
   const [selectedShape, setSelectedShape] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
@@ -16,7 +17,7 @@ export const ShopPage: React.FC = () => {
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((p) => {
-      if (selectedCategory !== 'All' && p.category !== selectedCategory) return false;
+      if (selectedCategoryFilter !== 'All' && p.category !== selectedCategoryFilter) return false;
       if (selectedShape !== 'All' && p.shape !== selectedShape) return false;
       if (inStockOnly && !p.inStock) return false;
       return true;
@@ -28,15 +29,15 @@ export const ShopPage: React.FC = () => {
       if (sortBy === 'rating') return b.rating - a.rating;
       return 0; // featured maintains default order
     });
-  }, [selectedCategory, selectedShape, sortBy, inStockOnly]);
+  }, [selectedCategoryFilter, selectedShape, sortBy, inStockOnly]);
 
   const activeFiltersCount =
-    (selectedCategory !== 'All' ? 1 : 0) +
+    (selectedCategoryFilter !== 'All' ? 1 : 0) +
     (selectedShape !== 'All' ? 1 : 0) +
     (inStockOnly ? 1 : 0);
 
   const clearAllFilters = () => {
-    setSelectedCategory('All');
+    setSelectedCategoryFilter('All');
     setSelectedShape('All');
     setInStockOnly(false);
   };
@@ -109,9 +110,9 @@ export const ShopPage: React.FC = () => {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => setSelectedCategoryFilter(cat)}
                 className={`px-4 py-2 text-xs font-mono-tech tracking-wider uppercase border rounded-lg transition-all whitespace-nowrap cursor-pointer ${
-                  selectedCategory === cat
+                  selectedCategoryFilter === cat
                     ? 'border-[#2C211B] bg-[#2C211B] text-[#F5EFE3] font-bold shadow-md'
                     : 'border-[#2C211B]/15 text-[#2C211B] hover:border-[#861F3A] bg-white'
                 }`}
@@ -257,15 +258,15 @@ export const ShopPage: React.FC = () => {
                     <button
                       key={cat}
                       type="button"
-                      onClick={() => setSelectedCategory(cat)}
+                      onClick={() => setSelectedCategoryFilter(cat)}
                       className={`w-full text-left px-3 py-2 text-xs font-mono-tech flex items-center justify-between rounded cursor-pointer ${
-                        selectedCategory === cat
+                        selectedCategoryFilter === cat
                           ? 'bg-[#2C211B] text-[#F5EFE3] font-bold'
                           : 'text-[#2C211B] hover:bg-white'
                       }`}
                     >
                       <span>{cat}</span>
-                      {selectedCategory === cat && <Check size={14} className="text-[#C8A96B]" />}
+                      {selectedCategoryFilter === cat && <Check size={14} className="text-[#C8A96B]" />}
                     </button>
                   ))}
                 </div>

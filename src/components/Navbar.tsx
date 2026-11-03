@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useShop } from '../context/ShopContext';
-import { ShoppingBag, Menu, X, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Menu, X, ArrowRight, Search } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const {
     currentView,
     setCurrentView,
     cartCount,
-    setIsCartOpen
+    setIsCartOpen,
+    setIsSearchOpen
   } = useShop();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -164,12 +165,25 @@ export const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Right Column (1fr): Shopping Bag Trigger */}
-          <div className="flex items-center justify-end gap-3 sm:gap-5">
+          {/* Right Column (1fr): Search & Shopping Bag Triggers */}
+          <div className="flex items-center justify-end gap-2.5 sm:gap-4">
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center gap-2 px-3 py-2 text-[#2C211B]/80 hover:text-[#861F3A] hover:bg-black/5 rounded-lg text-xs font-mono-tech transition-colors cursor-pointer border border-[#2C211B]/15 bg-white/70 shadow-2xs"
+              aria-label="Search Collection"
+            >
+              <Search size={14} className="text-[#6B7055]" />
+              <span className="hidden xl:inline text-[11px] font-bold tracking-wider">SEARCH</span>
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-[#FAF7F0] border border-[#2C211B]/15 rounded text-[#6B7055]">
+                ⌘K
+              </kbd>
+            </button>
+
             <button
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-2 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-4 py-2 transition-all duration-300 rounded cursor-pointer shadow-sm hover:shadow-md"
+              className="relative flex items-center gap-2 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-3.5 sm:px-4 py-2 transition-all duration-300 rounded cursor-pointer shadow-sm hover:shadow-md"
               aria-label="Open Bag"
             >
               <ShoppingBag size={15} className="text-[#C8A96B]" />
@@ -211,7 +225,20 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* Navigation links */}
-              <div className="py-6 flex flex-col gap-5 text-sm font-mono-tech tracking-wider uppercase">
+              <div className="py-6 flex flex-col gap-4 text-sm font-mono-tech tracking-wider uppercase">
+                {/* Mobile Search Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsSearchOpen(true);
+                  }}
+                  className="flex items-center gap-3 p-3 bg-white border border-[#2C211B]/15 rounded-xl text-xs font-mono-tech text-[#6B7055] hover:text-[#861F3A] hover:border-[#861F3A] transition-all cursor-pointer mb-2"
+                >
+                  <Search size={16} className="text-[#861F3A]" />
+                  <span>Search Silhouettes...</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => handleNavClick('home')}

@@ -9,6 +9,7 @@ import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CartDrawer } from './components/CartDrawer';
+import { SearchModal } from './components/SearchModal';
 import { PolicyModal } from './components/PolicyModal';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { NewsletterAndFooter } from './components/NewsletterAndFooter';
@@ -38,6 +39,7 @@ const AppContent: React.FC = () => {
       <NewsletterAndFooter onOpenPolicy={setActivePolicyKey} />
 
       {/* Interactive Overlays & Modals */}
+      <SearchModal />
       <CartDrawer />
       <PolicyModal
         policyKey={activePolicyKey}

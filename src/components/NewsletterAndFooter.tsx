@@ -6,7 +6,7 @@ interface NewsletterAndFooterProps {
 }
 
 export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpenPolicy }) => {
-  const { setCurrentView } = useShop();
+  const { setCurrentView, setSelectedCategoryFilter } = useShop();
 
   return (
     <footer className="w-full bg-[#2C211B] text-[#F5EFE3] border-t border-[#C8A96B]/20">
@@ -39,6 +39,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                 <button
                   type="button"
                   onClick={() => {
+                    setSelectedCategoryFilter('All');
                     setCurrentView('shop');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
@@ -51,6 +52,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                 <button
                   type="button"
                   onClick={() => {
+                    setSelectedCategoryFilter('Titanium');
                     setCurrentView('shop');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
@@ -63,6 +65,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                 <button
                   type="button"
                   onClick={() => {
+                    setSelectedCategoryFilter('Bio-Acetate');
                     setCurrentView('shop');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
@@ -75,6 +78,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                 <button
                   type="button"
                   onClick={() => {
+                    setSelectedCategoryFilter('Shield & Rimless');
                     setCurrentView('shop');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}

@@ -47,6 +47,10 @@ interface ShopContextType {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 
+  // Category filter synchronization across pages
+  selectedCategoryFilter: string;
+  setSelectedCategoryFilter: (category: string) => void;
+
   // Currency (Strictly INR)
   currency: Currency;
   setCurrency: (currency: Currency) => void;
@@ -148,6 +152,9 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('All');
 
   // Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -300,11 +307,14 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         wishlist: [],
         toggleWishlist: () => {},
         isInWishlist: () => false,
-        // Search stubs
-        isSearchOpen: false,
-        setIsSearchOpen: () => {},
-        searchQuery: '',
-        setSearchQuery: () => {},
+        // Search
+        isSearchOpen,
+        setIsSearchOpen,
+        searchQuery,
+        setSearchQuery,
+        // Category Filter
+        selectedCategoryFilter,
+        setSelectedCategoryFilter,
         // Currency strictly INR
         currency: 'INR',
         setCurrency: () => {},

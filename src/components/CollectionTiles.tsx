@@ -3,7 +3,7 @@ import { useShop } from '../context/ShopContext';
 import { ArrowUpRight } from 'lucide-react';
 
 export const CollectionTiles: React.FC = () => {
-  const { setCurrentView } = useShop();
+  const { setCurrentView, setSelectedCategoryFilter } = useShop();
 
   const collections = [
     {
@@ -11,7 +11,7 @@ export const CollectionTiles: React.FC = () => {
       title: 'AEROSPACE TITANIUM',
       subtitle: 'Milled from pure Grade 4 Japanese titanium in Sabae. Unmatched strength-to-weight ratio.',
       tag: 'TECH MATTE & CHROME',
-      count: '3 Silhouettes',
+      count: '8 Silhouettes',
       image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1000&q=85',
       category: 'Titanium'
     },
@@ -20,7 +20,7 @@ export const CollectionTiles: React.FC = () => {
       title: 'ORGANIC BIO-ACETATE',
       subtitle: 'Sculpted from Italian Mazzucchelli block cellulose. Warm translucent finishes and deep tactile depth.',
       tag: 'TIMELESS SUBSTANCE',
-      count: '3 Silhouettes',
+      count: '9 Silhouettes',
       image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85',
       category: 'Bio-Acetate'
     },
@@ -29,7 +29,7 @@ export const CollectionTiles: React.FC = () => {
       title: 'MONOLITHIC VISORS & RIMLESS',
       subtitle: 'Toroidal continuous lenses and frameless silhouettes engineered for extreme peripheral clarity.',
       tag: 'FUTURISTIC HORIZONS',
-      count: '2 Silhouettes',
+      count: '3 Silhouettes',
       image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1000&q=85',
       category: 'Shield & Rimless'
     },
@@ -38,13 +38,14 @@ export const CollectionTiles: React.FC = () => {
       title: 'RUNWAY ARCHIVE (LIMITED)',
       subtitle: 'Hand-numbered batch releases featuring custom stepped bevels and rare vintage tints.',
       tag: 'NUMBERED COLLECTIBLES',
-      count: 'Exclusive Runs',
+      count: 'Numbered Editions',
       image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=1000&q=85',
       category: 'Limited Edition'
     }
   ];
 
-  const handleTileClick = () => {
+  const handleTileClick = (category: string) => {
+    setSelectedCategoryFilter(category);
     setCurrentView('shop');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -73,7 +74,7 @@ export const CollectionTiles: React.FC = () => {
           {collections.map((col) => (
             <div
               key={col.id}
-              onClick={handleTileClick}
+              onClick={() => handleTileClick(col.category)}
               className="group relative h-[380px] sm:h-[420px] overflow-hidden rounded-xl bg-[#2C211B] border-2 border-[#C8A96B]/30 cursor-pointer transition-all duration-500 hover:border-[#861F3A] shadow-md hover:shadow-2xl hover-lift"
             >
               {/* Background Image */}
