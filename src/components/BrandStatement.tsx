@@ -9,9 +9,9 @@ export const BrandStatement: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Subtle section header */}
+        {/* Subtle section header with Official Emblem */}
         <div className="flex items-center gap-3 text-[11px] font-mono-tech tracking-widest uppercase mb-8 sm:mb-12">
-          <span className="hanko-stamp text-xs px-1.5 py-0.5 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10">空</span>
+          <img src="/logo-transparent.png" alt="SORA" className="h-5 w-auto object-contain brightness-110" />
           <span className="text-[#C8A96B]">THE SORA MANIFESTO // PHILOSOPHY OF PERSPECTIVE</span>
         </div>
 
@@ -39,10 +39,10 @@ export const BrandStatement: React.FC = () => {
 
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm text-[#F5EFE3]/80 leading-relaxed font-light">
             <p>
-              In Japanese, <strong className="text-white font-medium">SORA (空)</strong> signifies the open sky — boundless, ever-shifting in color, and completely free. We craft each frame in Sabae, Japan, using aerospace Grade 4 titanium and organic Italian Mazzucchelli bio-acetate.
+              In Japanese, <strong className="text-white font-medium">SORA (空)</strong> signifies the open sky — boundless, ever-shifting in color, and completely free. We craft each frame in Sabae, Japan, using aerospace Grade 4 titanium and organic Italian Mazzucchelli cellulose propionate.
             </p>
             <p>
-              Fitted with custom Carl Zeiss polarized optics, our silhouettes are designed to evoke an emotional response. Eyewear is simply the physical catalyst; the true medium is your identity, confidence, and self-expression.
+              Fitted with custom high-definition polarized optics, our silhouettes are designed to evoke an emotional response. Eyewear is simply the physical catalyst; the true medium is your identity, confidence, and self-expression.
             </p>
           </div>
         </div>

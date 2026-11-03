@@ -105,7 +105,7 @@ export const ProductWall: React.FC = () => {
                   SPECIAL OFFER
                 </span>
                 <span className="text-xs font-mono-tech text-zinc-400">
-                  BIO-ACETATE
+                  CELLULOSE PROPIONATE
                 </span>
               </div>
 

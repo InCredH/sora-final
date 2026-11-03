@@ -28,7 +28,7 @@ export const HeroSection: React.FC = () => {
       feeling: 'Soft sunlight, golden warmth and wandering thoughts',
       icon: <Sun size={13} />,
       heroProduct: PRODUCTS[0], // KAIZŌ
-      quote: 'Striated Italian bio-acetate capturing the golden hour glow.',
+      quote: 'Striated Italian cellulose propionate capturing the golden hour glow.',
       image: '/images/kaizo/model-1.jpg',
       accentColor: '#6B7055', // Muted Olive
       tag: 'KAIZŌ // SMOKED OLIVE'
@@ -52,7 +52,7 @@ export const HeroSection: React.FC = () => {
       feeling: 'Deep espresso shadows, city lights and quiet poise',
       icon: <Moon size={13} />,
       heroProduct: PRODUCTS[3] || PRODUCTS[0], // SORREL
-      quote: 'Midnight polarized Carl Zeiss optics framing the night.',
+      quote: 'Midnight polarized high-definition optics framing the night.',
       image: 'https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1600&q=90',
       accentColor: '#C8A96B', // Champagne
       tag: 'DEEP OBSIDIAN'
@@ -67,7 +67,7 @@ export const HeroSection: React.FC = () => {
       quote: 'Mottled warm bio-cellulose honoring the beauty of natural daylight.',
       image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=90',
       accentColor: '#2C211B', // Espresso
-      tag: 'ORGANIC BIO-ACETATE'
+      tag: 'ORGANIC CELLULOSE PROPIONATE'
     }
   ];
 
@@ -87,15 +87,15 @@ export const HeroSection: React.FC = () => {
   const marqueeItems = [
     'SORA MAISON // 空',
     'HANDCRAFTED IN SABAE, JAPAN',
-    'CARL ZEISS POLARIZED OPTICS',
+    '100% UV400 POLARIZED OPTICS',
     'GRADE 4 JAPANESE TITANIUM',
-    'MAZZUCCHELLI BIO-ACETATE',
+    'MAZZUCCHELLI CELLULOSE PROPIONATE',
     '30-DAY IN-STUDIO TRIAL',
     'COMPLIMENTARY INSURED DISPATCH'
   ];
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] overflow-hidden px-4 sm:px-8 lg:px-12 pt-4 pb-0 select-none">
+    <section className="relative w-full min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-0 select-none">
       
       {/* 1. Subtle Japanese Aesthetics: Animated Zen Circle & Pulsing Warm Mist */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -112,38 +112,15 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Top Minimal Telemetry Bar with Smooth Micro-Interaction */}
-      <div className="relative z-10 w-full flex items-center justify-between text-[10px] sm:text-[11px] font-mono-tech tracking-widest uppercase border-b border-[#2C211B]/10 pb-3">
-        <div className="flex items-center gap-2.5">
-          <span className="hanko-stamp text-xs px-1.5 py-0.5 cursor-pointer">空</span>
-          <span className="text-[#2C211B] font-bold">SORA // CONTEMPORARY LUXURY</span>
-          <span className="hidden sm:inline text-[#6B7055]">| CRAFTED IN SABAE, JAPAN</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-6 text-[#6B7055]">
-          <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#861F3A] animate-ping" />
-            <span>200 ARTISANAL STEPS</span>
-          </span>
-          <span className="text-[#C8A96B] font-semibold">100% CARL ZEISS OPTICS</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] text-[#861F3A] font-bold bg-[#861F3A]/10 border border-[#861F3A]/25 px-2.5 py-0.5 rounded transition-transform hover:scale-105">
-            AUTUMN/WINTER 2026
-          </span>
-        </div>
-      </div>
-
-      {/* 3. Main Split Stage: Bold English Typography & Fashion Editorial Visual */}
-      <div className="relative z-10 my-auto py-4 sm:py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full">
+      {/* 2. Main Split Stage: Bold English Typography & Fashion Editorial Visual */}
+      <div className="relative z-10 my-auto py-6 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full flex-1">
         
         {/* Left Column: Bold Editorial Narrative & Expressive Perspectives */}
         <div className="lg:col-span-7 flex flex-col justify-center animate-fade-up">
           
-          {/* Eyebrow Label with Subtle Japanese Touch */}
-          <div className="flex items-center gap-3 mb-4">
-            <span className="hanko-stamp text-[9px] px-1.5 py-0 border-[#861F3A]">空</span>
+          {/* Eyebrow Label with Official Emblem */}
+          <div className="flex items-center gap-3 mb-3.5 sm:mb-4">
+            <img src="/logo-transparent.png" alt="SORA" className="h-4 sm:h-5 w-auto object-contain" />
             <span className="text-[10px] sm:text-[11px] font-mono-tech tracking-[0.25em] text-[#6B7055] uppercase font-bold">
               SORA // THE ART OF PERSPECTIVE
             </span>
@@ -154,7 +131,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Master Headline: Bold Modern Sans + Italian Editorial Serif */}
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold uppercase text-[#2C211B] tracking-tight leading-[0.98]">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl xl:text-[80px] font-black uppercase text-[#2C211B] tracking-tight leading-[0.95]">
             SHAPED BY LIGHT. <br />
             <span className="font-serif-editorial italic font-normal text-[#861F3A] capitalize transition-colors duration-500">
               Defined by who you are.
@@ -205,7 +182,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Action Button: Smooth Spring Micro-Interaction */}
-          <div className="mt-7 flex flex-wrap items-center gap-3 sm:gap-4">
+          <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <button
               type="button"
               onClick={scrollToCollection}
@@ -228,7 +205,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Main Visual Image Card with Smooth Hover Lift & Dynamic Cross-fade */}
-          <div className="relative w-full max-w-md aspect-[4/5] rounded-xl overflow-hidden bg-[#2C211B] border-2 border-[#C8A96B]/40 shadow-xl hover-lift group">
+          <div className="relative w-full max-w-md aspect-[4/5] rounded-2xl overflow-hidden bg-[#2C211B] border-2 border-[#C8A96B]/40 shadow-2xl hover-lift group">
             
             {/* High-Fashion Editorial Model Photograph with Smooth Image Morph */}
             <img
@@ -241,10 +218,11 @@ export const HeroSection: React.FC = () => {
             {/* Warm Sunset/Champagne Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#2C211B]/90 via-transparent to-black/20 pointer-events-none" />
 
-            {/* Top Minimal Hanko Stamp */}
+            {/* Top Minimal Brand Badge */}
             <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
-              <span className="hanko-stamp text-[10px] px-2 py-0.5 bg-[#F5EFE3]/95 backdrop-blur-md shadow-sm">
-                空 SORA 2026
+              <span className="flex items-center gap-1.5 text-[10px] font-mono-tech px-2 py-0.5 bg-[#F5EFE3]/95 backdrop-blur-md shadow-sm rounded border border-[#2C211B]/15">
+                <img src="/logo-transparent.png" alt="SORA" className="h-3.5 w-auto object-contain" />
+                <span className="font-bold text-[#2C211B]">SORA 2026</span>
               </span>
               <span className="text-[9px] font-mono-tech text-[#C8A96B] bg-[#2C211B]/80 px-2 py-0.5 rounded border border-[#C8A96B]/30 uppercase font-semibold backdrop-blur-sm">
                 Sabae Handcrafted
@@ -252,7 +230,7 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Bottom Floating Frame Card: Warm Washi Glass Plaque with Smooth Transitions */}
-            <div className="absolute bottom-4 inset-x-4 z-20 p-3.5 rounded-lg bg-[#F5EFE3]/95 backdrop-blur-xl border border-[#C8A96B]/50 shadow-xl text-[#2C211B] transition-transform duration-300 group-hover:-translate-y-1">
+            <div className="absolute bottom-4 inset-x-4 z-20 p-3.5 sm:p-4 rounded-xl bg-[#F5EFE3]/95 backdrop-blur-xl border border-[#C8A96B]/50 shadow-xl text-[#2C211B] transition-transform duration-300 group-hover:-translate-y-1">
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-3">
                   {/* Miniature Silhouette Preview */}
@@ -280,7 +258,7 @@ export const HeroSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => openProductDetail(activeProduct)}
-                    className="px-3.5 py-2 rounded bg-[#2C211B] text-[#F5EFE3] hover:bg-[#861F3A] text-xs font-mono-tech font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-md cursor-pointer"
+                    className="px-4 py-2 rounded bg-[#2C211B] text-[#F5EFE3] hover:bg-[#861F3A] text-xs font-mono-tech font-bold uppercase tracking-wider transition-all duration-300 hover:shadow-md cursor-pointer"
                   >
                     INSPECT
                   </button>
@@ -291,8 +269,8 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. Buttery-Smooth Infinite Luxury Marquee Ribbon */}
-      <div className="relative z-10 w-full overflow-hidden border-t border-[#2C211B]/10 py-3 bg-[#FAF7F0] -mx-4 sm:-mx-8 lg:-mx-12 px-0">
+      {/* 3. Buttery-Smooth Infinite Luxury Marquee Ribbon */}
+      <div className="relative z-10 w-full overflow-hidden border-t border-[#2C211B]/10 py-3 sm:py-3.5 bg-[#FAF7F0] -mx-4 sm:-mx-8 lg:-mx-12 px-0 shrink-0 mt-auto">
         <div className="animate-marquee items-center gap-8 text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#6B7055] whitespace-nowrap">
           {marqueeItems.concat(marqueeItems).map((text, idx) => (
             <span key={idx} className="flex items-center gap-8">

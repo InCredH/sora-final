@@ -95,7 +95,7 @@ export const PrivacyPolicyPage: React.FC = () => {
                 </li>
                 <li className="p-3.5 bg-[#FAF7F0] rounded-xl border border-[#2C211B]/10">
                   <strong className="block text-xs font-mono-tech uppercase text-[#861F3A] mb-1">Order Records</strong>
-                  Selected frame models, customized acetate colorways, Zeiss lens specifications, and transaction timestamps for warranty validation.
+                  Selected frame models, customized acetate colorways, optical lens specifications, and transaction timestamps for warranty validation.
                 </li>
               </ul>
             </div>

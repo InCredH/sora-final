@@ -13,7 +13,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       {/* 1. Cinematic Hero Opening */}
       <HeroSection />
 
-      {/* 2. Core Curated Frames Grid (Featured Editions) */}
+      {/* 2. Curated Flagship Silhouettes Grid */}
       <FeaturedCollection />
 
       {/* 3. "SEEN IN SORA" — Real Patrons & Community Runway */}

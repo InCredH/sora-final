@@ -163,7 +163,7 @@ export const CartDrawer: React.FC = () => {
                     YOUR BAG IS CURRENTLY EMPTY
                   </h4>
                   <p className="text-xs text-[#6B7055] mt-2 max-w-xs font-normal">
-                    Explore our Japanese titanium and bio-acetate silhouettes.
+                    Explore our Japanese titanium and cellulose propionate silhouettes.
                   </p>
                   <button
                     type="button"

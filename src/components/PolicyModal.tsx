@@ -55,7 +55,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
           </p>
           <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
             <li>Covers OBE German 5-barrel hinge tension and solder joints.</li>
-            <li>Covers Carl Zeiss optical coating integrity against bubbling or spontaneous peeling under regular care.</li>
+            <li>Covers precision optical coating integrity against bubbling or spontaneous peeling under regular care.</li>
             <li>Complimentary annual ultrasonic frame cleaning and screw-tightening concierge service at our flagship locations.</li>
           </ul>
         </div>
@@ -100,7 +100,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            Our bio-acetate frames originate in Castiglione Olona, Italy. Formulated from FSC-certified cotton seed fibres and conifer wood pulp, plasticized using biodegradable plant esters instead of crude petroleum phthalates.
+            Our cellulose propionate frames originate in Castiglione Olona, Italy. Formulated from FSC-certified cotton seed fibres and conifer wood pulp, plasticized using biodegradable plant esters instead of crude petroleum phthalates.
           </p>
           <p>
             The material is 100% biodegradable in industrial composting conditions, hypoallergenic, and provides an organic warmth against the skin that petroleum synthetics cannot emulate.

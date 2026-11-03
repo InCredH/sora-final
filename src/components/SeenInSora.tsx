@@ -54,7 +54,7 @@ export const SeenInSora: React.FC = () => {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#2C211B]/10">
           <div>
             <div className="flex items-center gap-2 text-[11px] font-mono-tech tracking-widest text-[#861F3A] uppercase mb-2">
-              <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A]">空</span>
+              <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
               <span className="font-bold">SEEN IN SORA // COMMUNITY RUNWAY</span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight leading-[1.05]">
