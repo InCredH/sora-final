@@ -7,7 +7,7 @@ export const PrivacyPolicyPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = 'Privacy Policy — SORA (空) Atelier Tokyo';
+    document.title = 'Privacy Policy — SORA (空)';
   }, []);
 
   return (
@@ -46,14 +46,14 @@ export const PrivacyPolicyPage: React.FC = () => {
             PRIVACY POLICY
           </h1>
           <p className="mt-4 text-sm sm:text-base text-[#6B7055] font-normal leading-relaxed max-w-2xl">
-            SORA Atelier is committed to uncompromising digital sovereignty and institutional-grade data confidentiality. We honor your personal perspective and protect your identity with zero-compromise security protocols.
+            SORA is committed to protecting your personal information. This policy explains what we collect and how we use it.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-4 text-[11px] font-mono-tech text-[#2C211B]/70">
             <span className="bg-[#FAF7F0] px-3 py-1 rounded-md border border-[#2C211B]/10">
               EFFECTIVE DATE: S/S 2026
             </span>
             <span className="bg-[#FAF7F0] px-3 py-1 rounded-md border border-[#2C211B]/10">
-              JURISDICTION: JAPAN & INDIA (DPDP ACT 2023 / GDPR)
+              JURISDICTION: INDIA (DPDP ACT 2023)
             </span>
           </div>
         </div>
@@ -68,11 +68,11 @@ export const PrivacyPolicyPage: React.FC = () => {
                 01
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                Philosophy & Digital Sovereignty
+                Our Approach to Your Data
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed font-normal">
-              At SORA, we believe luxury extends beyond Japanese titanium metallurgy to encompass digital dignity. We explicitly reject data monetization. We do not sell, rent, license, or exchange patron identities, sizing measurements, optical specifications, or browsing behaviors with third-party ad networks, telemetry brokers, or data syndicates.
+              We do not sell, rent, license, or exchange your personal information or browsing behaviour with third-party ad networks or data brokers.
             </p>
           </section>
 
@@ -87,7 +87,7 @@ export const PrivacyPolicyPage: React.FC = () => {
               </h2>
             </div>
             <div className="space-y-4 text-sm text-[#2C211B]/80 leading-relaxed">
-              <p>We collect only the bare essential information required to fulfill physical couture dispatches and honor our 2-Year Atelier Warranty:</p>
+              <p>We collect only the bare essential information required to fulfill and deliver your orders:</p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <li className="p-3.5 bg-[#FAF7F0] rounded-xl border border-[#2C211B]/10">
                   <strong className="block text-xs font-mono-tech uppercase text-[#861F3A] mb-1">Dispatch Logistics</strong>
@@ -95,7 +95,7 @@ export const PrivacyPolicyPage: React.FC = () => {
                 </li>
                 <li className="p-3.5 bg-[#FAF7F0] rounded-xl border border-[#2C211B]/10">
                   <strong className="block text-xs font-mono-tech uppercase text-[#861F3A] mb-1">Order Records</strong>
-                  Selected frame models, customized acetate colorways, optical lens specifications, and transaction timestamps for warranty validation.
+                  Selected frames, quantities, and order dates, used for order support.
                 </li>
               </ul>
             </div>
@@ -181,7 +181,7 @@ export const PrivacyPolicyPage: React.FC = () => {
 
         {/* Back to top footer */}
         <div className="mt-16 pt-8 border-t border-[#2C211B]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#6B7055]">
-          <span>SORA (空) ATELIER TOKYO // S/S 2026 ARCHIVE</span>
+          <span>SORA (空) // SUNGLASSES INSPIRED BY THE SKY</span>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

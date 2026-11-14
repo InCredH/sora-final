@@ -34,17 +34,18 @@ export const SearchModal: React.FC = () => {
     ? PRODUCTS.filter((p) => {
         return (
           p.name.toLowerCase().includes(query) ||
-          p.category.toLowerCase().includes(query) ||
-          (p.collection?.toLowerCase().includes(query) ?? false) ||
-          p.shape.toLowerCase().includes(query) ||
+          p.subtitle.toLowerCase().includes(query) ||
+          p.japaneseMeaning.includes(query) ||
+          (p.shape?.toLowerCase().includes(query) ?? false) ||
+          (p.frame?.toLowerCase().includes(query) ?? false) ||
+          (p.lens?.toLowerCase().includes(query) ?? false) ||
           p.shortDescription.toLowerCase().includes(query) ||
-          p.specifications.frameMaterial.toLowerCase().includes(query) ||
           p.variants.some((v) => v.name.toLowerCase().includes(query) || v.colorName.toLowerCase().includes(query))
         );
       })
     : [];
 
-  const quickTags = ['Titanium', 'Cellulose Propionate', 'Square', 'Shield', 'Bestseller'];
+  const quickTags = ['Gold', 'Tortoiseshell', 'Cat-Eye', 'Oversized', 'Green'];
 
   const handleSelectProduct = (p: Product) => {
     setIsSearchOpen(false);
@@ -69,7 +70,7 @@ export const SearchModal: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search silhouettes, materials (Titanium, Acetate), or collections..."
+            placeholder="Search frames, colours, or shapes..."
             className="w-full bg-transparent text-sm sm:text-base font-mono-tech text-[#2C211B] placeholder-[#6B7055] focus:outline-none"
           />
           {searchQuery && (
@@ -136,7 +137,7 @@ export const SearchModal: React.FC = () => {
                         {p.name}
                       </h4>
                       <p className="text-[11px] text-[#6B7055] font-mono-tech">
-                        {p.category} • {p.shape}
+                        {p.subtitle}{p.shape ? ` • ${p.shape}` : ''}
                       </p>
                     </div>
                   </div>
@@ -144,13 +145,8 @@ export const SearchModal: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <div className="text-right">
                       <span className="text-xs font-mono-tech font-bold text-[#2C211B] block">
-                        {formatPrice(p.salePrice ?? p.price)}
+                        {formatPrice(p.price)}
                       </span>
-                      {p.salePrice && (
-                        <span className="text-[10px] font-mono-tech text-[#6B7055] line-through block">
-                          {formatPrice(p.price)}
-                        </span>
-                      )}
                     </div>
                     <div className="w-8 h-8 rounded-full bg-[#2C211B]/5 group-hover:bg-[#861F3A] group-hover:text-white flex items-center justify-center transition-colors text-[#2C211B]">
                       <ArrowRight size={13} />

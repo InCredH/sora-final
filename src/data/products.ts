@@ -7,17 +7,25 @@ export interface ProductVariant {
   image: string;
 }
 
-export interface ProductSpec {
-  frameWidth: string;
-  lensWidth: string;
-  bridgeWidth: string;
-  templeLength: string;
-  weight: string;
-  lensMaterial: string;
-  frameMaterial: "Metal" | "Cellulose Propionate";
-  uvProtection: string;
-  hingeType: string;
-}
+// --------------------------------------------------
+// PRICING
+// Entry ₹1,299 · Core ₹1,499 · Hero ₹1,799
+// Bundle: any 2 Entry/Core frames for ₹2,499 (Hero is excluded).
+// --------------------------------------------------
+
+export type PriceTier = "Entry" | "Core" | "Hero";
+
+export const TIER_PRICES: Record<PriceTier, number> = {
+  Entry: 1299,
+  Core: 1499,
+  Hero: 1799
+};
+
+export const BUNDLE_OFFER = {
+  size: 2,
+  price: 2499,
+  label: "Any 2 for ₹2,499"
+} as const;
 
 export interface Product {
   id: string;
@@ -28,44 +36,34 @@ export interface Product {
   tagline: string;
   slug: string;
   sku: string;
-  collection?: string;
 
+  tier: PriceTier;
   price: number;
-  salePrice: number | null;
 
-  category: "Metal" | "Cellulose Propionate";
-  shape: string;
-
-  badge?: "NEW ARRIVAL" | "BESTSELLER" | "LIMITED RUN" | "SALE";
-
-  rating?: number;
-  reviewCount?: number;
+  // Only filled in where the product description states it.
+  shape?: string;
+  frame?: string;
+  lens?: string;
 
   images: string[];
-
-  // Optional: only use when a design has actual variants.
   variants: ProductVariant[];
 
   shortDescription: string;
-  description?: string;
-  reelCaption?: string;
+  description: string;
+  reelCaption: string;
 
-  specifications: ProductSpec;
-
-  // Internal stock information.
-  // Never display the exact quantity on the storefront.
   inStock: boolean;
-  stockCount: number;
-
 
   isFeatured?: boolean;
   isEditorialHero?: boolean;
 }
 
+export const isBundleEligible = (product: Product): boolean => product.tier !== "Hero";
+
 export const PRODUCTS: Product[] = [
 
   // --------------------------------------------------
-  // 01. HOSHI — THE STAR
+  // HERO — HOSHI (星) · THE STAR
   // --------------------------------------------------
 
   {
@@ -79,14 +77,12 @@ export const PRODUCTS: Product[] = [
     slug: "hoshi",
     sku: "SORA-HS-001",
 
-    price: 1499,
-    salePrice: 1299,
+    tier: "Hero",
+    price: TIER_PRICES.Hero,
 
-    category: "Metal",
     shape: "Geometric",
-
-    rating: 5.0,
-    reviewCount: 0,
+    frame: "Fine gold-toned metal",
+    lens: "Warm brown",
 
     images: [
       "/images/hikari/model-1.jpg",
@@ -98,11 +94,11 @@ export const PRODUCTS: Product[] = [
     variants: [
       {
         id: "v_hikari_gold",
-        name: "Champagne Gold & Amber",
-        colorName: "18K Champagne Gold",
+        name: "Gold Frame & Brown Lens",
+        colorName: "Gold & Brown",
         colorHex: "#C8A96B",
         image: "/images/hikari/model-1.jpg"
-      },
+      }
     ],
 
     shortDescription:
@@ -114,19 +110,6 @@ export const PRODUCTS: Product[] = [
     reelCaption:
       "Hoshi (星) means star. Gold frame. Brown lens. Sharp angles, soft glow. ✦",
 
-    specifications: {
-      frameWidth: "138 mm",
-      lensWidth: "51 mm",
-      bridgeWidth: "18 mm",
-      templeLength: "142 mm",
-      weight: "18 g",
-      lensMaterial: "Polycarbonate",
-      frameMaterial: "Metal",
-      uvProtection: "UV400 Protected",
-      hingeType: "Metal Hinges"
-    },
-
-    stockCount: 2,
     inStock: true,
 
     isFeatured: true,
@@ -134,7 +117,7 @@ export const PRODUCTS: Product[] = [
   },
 
   // --------------------------------------------------
-  // 02. TAIYO — THE SUN
+  // CORE — TAIYO (太陽) · THE SUN
   // --------------------------------------------------
 
   {
@@ -148,14 +131,11 @@ export const PRODUCTS: Product[] = [
     slug: "taiyo",
     sku: "SORA-TY-002",
 
-    price: 1599,
-    salePrice: null,
+    tier: "Core",
+    price: TIER_PRICES.Core,
 
-    category: "Cellulose Propionate",
-    shape: "Oversized Square",
-
-    rating: 0,
-    reviewCount: 0,
+    shape: "Oversized",
+    lens: "Warm honey-amber",
 
     images: [
       "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&q=85",
@@ -165,7 +145,7 @@ export const PRODUCTS: Product[] = [
     variants: [
       {
         id: "v_taiyo_honey",
-        name: "Honey Amber",
+        name: "Honey-Amber Lens",
         colorName: "Honey Amber",
         colorHex: "#C88A45",
         image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&q=85"
@@ -176,31 +156,18 @@ export const PRODUCTS: Product[] = [
       "An oversized frame with warm honey lenses, made to be noticed. Bold in scale, golden in glow.",
 
     description:
-      "Inspired by the warmth and sheer scale of the sun, Taiyo brings a big, golden presence to everyday dressing.\n\nIt works from sunlit brunches to long weekend drives, and from the first light of morning to the last of the afternoon.\n\nWide, oversized lenses in a warm honey-amber tint come together in a silhouette that’s generous, glamorous and impossible to miss. Big in shape, soft in colour, Taiyo is made for the days you want to take up space and the moments you want to glow.\n\nSome things are meant to be seen from a distance. Taiyo is one of them.",
+      "Inspired by the warmth and sheer scale of the sun, Taiyo brings a big, golden presence to everyday dressing.\n\nIt works from sunlit brunches to long weekend drives, and from the first light of morning to the last of the afternoon.\n\nWide, oversized lenses in a warm honey-amber tint come together in a silhouette that's generous, glamorous and impossible to miss. Big in shape, soft in colour, Taiyo is made for the days you want to take up space and the moments you want to glow.\n\nSome things are meant to be seen from a distance. Taiyo is one of them.",
 
     reelCaption:
       "Taiyo (太陽) means sun. Oversized frame. Honey lens. Big presence, golden light. ✦",
 
-    specifications: {
-      frameWidth: "145 mm",
-      lensWidth: "56 mm",
-      bridgeWidth: "19 mm",
-      templeLength: "145 mm",
-      weight: "29 g",
-      lensMaterial: "Polycarbonate",
-      frameMaterial: "Cellulose Propionate",
-      uvProtection: "UV400 Protected",
-      hingeType: "Reinforced Hinges"
-    },
-
-    stockCount: 6,
     inStock: true,
 
     isFeatured: true
   },
 
   // --------------------------------------------------
-  // 03. AOZORA — THE BLUE SKY
+  // CORE — AOZORA (青空) · THE BLUE SKY
   // --------------------------------------------------
 
   {
@@ -214,14 +181,12 @@ export const PRODUCTS: Product[] = [
     slug: "aozora",
     sku: "SORA-AZ-003",
 
-    price: 1399,
-    salePrice: null,
+    tier: "Core",
+    price: TIER_PRICES.Core,
 
-    category: "Metal",
     shape: "Cat-Eye",
-
-    rating: 0,
-    reviewCount: 0,
+    frame: "Sleek silver-toned metal",
+    lens: "Cool blue tint",
 
     images: [
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85",
@@ -247,26 +212,13 @@ export const PRODUCTS: Product[] = [
     reelCaption:
       "Aozora (青空) means blue sky. Silver frame. Blue lenses. A little piece of endless summer. ✦",
 
-    specifications: {
-      frameWidth: "140 mm",
-      lensWidth: "52 mm",
-      bridgeWidth: "18 mm",
-      templeLength: "143 mm",
-      weight: "17 g",
-      lensMaterial: "Polycarbonate",
-      frameMaterial: "Metal",
-      uvProtection: "UV400 Protected",
-      hingeType: "Metal Hinges"
-    },
-
-    stockCount: 5,
     inStock: true,
 
     isFeatured: true
   },
 
   // --------------------------------------------------
-  // 04. ARASHI — THE STORM
+  // CORE — ARASHI (嵐) · THE STORM
   // --------------------------------------------------
 
   {
@@ -280,14 +232,11 @@ export const PRODUCTS: Product[] = [
     slug: "arashi",
     sku: "SORA-AR-004",
 
-    price: 1599,
-    salePrice: null,
+    tier: "Core",
+    price: TIER_PRICES.Core,
 
-    category: "Cellulose Propionate",
-    shape: "Square",
-
-    rating: 0,
-    reviewCount: 0,
+    frame: "Deep sage-green acetate-style",
+    lens: "Matching green tint",
 
     images: [
       "/images/kaizo/model-1.jpg",
@@ -299,7 +248,7 @@ export const PRODUCTS: Product[] = [
     variants: [
       {
         id: "v_arashi_sage",
-        name: "Sage Green",
+        name: "Sage-Green Frame & Green Lens",
         colorName: "Sage Green",
         colorHex: "#6B7055",
         image: "/images/kaizo/model-1.jpg"
@@ -315,36 +264,68 @@ export const PRODUCTS: Product[] = [
     reelCaption:
       "Arashi (嵐) means storm. Sage-green frame. Matching green lenses. Calm colour, storm-like attitude. ✦",
 
-    specifications: {
-      frameWidth: "144 mm",
-      lensWidth: "52 mm",
-      bridgeWidth: "20 mm",
-      templeLength: "148 mm",
-      weight: "28 g",
-      lensMaterial: "Polycarbonate",
-      frameMaterial: "Cellulose Propionate",
-      uvProtection: "UV400 Protected",
-      hingeType: "Reinforced Hinges"
-    },
-
-    stockCount: 4,
     inStock: true,
 
-    isFeatured: true,
-    isEditorialHero: true
+    isFeatured: true
+  },
+
+  // --------------------------------------------------
+  // ENTRY — YUHI (夕日) · THE SUNSET
+  // --------------------------------------------------
+
+  {
+    id: "prod_yuhi",
+    name: "YUHI",
+    subtitle: "The Sunset",
+    pronunciation: "YOO-hee",
+    japaneseMeaning: "夕日",
+    tagline: "A little warmth in every view.",
+
+    slug: "yuhi",
+    sku: "SORA-YH-005",
+
+    tier: "Entry",
+    price: TIER_PRICES.Entry,
+
+    shape: "Rectangular",
+    frame: "Rich tortoiseshell with gold-toned accents",
+    lens: "Deep brown",
+
+    // TODO: replace with real YUHI photography.
+    images: ["/images/yuhi/placeholder.svg"],
+    variants: [
+      {
+        id: "v_yuhi_tortoise",
+        name: "Tortoiseshell Frame & Brown Lens",
+        colorName: "Tortoiseshell",
+        colorHex: "#7A4A26",
+        image: "/images/yuhi/placeholder.svg"
+      }
+    ],
+
+    shortDescription:
+      "A vintage-inspired rectangular silhouette in rich tortoiseshell, paired with warm brown lenses. Timeless in character, effortless in style.",
+
+    description:
+      "Inspired by the warmth of the setting sun and the quiet beauty of golden hour, Yuhi captures the art of understated elegance.\n\nWith its softly sculpted rectangular silhouette, rich tortoiseshell frame and deep brown lenses, Yuhi brings together vintage charm and contemporary sophistication. Subtle amber tones flow through the frame, adding depth and character, while delicate gold-toned accents lend a refined finishing touch.\n\nDesigned for slow afternoons, spontaneous escapes and evenings that linger a little longer, Yuhi is effortlessly versatile. Neither too bold nor too subtle, it makes its presence felt through thoughtful details and timeless proportions.\n\nSome things never go out of style. They simply find a new light.",
+
+    reelCaption:
+      "Yuhi (夕日) means sunset. Tortoiseshell tones. Warm brown lenses. A timeless silhouette. An everyday classic, seen in a different light. ✦",
+
+    inStock: true,
+
+    isFeatured: true
   }
 
 ];
 
 // --------------------------------------------------
 // PRODUCT INFORMATION SECTIONS
-// Keep these three sections available on product pages.
+// Only details stated in the product descriptions are shown.
 // --------------------------------------------------
 
 export const PRODUCT_INFO_SECTIONS = [
-  "Dimensions",
-  "Materials & Craft",
-  "Unboxing & Packaging"
+  "Details"
 ] as const;
 
 // --------------------------------------------------

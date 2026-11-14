@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5EFE3"/>
+      <stop offset="0.6" stop-color="#EBCFA4"/>
+      <stop offset="1" stop-color="#C88A45"/>
+    </linearGradient>
+    <linearGradient id="tort" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4A2A14"/>
+      <stop offset="0.35" stop-color="#8A5428"/>
+      <stop offset="0.55" stop-color="#3B200F"/>
+      <stop offset="0.8" stop-color="#A86A32"/>
+      <stop offset="1" stop-color="#4A2A14"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A2418" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#6B4428" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#sky)"/>
+  <circle cx="400" cy="700" r="170" fill="#E9A05A" opacity="0.55"/>
+  <g transform="translate(400 470)">
+    <rect x="-300" y="-85" width="250" height="160" rx="34" fill="url(#lens)" stroke="url(#tort)" stroke-width="22"/>
+    <rect x="50" y="-85" width="250" height="160" rx="34" fill="url(#lens)" stroke="url(#tort)" stroke-width="22"/>
+    <path d="M-50 -30 Q0 -62 50 -30" fill="none" stroke="url(#tort)" stroke-width="18" stroke-linecap="round"/>
+    <circle cx="-282" cy="-70" r="7" fill="#C8A96B"/>
+    <circle cx="282" cy="-70" r="7" fill="#C8A96B"/>
+  </g>
+  <text x="400" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="64" letter-spacing="10" fill="#2C211B">YUHI</text>
+  <text x="400" y="260" text-anchor="middle" font-family="serif" font-size="34" fill="#861F3A">夕日 · the sunset</text>
+  <text x="400" y="920" text-anchor="middle" font-family="monospace" font-size="22" letter-spacing="4" fill="#2C211B" opacity="0.6">PHOTOS COMING SOON</text>
+</svg>

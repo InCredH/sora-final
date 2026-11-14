@@ -17,15 +17,10 @@ export const Navbar: React.FC = () => {
 
   const OFFERS = [
     {
-      title: 'SPECIAL LAUNCH OFFER: GET FLAT 10% OFF ON ALL ORDERS',
-      code: 'SORA10',
-      tag: 'USE CODE'
+      title: 'BUNDLE OFFER: ANY 2 FRAMES FOR ₹2,499 (EXCLUDES HOSHI)',
+      code: null,
+      tag: 'NO CODE NEEDED'
     },
-    // {
-    //   title: 'LIMITED DROP: INSTANT ₹500 OFF ON PURCHASES OVER ₹2,499',
-    //   code: 'FLAGSHIP',
-    //   tag: 'USE CODE'
-    // },
     {
       title: 'Complimentary Shipping on Every Order',
       code: null,
@@ -342,8 +337,8 @@ export const Navbar: React.FC = () => {
 
             {/* Mobile Footer information */}
             <div className="pt-8 border-t border-[#2C211B]/10 text-[11px] font-mono-tech text-[#6B7055] flex flex-col gap-1">
-              <span className="text-[#2C211B] font-semibold">SORA ATELIER // 空 TOKYO</span>
-              <span>SABAE CRAFTED • ZERO-DISTORTION OPTICS</span>
+              <span className="text-[#2C211B] font-semibold">SORA (空) // INSPIRED BY THE SKY</span>
+              <span>UV400 PROTECTED • SHIPPING INCLUDED</span>
               <span className="text-[#861F3A] font-bold mt-2">ALL PRICES IN INR (₹)</span>
             </div>
           </div>

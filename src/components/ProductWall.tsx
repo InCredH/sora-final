@@ -125,9 +125,6 @@ export const ProductWall: React.FC = () => {
                   </h4>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="text-xs font-mono-tech text-rose-400">
-                      {formatPrice(secondaryItem1.salePrice ?? secondaryItem1.price)}
-                    </span>
-                    <span className="text-xs font-mono-tech text-zinc-500 line-through">
                       {formatPrice(secondaryItem1.price)}
                     </span>
                   </div>

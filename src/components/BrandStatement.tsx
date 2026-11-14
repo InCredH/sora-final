@@ -3,7 +3,7 @@ import React from 'react';
 export const BrandStatement: React.FC = () => {
   return (
     <section className="relative w-full py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#2C211B] text-[#F5EFE3] border-b border-[#C8A96B]/20 overflow-hidden">
-      {/* Background Japanese Watermark */}
+      {/* Background 空 (sky) watermark */}
       <div className="absolute right-6 top-1/2 -translate-y-1/2 font-japanese text-[22vw] text-white/[0.025] select-none pointer-events-none leading-none">
         空
       </div>
@@ -39,10 +39,10 @@ export const BrandStatement: React.FC = () => {
 
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm text-[#F5EFE3]/80 leading-relaxed font-light">
             <p>
-              In Japanese, <strong className="text-white font-medium">SORA (空)</strong> signifies the open sky — boundless, ever-shifting in color, and completely free. We craft each frame in Sabae, Japan, using aerospace Grade 4 titanium and organic Italian Mazzucchelli cellulose propionate.
+              In Japanese, <strong className="text-white font-medium">SORA (空)</strong> means the open sky — boundless, ever-shifting in colour, and completely free. That idea inspires everything we design, from the names of our frames to their colours.
             </p>
             <p>
-              Fitted with custom high-definition polarized optics, our silhouettes are designed to evoke an emotional response. Eyewear is simply the physical catalyst; the true medium is your identity, confidence, and self-expression.
+              Every pair comes with UV400-protected lenses, and every silhouette is designed to help you feel like yourself. Sunglasses are simply the starting point; what matters is your confidence and self-expression.
             </p>
           </div>
         </div>

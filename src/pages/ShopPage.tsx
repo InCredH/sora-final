@@ -1,38 +1,37 @@
 import React, { useState, useMemo } from 'react';
-import { PRODUCTS, Product } from '../data/products';
+import { PRODUCTS, BUNDLE_OFFER, isBundleEligible } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
 import { useShop } from '../context/ShopContext';
 import { SlidersHorizontal, X, Grid, LayoutGrid, Check, Sparkles } from 'lucide-react';
 
+const BUNDLE_FILTER = BUNDLE_OFFER.label;
+
 export const ShopPage: React.FC = () => {
   const { selectedCategoryFilter, setSelectedCategoryFilter } = useShop();
   const [selectedShape, setSelectedShape] = useState<string>('All');
-  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
+  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
   const [gridColumns, setGridColumns] = useState<'editorial' | 'dense'>('editorial');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
 
-  const categories = ['All', 'Cellulose Propionate', 'Titanium', 'Shield & Rimless', 'Limited Edition'];
-  const shapes = ['All', 'Rectangular', 'Square', 'Aviator', 'Geometric', 'Cat-Eye', 'Round', 'Shield'];
+  const categories = ['All', BUNDLE_FILTER];
+  const shapes = ['All', ...Array.from(new Set(PRODUCTS.flatMap((p) => (p.shape ? [p.shape] : []))))];
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((p) => {
-      if (selectedCategoryFilter !== 'All' && p.category !== selectedCategoryFilter) return false;
+      if (selectedCategoryFilter === BUNDLE_FILTER && !isBundleEligible(p)) return false;
       if (selectedShape !== 'All' && p.shape !== selectedShape) return false;
       if (inStockOnly && !p.inStock) return false;
       return true;
     }).sort((a, b) => {
-      const priceA = a.salePrice ?? a.price;
-      const priceB = b.salePrice ?? b.price;
-      if (sortBy === 'price-asc') return priceA - priceB;
-      if (sortBy === 'price-desc') return priceB - priceA;
-      if (sortBy === 'rating') return (b.rating ?? 0) - (a.rating ?? 0);
+      if (sortBy === 'price-asc') return a.price - b.price;
+      if (sortBy === 'price-desc') return b.price - a.price;
       return 0; // featured maintains default order
     });
   }, [selectedCategoryFilter, selectedShape, sortBy, inStockOnly]);
 
   const activeFiltersCount =
-    (selectedCategoryFilter !== 'All' ? 1 : 0) +
+    (selectedCategoryFilter === BUNDLE_FILTER ? 1 : 0) +
     (selectedShape !== 'All' ? 1 : 0) +
     (inStockOnly ? 1 : 0);
 
@@ -58,9 +57,6 @@ export const ShopPage: React.FC = () => {
             <h1 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
               THE FULL COLLECTION
             </h1>
-            {/* <p className="mt-2 text-xs sm:text-sm text-[#6B7055] font-normal max-w-xl">
-              Sculptural eyewear handcrafted from Grade 4 Japanese titanium and Italian Mazzucchelli cellulose propionate. Each frame is fitted with certified 100% UV400 high-definition polarized optics.
-            </p> */}
           </div>
 
           <div className="flex items-center gap-4">
@@ -144,7 +140,6 @@ export const ShopPage: React.FC = () => {
                 <option value="featured">Featured Sequence</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
               </select>
             </div>
           </div>
@@ -251,7 +246,7 @@ export const ShopPage: React.FC = () => {
               {/* Categories */}
               <div className="py-6 border-b border-[#2C211B]/10">
                 <span className="text-[10px] font-mono-tech text-[#6B7055] uppercase tracking-widest block mb-3 font-bold">
-                  MATERIAL CATEGORY
+                  OFFERS
                 </span>
                 <div className="space-y-2">
                   {categories.map((cat) => (

@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = '404 — Silhouette Not Found | SORA (空) Atelier';
+    document.title = '404 — Page Not Found | SORA (空)';
   }, []);
 
   const recommendedProducts = PRODUCTS.slice(0, 3);
@@ -36,7 +36,7 @@ export const NotFoundPage: React.FC = () => {
         </h2>
 
         <p className="mt-4 text-sm sm:text-base text-[#6B7055] font-normal max-w-lg mx-auto leading-relaxed">
-          The atelier coordinate or limited-run release you are seeking does not exist or has returned to our private Sabae vault.
+          The page you are looking for doesn't exist or has been moved.
         </p>
 
         {/* Action Buttons */}

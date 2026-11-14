@@ -158,7 +158,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
                   >
                     {PRODUCTS.map((p) => (
                       <option key={p.id} value={p.id}>
-                        {p.name} ({p.category})
+                        {p.name} ({p.subtitle})
                       </option>
                     ))}
                   </select>
@@ -239,7 +239,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
                 THANK YOU, {name.toUpperCase() || 'PATRON'}
               </h3>
               <p className="text-xs text-[#6B7055] mt-2 font-normal max-w-md mx-auto leading-relaxed">
-                Your photograph wearing SORA has entered our atelier editorial curation. Once verified against <strong className="text-[#2C211B]">@{handle || 'yourhandle'}</strong>, your look will be published in the flagship community runway.
+                Your photograph wearing SORA has been sent to the SORA team for review. Once verified against <strong className="text-[#2C211B]">@{handle || 'yourhandle'}</strong>, your look will be published in the flagship community runway.
               </p>
             </div>
 
@@ -250,7 +250,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
               </div>
               <div className="flex justify-between">
                 <span className="text-[#6B7055]">Editorial Perk:</span>
-                <span className="text-[#861F3A] font-bold">₹1,000 Atelier Credit upon Feature</span>
+                <span className="text-[#861F3A] font-bold">₹1,000 Store Credit upon Feature</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-[#6B7055]">Curator Review:</span>
@@ -263,7 +263,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
               onClick={handleClose}
               className="bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-8 py-3 text-xs font-mono-tech font-bold uppercase tracking-wider transition-all rounded-lg shadow-md cursor-pointer"
             >
-              RETURN TO ATELIER
+              BACK TO SORA
             </button>
           </div>
         )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { REVIEWS } from '../data/products';
-import { Star, CheckCircle, ShieldCheck, Truck, RefreshCcw, Lock } from 'lucide-react';
+import { Star, CheckCircle, Truck, Lock } from 'lucide-react';
 
 interface TrustAndReviewsProps {
   onOpenPolicy?: (policyKey: string) => void;
@@ -83,32 +83,6 @@ export const TrustAndReviews: React.FC<TrustAndReviewsProps> = ({ onOpenPolicy }
             </h4>
             <p className="text-[11px] text-[#6B7055] mt-1 font-normal">
               Complimentary on all orders over ₹3,000.
-            </p>
-          </div>
-
-          <div
-            onClick={() => onOpenPolicy?.('trial')}
-            className="p-5 bg-white border border-[#2C211B]/10 hover:border-[#861F3A] rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md"
-          >
-            <RefreshCcw size={22} className="text-[#861F3A] mb-2.5" />
-            <h4 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B] tracking-wider">
-              30-DAY TRIAL
-            </h4>
-            <p className="text-[11px] text-[#6B7055] mt-1 font-normal">
-              Experience frames at home with zero risk.
-            </p>
-          </div>
-
-          <div
-            onClick={() => onOpenPolicy?.('warranty')}
-            className="p-5 bg-white border border-[#2C211B]/10 hover:border-[#861F3A] rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md"
-          >
-            <ShieldCheck size={22} className="text-[#861F3A] mb-2.5" />
-            <h4 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B] tracking-wider">
-              2-YEAR WARRANTY
-            </h4>
-            <p className="text-[11px] text-[#6B7055] mt-1 font-normal">
-              Covers manufacturing & structural integrity.
             </p>
           </div>
 

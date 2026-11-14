@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ShieldCheck, Truck, RefreshCcw, Lock, Leaf, Compass } from 'lucide-react';
+import { X, Truck, Lock } from 'lucide-react';
 
 interface PolicyModalProps {
   policyKey: string | null;
@@ -11,53 +11,17 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
 
   const policies: Record<string, { title: string; subtitle: string; icon: any; content: React.ReactNode }> = {
     shipping: {
-      title: 'COMPLIMENTARY INSURED COURIER',
-      subtitle: 'White-glove global dispatch protocols',
+      title: 'SHIPPING INCLUDED',
+      subtitle: 'No extra charges at checkout',
       icon: Truck,
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            All SORA eyewear orders exceeding ₹3,000 qualify for complimentary insured courier dispatch. Every package is dispatched in our tamper-proof, custom-milled rigid presentation cassette.
+            Shipping is included in every SORA price — there are no extra delivery charges on any order.
           </p>
-          <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
-            <li><strong>Domestic Dispatch (India):</strong> 2 to 4 business days via Blue Dart Apex Air with real-time OTP signature hand-off.</li>
-            <li><strong>Global International:</strong> 4 to 6 business days via DHL Express worldwide with complete customs pre-clearance.</li>
-            <li><strong>Transit Insurance:</strong> 100% replacement guarantee if damaged or lost during transit prior to physical handoff.</li>
-          </ul>
-        </div>
-      )
-    },
-    trial: {
-      title: '30-DAY IN-STUDIO TRIAL',
-      subtitle: 'Experience your frames in authentic daylight',
-      icon: RefreshCcw,
-      content: (
-        <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            True eyewear harmony requires living with a frame. Examine how our Japanese titanium and Italian bio-cellulose rest against your temples throughout regular daily routines.
+            Once your order is confirmed on WhatsApp, we'll share the expected delivery time and tracking details with you.
           </p>
-          <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
-            <li>30 calendar days from the date of recorded carrier delivery.</li>
-            <li>Frames must be returned in their original undamaged presentation cassette with all microfibre pouches included.</li>
-            <li>Pre-printed insured return waybills are included in every delivery box. No fees deducted for size or style exchanges.</li>
-          </ul>
-        </div>
-      )
-    },
-    warranty: {
-      title: '2-YEAR ATELIER WARRANTY',
-      subtitle: 'Comprehensive structural and optical coverage',
-      icon: ShieldCheck,
-      content: (
-        <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
-          <p>
-            Every SORA frame is protected by our two-year international artisan warranty against material defects, hinge fatigue, and optical delamination.
-          </p>
-          <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
-            <li>Covers OBE German 5-barrel hinge tension and solder joints.</li>
-            <li>Covers precision optical coating integrity against bubbling or spontaneous peeling under regular care.</li>
-            <li>Complimentary annual ultrasonic frame cleaning and screw-tightening concierge service at our flagship locations.</li>
-          </ul>
         </div>
       )
     },
@@ -75,36 +39,6 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
             <li>Tokenized payment gateway integrations ensuring zero payment card numbers are stored on our servers.</li>
             <li>Right to erasure: Request immediate deletion of your digital purchasing history at concierge@yoursora.shop.</li>
           </ul>
-        </div>
-      )
-    },
-    craft: {
-      title: 'SABAE METALLURGY',
-      subtitle: 'Centuries of Fukui Prefecture optical mastery',
-      icon: Compass,
-      content: (
-        <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
-          <p>
-            Sabae, in Fukui Prefecture, produces over 95% of Japan's premium eyewear. The artisans who forge SORA frames possess multi-generational expertise in cold-forging Grade 4 pure titanium.
-          </p>
-          <p>
-            By utilizing electric-discharge wire cutting and hand-buffing with vegetable wax buffing wheels, each titanium bevel reflects ambient light with razor precision while eliminating 40% of standard frame weight.
-          </p>
-        </div>
-      )
-    },
-    sustainability: {
-      title: 'ORGANIC BIO-CELLULOSE',
-      subtitle: 'Mazzucchelli 1849 circular materials',
-      icon: Leaf,
-      content: (
-        <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
-          <p>
-            Our cellulose propionate frames originate in Castiglione Olona, Italy. Formulated from FSC-certified cotton seed fibres and conifer wood pulp, plasticized using biodegradable plant esters instead of crude petroleum phthalates.
-          </p>
-          <p>
-            The material is 100% biodegradable in industrial composting conditions, hypoallergenic, and provides an organic warmth against the skin that petroleum synthetics cannot emulate.
-          </p>
         </div>
       )
     }
