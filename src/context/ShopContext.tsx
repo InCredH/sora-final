@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariant, PRODUCTS } from '../data/products';
+import { calculateBundle } from '../utils/pricing';
 
 export interface CartItem {
   id: string; // unique item key: productId + variantId
@@ -32,7 +33,15 @@ interface ShopContextType {
   cartCount: number;
   cartSubtotal: number;
   appliedPromo: string | null;
+  /** Promo-code discount (applies only to frames not already in a bundle). */
   discountAmount: number;
+  /** Saving from the "any 2 for ₹2,499" bundle offer. */
+  bundleDiscount: number;
+  bundleCount: number;
+  /** Bundle-eligible frames in the cart that still need a partner (0 or 1). */
+  unpairedEligibleUnits: number;
+  /** Final amount payable (shipping is included in product prices). */
+  cartTotal: number;
   applyPromoCode: (code: string) => { success: boolean; message: string };
   removePromoCode: () => void;
 
@@ -74,19 +83,19 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (view === 'home') {
         setSelectedProduct(null);
         window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        document.title = 'SORA (空) — Contemporary Japanese Luxury Eyewear | Sabae Crafted';
+        document.title = 'SORA (空) — Sunglasses Inspired by the Sky';
       } else if (view === 'shop') {
         window.history.replaceState(null, '', '#collection');
-        document.title = 'The Collection — SORA (空) Atelier Tokyo';
+        document.title = 'The Collection — SORA (空) Sunglasses';
       } else if (view === 'story') {
         window.history.replaceState(null, '', '#manifesto');
-        document.title = 'The Manifesto — Sabae Metallurgy | SORA (空)';
+        document.title = 'Our Story — SORA (空)';
       } else if (view === 'privacy') {
         window.history.replaceState(null, '', '#privacy');
-        document.title = 'Privacy Policy — SORA (空) Atelier Tokyo';
+        document.title = 'Privacy Policy — SORA (空)';
       } else if (view === 'terms') {
         window.history.replaceState(null, '', '#terms');
-        document.title = 'Terms & Conditions — SORA (空) Atelier Tokyo';
+        document.title = 'Terms & Conditions — SORA (空)';
       } else if (view === '404') {
         window.history.replaceState(null, '', '#404');
         document.title = '404 — Silhouette Not Found | SORA (空)';
@@ -105,26 +114,26 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
           }
         } catch {}
         _setCurrentView('home');
-        document.title = 'SORA (空) — Contemporary Japanese Luxury Eyewear | Sabae Crafted';
+        document.title = 'SORA (空) — Sunglasses Inspired by the Sky';
       } else if (hash === 'shop' || hash === 'collection' || hash === 'frames') {
         _setCurrentView('shop');
-        document.title = 'The Collection — SORA (空) Atelier Tokyo';
+        document.title = 'The Collection — SORA (空) Sunglasses';
       } else if (hash === 'story' || hash === 'manifesto') {
         _setCurrentView('story');
-        document.title = 'The Manifesto — Sabae Metallurgy | SORA (空)';
+        document.title = 'Our Story — SORA (空)';
       } else if (hash === 'privacy' || hash === 'privacy-policy') {
         _setCurrentView('privacy');
-        document.title = 'Privacy Policy — SORA (空) Atelier Tokyo';
+        document.title = 'Privacy Policy — SORA (空)';
       } else if (hash === 'terms' || hash === 'terms-and-conditions') {
         _setCurrentView('terms');
-        document.title = 'Terms & Conditions — SORA (空) Atelier Tokyo';
+        document.title = 'Terms & Conditions — SORA (空)';
       } else if (hash.startsWith('product/')) {
         // Automatically clear any leftover #product/... hash from URL so reload goes cleanly to Home
         try {
           window.history.replaceState(null, '', window.location.pathname + window.location.search);
         } catch {}
         _setCurrentView('home');
-        document.title = 'SORA (空) — Contemporary Japanese Luxury Eyewear | Sabae Crafted';
+        document.title = 'SORA (空) — Sunglasses Inspired by the Sky';
       } else if (hash === '404') {
         _setCurrentView('404');
         document.title = '404 — Silhouette Not Found | SORA (空)';
@@ -144,7 +153,14 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('sora_cart');
-      return saved ? JSON.parse(saved) : [];
+      if (!saved) return [];
+      // Re-link saved items to the current catalogue so prices and details are never stale.
+      return (JSON.parse(saved) as CartItem[]).flatMap((item) => {
+        const product = PRODUCTS.find((p) => p.id === item.product?.id);
+        if (!product) return [];
+        const variant = product.variants.find((v) => v.id === item.variant?.id) ?? product.variants[0];
+        return [{ ...item, id: `${product.id}_${variant.id}`, product, variant }];
+      });
     } catch {
       return [];
     }
@@ -238,10 +254,9 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  const cartSubtotal = cart.reduce((sum, item) => {
-    const unitPrice = item.product.salePrice ?? item.product.price;
-    return sum + unitPrice * item.quantity;
-  }, 0);
+  const cartSubtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+
+  const { bundleCount, bundleDiscount, bundledValue, unpairedEligibleUnits } = calculateBundle(cart);
 
   const applyPromoCode = (code: string) => {
     const trimmed = code.trim().toUpperCase();
@@ -251,7 +266,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     if (trimmed === 'SORA15') {
       setAppliedPromo('SORA15');
-      return { success: true, message: 'Exclusive 15% Atelier discount applied' };
+      return { success: true, message: 'Exclusive 15% discount applied' };
     }
     if (trimmed === 'FLAGSHIP') {
       setAppliedPromo('FLAGSHIP');
@@ -264,14 +279,18 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setAppliedPromo(null);
   };
 
+  // Promo codes don't stack with the bundle offer: they only apply to frames not in a bundle.
+  const promoEligibleAmount = cartSubtotal - bundledValue;
   let discountAmount = 0;
   if (appliedPromo === 'SORA10') {
-    discountAmount = Math.round(cartSubtotal * 0.1);
+    discountAmount = Math.round(promoEligibleAmount * 0.1);
   } else if (appliedPromo === 'SORA15') {
-    discountAmount = Math.round(cartSubtotal * 0.15);
+    discountAmount = Math.round(promoEligibleAmount * 0.15);
   } else if (appliedPromo === 'FLAGSHIP') {
-    discountAmount = Math.min(cartSubtotal, 500);
+    discountAmount = Math.min(promoEligibleAmount, 500);
   }
+
+  const cartTotal = Math.max(0, cartSubtotal - bundleDiscount - discountAmount);
 
   // Strictly formatted in Indian Rupee (INR)
   const formatPrice = (amountInINR: number) => {
@@ -301,6 +320,10 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         cartSubtotal,
         appliedPromo,
         discountAmount,
+        bundleDiscount,
+        bundleCount,
+        unpairedEligibleUnits,
+        cartTotal,
         applyPromoCode,
         removePromoCode,
         // Wishlist stubs

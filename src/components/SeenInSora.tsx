@@ -36,7 +36,7 @@ export const SeenInSora: React.FC = () => {
       image: data.selectedPreviewImage,
       productId: matchedProd.id,
       productName: matchedProd.name,
-      productCategory: matchedProd.category,
+      productCategory: matchedProd.subtitle,
       productPrice: matchedProd.price,
       productImage: matchedProd.images[0],
       quote: data.quote || 'Living in architectural optics.',
@@ -117,7 +117,7 @@ export const SeenInSora: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C8A96B]" />
-                  <span>₹1,000 Atelier Credit upon Feature</span>
+                  <span>₹1,000 Store Credit upon Feature</span>
                 </div>
               </div>
             </div>
@@ -189,7 +189,7 @@ export const SeenInSora: React.FC = () => {
                         WEARING {patron.productName}
                       </span>
                       <span className="text-xs font-mono-tech text-[#2C211B] font-bold">
-                        {formatPrice(patron.productPrice)}
+                        {formatPrice(product.price)}
                       </span>
                     </div>
                   </div>

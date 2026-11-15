@@ -66,7 +66,7 @@ export const CookieConsentBanner: React.FC = () => {
                 <span className="hanko-stamp text-[8px] py-0 px-1 border-[#C8A96B] text-[#C8A96B] bg-[#C8A96B]/10">空</span>
               </div>
               <span className="text-[10px] font-mono-tech tracking-wider text-[#C8A96B] uppercase block">
-                SORA ATELIER // GDPR & PRIVACY NOTICE
+                SORA // PRIVACY NOTICE
               </span>
             </div>
           </div>
@@ -97,7 +97,7 @@ export const CookieConsentBanner: React.FC = () => {
               <span className="text-[10px] text-[#C8A96B] uppercase font-bold">Always Active</span>
             </div>
             <label className="flex items-center justify-between text-[#F5EFE3]/80 cursor-pointer pt-1 border-t border-white/5">
-              <span>Anonymous Craft Analytics</span>
+              <span>Anonymous Analytics</span>
               <input
                 type="checkbox"
                 checked={analyticsEnabled}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useShop } from '../context/ShopContext';
+import { BUNDLE_OFFER } from '../data/products';
 
 interface NewsletterAndFooterProps {
   onOpenPolicy: (key: string) => void;
@@ -26,7 +27,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
               </span>
             </div>
             <p className="mt-4 text-xs text-[#F5EFE3]/75 font-normal leading-relaxed max-w-sm">
-              Contemporary luxury eyewear brand crafted in Sabae, Japan. Optical precision, certified 100% UV400 polarized lenses, and architectural silhouettes sculpted for personal expression.
+              Sunglasses inspired by the sky. Distinctive shapes, UV400-protected lenses, and shipping included in every price.
             </p>
             <div className="mt-6 text-xs font-mono-tech text-[#C8A96B]">
               CONCIERGE: <a href="mailto:concierge@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">concierge@yoursora.shop</a>
@@ -56,39 +57,13 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedCategoryFilter('Titanium');
+                    setSelectedCategoryFilter(BUNDLE_OFFER.label);
                     setCurrentView('shop');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="hover:text-[#C8A96B] transition-colors cursor-pointer"
                 >
-                  Japanese Titanium
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategoryFilter('Cellulose Propionate');
-                    setCurrentView('shop');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="hover:text-[#C8A96B] transition-colors cursor-pointer"
-                >
-                  Cellulose Propionate Frames
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategoryFilter('Shield & Rimless');
-                    setCurrentView('shop');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="hover:text-[#C8A96B] transition-colors cursor-pointer"
-                >
-                  Shield & Rimless
+                  Bundle: {BUNDLE_OFFER.label}
                 </button>
               </li>
             </ul>
@@ -109,25 +84,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                   }}
                   className="hover:text-[#C8A96B] transition-colors cursor-pointer"
                 >
-                  The Manifesto
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onOpenPolicy('craft')}
-                  className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
-                >
-                  Sabae Metallurgy
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onOpenPolicy('sustainability')}
-                  className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
-                >
-                  Cellulose Sustainability
+                  Our Story
                 </button>
               </li>
             </ul>
@@ -146,24 +103,6 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                   className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
                 >
                   Complimentary Shipping
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onOpenPolicy('trial')}
-                  className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
-                >
-                  30-Day In-Studio Trial
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onOpenPolicy('warranty')}
-                  className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
-                >
-                  2-Year Lens Warranty
                 </button>
               </li>
               <li>
@@ -226,7 +165,6 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
 
           <div className="flex items-center gap-6">
             <span>© 2026 SORA EYEWEAR. ALL RIGHTS RESERVED.</span>
-            <span className="hidden md:inline text-[#C8A96B]">FLAGSHIP TOKYO // BENGALURU</span>
           </div>
         </div>
       </div>

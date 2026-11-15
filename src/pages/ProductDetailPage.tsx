@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Product, ProductVariant, PRODUCTS } from '../data/products';
+import { ProductVariant, PRODUCTS, BUNDLE_OFFER, isBundleEligible } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { ProductCard } from '../components/ProductCard';
-import { ArrowLeft, Star, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Sparkles, Check, ChevronLeft, ChevronRight, Eye, Sun, Layers } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag } from 'lucide-react';
 
 interface ProductDetailPageProps {
   onOpenPolicy: (key: string) => void;
@@ -20,11 +20,18 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(product.variants[0]);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<'specs' | 'materials' | 'packaging'>('specs');
+  const bundleEligible = isBundleEligible(product);
+  const descriptionParagraphs = product.description.split('\n\n');
 
-  const discountPercent = product.salePrice 
-    ? Math.round(((product.price - product.salePrice) / product.price) * 100) 
-    : null;
+  // Only details stated in the product description.
+  const details = [
+    { label: 'Meaning', value: `${product.japaneseMeaning} — ${product.subtitle}` },
+    { label: 'Pronunciation', value: `${product.name.charAt(0)}${product.name.slice(1).toLowerCase()} (${product.pronunciation})` },
+    { label: 'Silhouette', value: product.shape },
+    { label: 'Frame', value: product.frame },
+    { label: 'Lenses', value: product.lens },
+    { label: 'UV Protection', value: 'UV400 Protected' }
+  ].filter((d): d is { label: string; value: string } => Boolean(d.value));
 
   const handleVariantSelect = (variant: ProductVariant) => {
     setSelectedVariant(variant);
@@ -46,16 +53,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
     addToCart(product, selectedVariant, quantity);
   };
 
-  // 4 Related Products from same or complementary collection with fallback to maintain 4 balanced compact cards
-  const relatedProducts = (() => {
-    const matched = PRODUCTS.filter(
-      (p) => p.id !== product.id && (p.category === product.category || p.shape === product.shape)
-    );
-    const fallback = PRODUCTS.filter(
-      (p) => p.id !== product.id && !matched.some((m) => m.id === p.id)
-    );
-    return [...matched, ...fallback].slice(0, 4);
-  })();
+  // Other frames — bundle-eligible ones first so shoppers can complete a pair.
+  const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id)
+    .sort((a, b) => Number(isBundleEligible(b)) - Number(isBundleEligible(a)))
+    .slice(0, 4);
 
   return (
     <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] pt-3 sm:pt-4 pb-12 px-4 sm:px-6 lg:px-8">
@@ -107,21 +108,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               <img
                 key={activeImageIndex}
                 src={product.images[activeImageIndex] || selectedVariant.image}
-                alt={`SORA ${product.name} luxury eyewear — View ${activeImageIndex + 1}`}
+                alt={`SORA ${product.name} sunglasses — View ${activeImageIndex + 1}`}
                 className="relative z-10 max-h-full max-w-full object-contain filter contrast-[1.02] transition-all duration-500 ease-out animate-in fade-in zoom-in-95 duration-300 drop-shadow-sm"
               />
 
               {/* Badges on detail photo - Perfectly Inset & Aligned */}
               <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 items-start pointer-events-none">
-                {discountPercent && (
-                  <span className="text-[10px] font-mono-tech tracking-normal px-2.5 py-0.5 uppercase rounded-md bg-[#861F3A] text-white font-bold shadow-sm inline-flex items-center gap-1">
-                    <span>SAVE</span>
-                    <span>{discountPercent}%</span>
-                  </span>
-                )}
-                {product.badge && !discountPercent && (
-                  <span className="text-[10px] font-mono-tech tracking-normal px-2.5 py-0.5 uppercase rounded-md bg-[#2C211B] text-[#F5EFE3] font-bold shadow-sm">
-                    {product.badge}
+                {bundleEligible && (
+                  <span className="text-[10px] font-mono-tech tracking-normal px-2.5 py-0.5 uppercase rounded-md bg-[#861F3A] text-white font-bold shadow-sm">
+                    {BUNDLE_OFFER.label}
                   </span>
                 )}
                 <span className="text-[9px] font-mono-tech bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded uppercase font-semibold">
@@ -187,14 +182,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           {/* Right Column: Specifications, Variants & Shopping Flow (5 cols) — Tight Spacing Above Fold */}
           <div className="lg:col-span-5 flex flex-col justify-start space-y-3">
             <div>
-              {/* Category & Shape */}
+              {/* Meaning & Shape */}
               <div className="flex items-center justify-between text-[11px] font-mono-tech tracking-wider text-[#6B7055] uppercase">
-                <span className="font-bold">{product.category} • {product.shape}</span>
-                <div className="flex items-center gap-1 text-[#C8A96B]">
-                  <Star size={13} fill="currentColor" />
-                  <span className="text-[#2C211B] font-bold">{(product.rating ?? 0).toFixed(1)}</span>
-                  <span className="text-[#6B7055]">({product.reviewCount} reviews)</span>
-                </div>
+                <span className="font-bold">{product.japaneseMeaning} · {product.pronunciation}</span>
+                {product.shape && <span className="text-[#C8A96B] font-bold">{product.shape}</span>}
               </div>
 
               {/* Title & Price */}
@@ -203,41 +194,36 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               </h1>
 
               <div className="mt-1.5 flex items-baseline gap-2.5">
-                {product.salePrice ? (
-                  <>
-                    <span className="font-mono-tech text-2xl sm:text-3xl text-[#861F3A] font-extrabold">
-                      {formatPrice(product.salePrice)}
-                    </span>
-                    <span className="font-mono-tech text-base text-[#6B7055] line-through">
-                      {formatPrice(product.price)}
-                    </span>
-                    <span className="text-[11px] font-mono-tech bg-[#861F3A]/10 text-[#861F3A] font-bold px-2 py-0.5 rounded inline-flex items-center gap-1 border border-[#861F3A]/20">
-                      <span>SAVE</span>
-                      <span>{discountPercent}%</span>
-                    </span>
-                  </>
-                ) : (
-                  <span className="font-mono-tech text-2xl sm:text-3xl text-[#2C211B] font-extrabold">
-                    {formatPrice(product.price)}
-                  </span>
-                )}
+                <span className="font-mono-tech text-2xl sm:text-3xl text-[#2C211B] font-extrabold">
+                  {formatPrice(product.price)}
+                </span>
                 <span className="text-[10px] font-mono-tech text-emerald-800 uppercase font-semibold">
                   Taxes Included
                 </span>
               </div>
 
-              {/* Subtitle & Clean Description */}
+              {/* Bundle offer note */}
+              <div className="mt-2 flex items-center gap-1.5 text-[11px] font-mono-tech font-bold text-[#861F3A]">
+                <Tag size={12} />
+                <span>
+                  {bundleEligible
+                    ? `Bundle offer: ${BUNDLE_OFFER.label} (excludes HOSHI)`
+                    : 'Not part of the bundle offer'}
+                </span>
+              </div>
+
+              {/* Subtitle, Tagline & Short Description */}
               <p className="mt-1.5 text-[11px] font-mono-tech text-[#6B7055] uppercase font-semibold tracking-wider">
-                {product.subtitle}
+                {product.subtitle} — <span className="normal-case italic">{product.tagline}</span>
               </p>
-              <p className="mt-1 text-xs text-[#2C211B]/80 font-normal leading-relaxed line-clamp-3 sm:line-clamp-4">
-                {product.description}
+              <p className="mt-1 text-xs text-[#2C211B]/80 font-normal leading-relaxed">
+                {product.shortDescription}
               </p>
 
               {/* Colorway Variant Selection */}
               <div className="mt-3 pt-2.5 border-t border-[#2C211B]/10">
                 <div className="flex items-center justify-between text-[11px] font-mono-tech uppercase mb-2">
-                  <span className="text-[#6B7055] font-semibold">FINISH SELECTION:</span>
+                  <span className="text-[#6B7055] font-semibold">COLOUR:</span>
                   <span className="text-[#2C211B] font-bold">{selectedVariant.colorName}</span>
                 </div>
 
@@ -268,21 +254,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               {/* Authentic Stock Status Urgency Indicator */}
               <div className="mt-2.5 p-2 rounded-lg bg-white border border-[#2C211B]/10 shadow-sm text-xs font-mono-tech">
                 {product.inStock ? (
-                  product.stockCount <= 5 ? (
-                    <div className="flex items-center gap-2 text-[#861F3A] font-bold">
-                      <span className="w-2 h-2 rounded-full bg-[#861F3A] animate-pulse" />
-                      <span>Few left in stock — Only {product.stockCount} frames remaining in this batch!</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2 text-emerald-800 font-bold">
-                      <Check size={14} className="text-emerald-700" />
-                      <span>In Stock • Ready for dispatch from Sabae atelier</span>
-                    </div>
-                  )
+                  <div className="flex items-center gap-2 text-emerald-800 font-bold">
+                    <Check size={14} className="text-emerald-700" />
+                    <span>In Stock</span>
+                  </div>
                 ) : (
                   <div className="flex items-center gap-2 text-rose-700 font-bold">
                     <span className="w-2 h-2 rounded-full bg-rose-600" />
-                    <span>Batch Sold Out — Next artisanal run in production</span>
+                    <span>Sold Out</span>
                   </div>
                 )}
               </div>
@@ -320,7 +299,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <ShoppingBag size={14} className="text-[#C8A96B]" />
                   <span>
                     {product.inStock 
-                      ? `ADD TO BAG • ${formatPrice((product.salePrice ?? product.price) * quantity)}` 
+                      ? `ADD TO BAG • ${formatPrice(product.price * quantity)}` 
                       : 'RESERVE FOR NEXT DROP'}
                   </span>
                 </button>
@@ -337,19 +316,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <span className="text-[8px] font-mono-tech text-[#6B7055]">On all orders</span>
                 </div>
 
-                <div
-                  onClick={() => onOpenPolicy('trial')}
-                  className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
-                >
+                <div className="p-2 bg-white border border-[#2C211B]/10 rounded-lg shadow-sm">
                   <RefreshCcw size={14} className="mx-auto text-[#861F3A] mb-0.5" />
                   <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">No exchange/Returns</span>
                   <span className="text-[8px] font-mono-tech text-[#6B7055]">Unless damaged</span>
                 </div>
 
-                <div
-                  onClick={() => onOpenPolicy('warranty')}
-                  className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
-                >
+                <div className="p-2 bg-white border border-[#2C211B]/10 rounded-lg shadow-sm">
                   <ShieldCheck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
                   <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">UV400 Protected</span>
                   <span className="text-[8px] font-mono-tech text-[#6B7055]">All frames</span>
@@ -357,97 +330,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               </div>
             </div>
 
-            {/* Technical Specification Tabs */}
-            <div className="mt-8 pt-6 border-t border-[#2C211B]/10">
-              <div className="flex items-center gap-3 border-b border-[#2C211B]/10 pb-2 text-xs font-mono-tech uppercase">
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('specs')}
-                  className={`pb-2 transition-colors relative cursor-pointer ${
-                    activeTab === 'specs'
-                      ? 'text-[#2C211B] font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#861F3A]'
-                      : 'text-[#6B7055] hover:text-[#2C211B]'
-                  }`}
-                >
-                  Dimensions
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('materials')}
-                  className={`pb-2 transition-colors relative cursor-pointer ${
-                    activeTab === 'materials'
-                      ? 'text-[#2C211B] font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#861F3A]'
-                      : 'text-[#6B7055] hover:text-[#2C211B]'
-                  }`}
-                >
-                  Materials & Craft
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('packaging')}
-                  className={`pb-2 transition-colors relative cursor-pointer ${
-                    activeTab === 'packaging'
-                      ? 'text-[#2C211B] font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[#861F3A]'
-                      : 'text-[#6B7055] hover:text-[#2C211B]'
-                  }`}
-                >
-                  Unboxing Packaging
-                </button>
-              </div>
-
-              <div className="py-4 text-xs font-mono-tech">
-                {activeTab === 'specs' && (
-                  <div className="grid grid-cols-2 gap-3 text-[#6B7055]">
-                    <div className="p-2.5 rounded bg-white border border-[#2C211B]/10">
-                      <span className="text-[10px] text-[#6B7055] block font-semibold">FRAME WIDTH</span>
-                      <strong className="text-[#2C211B]">{product.specifications.frameWidth}</strong>
-                    </div>
-                    <div className="p-2.5 rounded bg-white border border-[#2C211B]/10">
-                      <span className="text-[10px] text-[#6B7055] block font-semibold">LENS WIDTH</span>
-                      <strong className="text-[#2C211B]">{product.specifications.lensWidth}</strong>
-                    </div>
-                    <div className="p-2.5 rounded bg-white border border-[#2C211B]/10">
-                      <span className="text-[10px] text-[#6B7055] block font-semibold">BRIDGE GAP</span>
-                      <strong className="text-[#2C211B]">{product.specifications.bridgeWidth}</strong>
-                    </div>
-                    <div className="p-2.5 rounded bg-white border border-[#2C211B]/10">
-                      <span className="text-[10px] text-[#6B7055] block font-semibold">TEMPLE LENGTH</span>
-                      <strong className="text-[#2C211B]">{product.specifications.templeLength}</strong>
-                    </div>
-                    <div className="p-2.5 rounded bg-white border border-[#2C211B]/10">
-                      <span className="text-[10px] text-[#6B7055] block font-semibold">TOTAL WEIGHT</span>
-                      <strong className="text-[#2C211B]">{product.specifications.weight}</strong>
-                    </div>
-                    <div className="p-2.5 rounded bg-white border border-[#2C211B]/10">
-                      <span className="text-[10px] text-[#6B7055] block font-semibold">HINGE TYPE</span>
-                      <strong className="text-[#2C211B]">{product.specifications.hingeType}</strong>
-                    </div>
+            {/* Product Details (from the product description only) */}
+            <div className="mt-6 pt-5 border-t border-[#2C211B]/10">
+              <h2 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B] pb-2 border-b border-[#2C211B]/10">
+                Details
+              </h2>
+              <dl className="py-4 grid grid-cols-2 gap-3 text-xs font-mono-tech">
+                {details.map((d) => (
+                  <div key={d.label} className="p-2.5 rounded bg-white border border-[#2C211B]/10">
+                    <dt className="text-[10px] text-[#6B7055] block font-semibold uppercase">{d.label}</dt>
+                    <dd className="text-[#2C211B] font-bold">{d.value}</dd>
                   </div>
-                )}
-
-                {activeTab === 'materials' && (
-                  <div className="space-y-3 text-[#2C211B]/80 leading-relaxed font-normal p-3 rounded-lg bg-white border border-[#2C211B]/10">
-                    <p>
-                      <strong className="text-[#2C211B]">Frame Material:</strong> {product.specifications.frameMaterial}
-                    </p>
-                    <p>
-                      <strong className="text-[#2C211B]">Optical Lenses:</strong> {product.specifications.lensMaterial}
-                    </p>
-                    <p>
-                      <strong className="text-[#2C211B]">UV Protection:</strong> {product.specifications.uvProtection}
-                    </p>
-                  </div>
-                )}
-
-                {activeTab === 'packaging' && (
-                  <div className="space-y-3 text-[#2C211B]/80 leading-relaxed font-normal p-3 rounded-lg bg-white border border-[#2C211B]/10">
-                    <p>
-                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
-                      Each {product.name} frame arrives in our signature protective hard case, accompanied by a microfiber lens-cleaning cloth, certified atelier warranty documentation, and our 30-day home trial guarantee.
-                    </p>
-                  </div>
-                )}
-              </div>
+                ))}
+              </dl>
             </div>
           </div>
         </div>
@@ -466,7 +361,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 VISUAL ARCHIVE // {product.name}
               </h2>
               <p className="text-xs sm:text-sm text-[#6B7055] mt-2 max-w-xl font-normal">
-                Real-world editorial photography, natural lighting tests, and craftsmanship details.
+                Photography and the story behind the frame.
               </p>
             </div>
 
@@ -485,29 +380,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               <div className="lg:col-span-7 h-[340px] sm:h-[420px] overflow-hidden rounded-xl bg-[#FAF7F0] border border-[#2C211B]/10 p-3 sm:p-5 flex items-center justify-center relative">
                 <img
                   src={product.images[0]}
-                  alt={`Model styled in SORA ${product.name} ${product.category} sunglasses`}
+                  alt={`Model styled in SORA ${product.name} sunglasses`}
                   className="max-h-full max-w-full object-contain drop-shadow-sm hover:scale-102 transition-transform duration-500"
                 />
               </div>
               <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
                 <span className="text-[10px] font-mono-tech tracking-widest text-[#861F3A] uppercase font-bold">
-                  PLATE 01 // PERSPECTIVE & PRESENCE
+                  {product.name} · {product.japaneseMeaning} · {product.subtitle}
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#2C211B] leading-tight">
-                  ENGINEERED FOR SELF-EXPRESSION
+                  {product.tagline}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#6B7055] leading-relaxed font-normal">
-                  Designed to look effortless in any ambient light. The beveled browline rests comfortably across the nose bridge while framing your facial contours with sculpted confidence.
-                </p>
-                <div className="pt-4 border-t border-[#2C211B]/10 grid grid-cols-2 gap-4 text-xs font-mono-tech">
-                  <div>
-                    <span className="text-[#6B7055] text-[10px] block">SILHOUETTE</span>
-                    <strong className="text-[#2C211B] font-bold">{product.shape} Architectural</strong>
-                  </div>
-                  <div>
-                    <span className="text-[#6B7055] text-[10px] block">FITTING</span>
-                    <strong className="text-[#2C211B] font-bold">Universal Asian & Global Fit</strong>
-                  </div>
+                <div className="space-y-3 text-xs sm:text-sm text-[#6B7055] leading-relaxed font-normal">
+                  {descriptionParagraphs.map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
                 </div>
               </div>
             </div>
@@ -521,7 +408,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <div className="h-64 sm:h-72 overflow-hidden bg-[#FAF7F0] p-4 flex items-center justify-center">
                     <img
                       src={product.images[1]}
-                      alt={`SORA ${product.name} precision frame craftsmanship and hinge detail`}
+                      alt={`SORA ${product.name} frame detail`}
                       className="max-h-full max-w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
@@ -529,17 +416,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                     <span className="text-[10px] font-mono-tech text-[#6B7055] uppercase tracking-wider block mb-1 font-bold">
                       PLATE 02 // STUDIO DISPLAY
                     </span>
-                    {/* <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
-                      {product.category === 'Titanium' 
-                        ? 'PRECISION TITANIUM WIREFRAME' 
-                        : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
-                        : 'SCULPTED CELLULOSE PROPIONATE GEOMETRY'}
-                    </h4>
-                    <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
-                      {product.category === 'Titanium'
-                        ? 'Forged in Sabae, Japan from Grade 4 titanium with micro-flex tension joints. Ultralight 16-17g profile that balances effortlessly all day.'
-                        : 'Hand-tumbled with Japanese bamboo chips for 72 continuous hours, imparting a smooth, silky tactile finish that feels weightless against skin.'}
-                    </p> */}
                   </div>
                 </div>
               )}
@@ -550,19 +426,16 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <div className="h-64 sm:h-72 overflow-hidden bg-[#FAF7F0] p-4 flex items-center justify-center">
                     <img
                       src={product.images[4] || product.images[2]}
-                      alt={`SORA ${product.name} polarized lens daylight optical test`}
+                      alt={`SORA ${product.name} in daylight`}
                       className="max-h-full max-w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6">
                     <span className="text-[10px] font-mono-tech text-[#861F3A] uppercase tracking-wider block mb-1 font-bold">
-                      PLATE 03 // SKYLIGHT & OPTICS
+                      PLATE 03 // IN THE LIGHT
                     </span>
-                    <h4 className="font-display text-xl font-bold uppercase text-[#2C211B]">
-                      HIGH-DEFINITION LIGHT TRANSMISSION
-                    </h4>
                     <p className="text-xs text-[#6B7055] mt-2 leading-relaxed">
-                      Captured directly against the evening twilight. Zero optical aberration, enhanced warm contrast, and 100% certified UV400 radiation protection.
+                      {product.reelCaption}
                     </p>
                   </div>
                 </div>

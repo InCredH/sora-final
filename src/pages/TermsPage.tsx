@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useShop } from '../context/ShopContext';
-import { ArrowLeft, Scale, Award, Truck, RefreshCcw, ShieldCheck, Mail } from 'lucide-react';
+import { ArrowLeft, Scale, Award, Truck, Mail } from 'lucide-react';
 
 export const TermsPage: React.FC = () => {
   const { setCurrentView } = useShop();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = 'Terms & Conditions — SORA (空) Atelier Tokyo';
+    document.title = 'Terms & Conditions — SORA (空)';
   }, []);
 
   return (
@@ -46,25 +46,25 @@ export const TermsPage: React.FC = () => {
             TERMS & CONDITIONS
           </h1>
           <p className="mt-4 text-sm sm:text-base text-[#6B7055] font-normal leading-relaxed max-w-2xl">
-            Welcome to SORA Atelier (空). These terms govern the acquisition, dispatch, trial period, and artisan warranty coverage for all handcrafted eyewear silhouettes commissioned through this platform.
+            Welcome to SORA (空). These terms govern the purchase and dispatch of all eyewear ordered through this platform.
           </p>
         </div>
 
         {/* Policy Body */}
         <div className="mt-12 space-y-12">
           
-          {/* Section 1: Numbered Craftsmanship */}
+          {/* Section 1: Our Products */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-lg bg-[#861F3A]/10 text-[#861F3A] flex items-center justify-center font-bold">
                 01
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                Sabae Craftsmanship & Numbered Editions
+                Our Products
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed font-normal">
-              Every SORA silhouette is cold-forged in Sabae (Fukui Prefecture, Japan) using Grade 4 Japanese titanium and hand-cured Italian Mazzucchelli cellulose propionate. Our releases are produced in strictly numbered, micro-batch ateliers. Due to natural striations in genuine bio-cellulose horn acetate and hand-buffed vegetable wax finishes, subtle organic variations are authentic hallmarks of artisanal craft rather than defects.
+              SORA frame names and designs are inspired by Japanese words for the sky. Every pair has UV400-protected lenses. Product photos are for reference; colours may look slightly different depending on your screen.
             </p>
           </section>
 
@@ -83,80 +83,40 @@ export const TermsPage: React.FC = () => {
                 All prices displayed across the SORA platform are denominated exclusively in <strong>Indian Rupee (INR ₹)</strong> and are inclusive of applicable Goods and Services Tax (GST).
               </p>
               <p>
-                The total price presented in your final bag summary is complete and final. There are zero unannounced checkout fees, delivery surcharges, or hidden import tariffs levied at domestic delivery hand-off.
+                The total price presented in your final bag summary is complete and final. There are no extra checkout fees or delivery charges.
               </p>
             </div>
           </section>
 
-          {/* Section 3: Courier Dispatch */}
+          {/* Section 3: Shipping */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-lg bg-[#C8A96B]/20 text-[#2C211B] flex items-center justify-center font-bold">
                 <Truck size={18} className="text-[#861F3A]" />
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                Complimentary Insured Courier Dispatch
+                Shipping
               </h2>
             </div>
             <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
               <p>
-                All orders exceeding ₹3,000 qualify for complimentary insured priority air courier dispatch. Standard delivery windows:
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-xs text-[#6B7055] font-mono-tech pt-2">
-                <li>Major Metros (Bengaluru, Mumbai, Delhi-NCR): 2 to 3 business days via Blue Dart Apex Air.</li>
-                <li>Rest of India: 3 to 5 business days with direct OTP-verified physical signature hand-off.</li>
-                <li>Every shipment is protected by 100% full replacement transit insurance until physically verified by the recipient.</li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Section 4: 30-Day Trial & Returns */}
-          <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-[#C8A96B]/20 text-[#2C211B] flex items-center justify-center font-bold">
-                <RefreshCcw size={18} className="text-[#861F3A]" />
-              </div>
-              <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                30-Day In-Studio Trial & Exchange Guarantee
-              </h2>
-            </div>
-            <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
-              <p>
-                We invite patrons to experience SORA frames in authentic daylight. You may initiate a full refund or style exchange within <strong>30 calendar days</strong> of recorded carrier delivery.
-              </p>
-              <p>
-                To qualify, frames must remain free from deep accidental scratches or structural modifications, and be returned in the original presentation cassette with all included microfibre pouches and authenticity certificates.
+                Shipping is included in every price — no delivery charges are added at checkout. Once your order is confirmed on WhatsApp, we&rsquo;ll share the expected delivery time and tracking details with you.
               </p>
             </div>
           </section>
 
-          {/* Section 5: Warranty */}
-          <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-[#C8A96B]/20 text-[#2C211B] flex items-center justify-center font-bold">
-                <ShieldCheck size={18} className="text-[#861F3A]" />
-              </div>
-              <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                2-Year Atelier Optical Warranty
-              </h2>
-            </div>
-            <p className="text-sm text-[#2C211B]/80 leading-relaxed">
-              Every SORA frame is protected by a two-year international warranty covering cold-forged titanium solder joints, OBE German 5-barrel hinge tension, and UV400 polarized lens optical coating integrity. Complimentary ultrasonic deep-cleansing and hinge re-tightening are provided at all SORA ateliers.
-            </p>
-          </section>
-
-          {/* Section 6: Concierge & Dispute Resolution */}
+          {/* Section 4: Concierge & Dispute Resolution */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-lg bg-[#861F3A]/10 text-[#861F3A] flex items-center justify-center font-bold">
-                06
+                04
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
                 Concierge Assistance & Governing Law
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed mb-6">
-              These terms are interpreted in harmony with the laws of Japan and India. Any queries regarding custom sizing adjustments, lens prescriptions, or order status are handled with utmost personal attention.
+              These terms are governed by the laws of India. For any question about your order, please contact us and we'll get back to you personally.
             </p>
 
             <div className="p-4 rounded-xl bg-[#2C211B] text-[#F5EFE3] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -180,7 +140,7 @@ export const TermsPage: React.FC = () => {
 
         {/* Back to top footer */}
         <div className="mt-16 pt-8 border-t border-[#2C211B]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#6B7055]">
-          <span>SORA (空) ATELIER TOKYO // S/S 2026 ARCHIVE</span>
+          <span>SORA (空) // SUNGLASSES INSPIRED BY THE SKY</span>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

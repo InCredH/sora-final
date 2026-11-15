@@ -2,20 +2,20 @@
 import React, { useState } from 'react';
 import { useShop } from '../context/ShopContext';
 import { PRODUCTS } from '../data/products';
-import { ArrowRight, Sparkles, Sun, Moon, Wind, CloudLightning } from 'lucide-react';
+import { ArrowRight, Sparkles, Sun, Wind, CloudLightning, Sunset } from 'lucide-react';
 
 export const HeroSection: React.FC = () => {
   const { setCurrentView, openProductDetail, formatPrice } = useShop();
 
-  // Keep the order consistent with PRODUCTS in products.ts
-  const frameIcons = [
-    <Sparkles size={13} />,
-    <Sun size={13} />,
-    <Wind size={13} />,
-    <CloudLightning size={13} />
-  ];
+  const frameIcons: Record<string, React.ReactNode> = {
+    prod_hoshi: <Sparkles size={13} />,
+    prod_taiyo: <Sun size={13} />,
+    prod_aozora: <Wind size={13} />,
+    prod_arashi: <CloudLightning size={13} />,
+    prod_yuhi: <Sunset size={13} />
+  };
 
-  const frameProducts = PRODUCTS.slice(0, 4);
+  const frameProducts = PRODUCTS;
 
   const [activeFrameIndex, setActiveFrameIndex] = useState(0);
 
@@ -41,7 +41,7 @@ export const HeroSection: React.FC = () => {
     'SORA — SEE YOUR WAY',
     'UV400 PROTECTED',
     'COMPLIMENTARY DELIVERY',
-    'METAL & CELLULOSE PROPIONATE',
+    'ANY 2 FOR ₹2,499',
     'MADE FOR EVERY MOOD',
     'SORA ON YOU'
   ];
@@ -116,7 +116,7 @@ export const HeroSection: React.FC = () => {
               </span>
 
               <span className="text-[10px] font-mono-tech text-[#861F3A] font-bold">
-                0{activeFrameIndex + 1} / 04
+                0{activeFrameIndex + 1} / {String(frameProducts.length).padStart(2, '0')}
               </span>
             </div>
 
@@ -138,7 +138,7 @@ export const HeroSection: React.FC = () => {
                       ? 'scale-110 text-[#C8A96B]'
                       : 'text-[#6B7055]'
                   }`}>
-                    {frameIcons[idx]}
+                    {frameIcons[product.id] ?? <Sparkles size={13} />}
                   </span>
 
                   <span>{product.name}</span>
@@ -248,9 +248,9 @@ export const HeroSection: React.FC = () => {
                     </h4>
 
                     <span className="text-xs font-mono-tech text-[#861F3A] font-bold">
-                      {formatPrice(activeProduct.salePrice || activeProduct.price)}
+                      {formatPrice(activeProduct.price)}
                       {' '}•{' '}
-                      {activeProduct.category}
+                      {activeProduct.japaneseMeaning}
                     </span>
                   </div>
                 </div>

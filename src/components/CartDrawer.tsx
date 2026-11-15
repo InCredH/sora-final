@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useShop } from '../context/ShopContext';
-import { X, Minus, Plus, ShoppingBag, ArrowRight, Trash2, Tag, ShieldCheck, CheckCircle2, MessageSquare } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, ArrowRight, Trash2, Tag, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { buildEnquiryMessage, openWhatsAppEnquiry } from '../utils/whatsappEnquiry';
+import { BUNDLE_OFFER, isBundleEligible } from '../data/products';
 
 export const CartDrawer: React.FC = () => {
   const {
@@ -13,6 +15,10 @@ export const CartDrawer: React.FC = () => {
     cartSubtotal,
     appliedPromo,
     discountAmount,
+    bundleDiscount,
+    bundleCount,
+    unpairedEligibleUnits,
+    cartTotal,
     applyPromoCode,
     removePromoCode,
     formatPrice,
@@ -22,15 +28,13 @@ export const CartDrawer: React.FC = () => {
   const [promoInput, setPromoInput] = useState('');
   const [promoMessage, setPromoMessage] = useState<{ text: string; isError: boolean } | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
-  const [customerPhone, setCustomerPhone] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [lastEnquiryMessage, setLastEnquiryMessage] = useState('');
 
   if (!isCartOpen) return null;
 
-  const freeShippingThreshold = 3000;
-  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - cartSubtotal);
-  const progressPercent = Math.min(100, (cartSubtotal / freeShippingThreshold) * 100);
-  const shippingCharge = remainingForFreeShipping === 0 ? 0 : 250;
-  const finalTotal = Math.max(0, cartSubtotal - discountAmount + shippingCharge);
+  // Product prices are inclusive of shipping.
+  const finalTotal = cartTotal;
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,6 +48,20 @@ export const CartDrawer: React.FC = () => {
 
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (cart.length === 0) return;
+    const message = buildEnquiryMessage({
+      cart,
+      subtotal: cartSubtotal,
+      discountAmount,
+      appliedPromo,
+      bundleCount,
+      bundleDiscount,
+      total: finalTotal,
+      formatPrice,
+      customerName,
+    });
+    setLastEnquiryMessage(message);
+    openWhatsAppEnquiry(message);
     setOrderConfirmed(true);
   };
 
@@ -97,27 +115,26 @@ export const CartDrawer: React.FC = () => {
               </div>
               
               <span className="text-[10px] font-mono-tech tracking-widest text-[#861F3A] uppercase font-bold block mb-1">
-                ORDER RESERVATION CONFIRMED
+                ENQUIRY READY ON WHATSAPP
               </span>
               <h4 className="font-display text-2xl font-black text-[#2C211B] uppercase tracking-tight">
                 THANK YOU FOR CHOOSING SORA
               </h4>
               <p className="text-xs sm:text-sm text-[#6B7055] mt-3 max-w-sm mx-auto leading-relaxed">
-                Your reservation for <strong>{cart.length} signature frame{cart.length > 1 ? 's' : ''}</strong> has been logged. Our concierge will dispatch your insured package within 24 hours.
+                Your enquiry for <strong>{cart.reduce((s, i) => s + i.quantity, 0)} frame{cart.reduce((s, i) => s + i.quantity, 0) > 1 ? 's' : ''}</strong> has been prepared in WhatsApp. Tap <strong>Send</strong> there and our concierge will confirm availability and delivery.
               </p>
+              <button
+                type="button"
+                onClick={() => openWhatsAppEnquiry(lastEnquiryMessage)}
+                className="mt-3 text-[11px] font-mono-tech font-bold text-[#861F3A] underline cursor-pointer"
+              >
+                WhatsApp didn't open? Tap here
+              </button>
 
               <div className="mt-6 p-4 bg-white border border-[#2C211B]/10 rounded-lg text-left text-xs font-mono-tech space-y-2">
                 <div className="flex justify-between text-[#6B7055]">
                   <span>Total Amount (COD / Online):</span>
                   <span className="text-[#2C211B] font-bold">{formatPrice(finalTotal)}</span>
-                </div>
-                <div className="flex justify-between text-[#6B7055]">
-                  <span>Packaging:</span>
-                  <span className="text-[#2C211B]">Handcrafted Leather Case & Cloth</span>
-                </div>
-                <div className="flex justify-between text-[#6B7055]">
-                  <span>Trial Period:</span>
-                  <span className="text-[#861F3A] font-bold">30-Day In-Home Guarantee</span>
                 </div>
               </div>
             </div>
@@ -134,23 +151,6 @@ export const CartDrawer: React.FC = () => {
           </div>
         ) : (
           <>
-            {/* Free Shipping Progress Indicator */}
-            {/* <div className="px-6 py-3 bg-[#FAF7F0] border-b border-[#2C211B]/10">
-              <div className="flex items-center justify-between text-[11px] font-mono-tech mb-1.5">
-                <span className="text-[#6B7055]">
-                  {remainingForFreeShipping > 0
-                    ? `Add ${formatPrice(remainingForFreeShipping)} more for Complimentary Shipping`
-                    : 'Complimentary Insured Courier Unlocked'}
-                </span>
-                <span className="text-[#861F3A] font-bold">{Math.round(progressPercent)}%</span>
-              </div>
-              <div className="w-full h-1.5 bg-[#2C211B]/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#861F3A] transition-all duration-500 ease-out rounded-full"
-                  style={{ width: `${progressPercent}%` }}
-                />
-              </div>
-            </div> */}
 
             {/* Cart Items List */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
@@ -163,7 +163,7 @@ export const CartDrawer: React.FC = () => {
                     YOUR BAG IS CURRENTLY EMPTY
                   </h4>
                   <p className="text-xs text-[#6B7055] mt-2 max-w-xs font-normal">
-                    Explore our Japanese titanium and cellulose propionate silhouettes.
+                    Explore the collection — any 2 frames (except HOSHI) for ₹2,499.
                   </p>
                   <button
                     type="button"
@@ -178,7 +178,7 @@ export const CartDrawer: React.FC = () => {
                 </div>
               ) : (
                 cart.map((item) => {
-                  const unitPrice = item.product.salePrice ?? item.product.price;
+                  const unitPrice = item.product.price;
                   return (
                     <div
                       key={item.id}
@@ -214,15 +214,13 @@ export const CartDrawer: React.FC = () => {
                               style={{ backgroundColor: item.variant.colorHex }}
                             />
                             <span>{item.variant.colorName}</span>
-                            <span>• {item.product.category}</span>
                           </div>
 
-                          {/* Stock urgency indicator */}
                           <div className="mt-1">
-                            <span className="text-[10px] font-mono-tech font-bold text-[#861F3A]">
-                              {item.product.stockCount <= 5
-                                ? `Only ${item.product.stockCount} left in stock`
-                                : 'In Stock • Ships in 24 hrs'}
+                            <span className="text-[10px] font-mono-tech font-bold text-[#6B7055]">
+                              {isBundleEligible(item.product)
+                                ? `Eligible for ${BUNDLE_OFFER.label}`
+                                : 'Not part of the bundle offer'}
                             </span>
                           </div>
                         </div>
@@ -272,6 +270,13 @@ export const CartDrawer: React.FC = () => {
             {/* Drawer Footer with Promo Code & Direct Order Reservation */}
             {cart.length > 0 && (
               <div className="p-6 border-t border-[#2C211B]/10 bg-[#FAF7F0] space-y-4">
+                {/* Bundle nudge */}
+                {unpairedEligibleUnits > 0 && (
+                  <div className="p-2.5 bg-[#C8A96B]/15 border border-[#C8A96B]/40 text-[#2C211B] text-[11px] font-mono-tech rounded">
+                    Add 1 more frame (any except HOSHI) to get 2 for {formatPrice(BUNDLE_OFFER.price)}.
+                  </div>
+                )}
+
                 {/* Promo Code Form */}
                 <div>
                   {appliedPromo ? (
@@ -322,20 +327,20 @@ export const CartDrawer: React.FC = () => {
                     <span>Subtotal</span>
                     <span className="text-[#2C211B] font-bold">{formatPrice(cartSubtotal)}</span>
                   </div>
+                  {bundleDiscount > 0 && (
+                    <div className="flex justify-between text-[#861F3A] font-bold">
+                      <span>Bundle Offer ({bundleCount} × 2 for {formatPrice(BUNDLE_OFFER.price)})</span>
+                      <span>-{formatPrice(bundleDiscount)}</span>
+                    </div>
+                  )}
                   {discountAmount > 0 && (
                     <div className="flex justify-between text-[#861F3A] font-bold">
                       <span>Maison Privilege</span>
                       <span>-{formatPrice(discountAmount)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span>Insured White-Glove Courier</span>
-                    <span className="text-[#2C211B] font-medium">
-                      {remainingForFreeShipping === 0 ? 'COMPLIMENTARY' : formatPrice(250)}
-                    </span>
-                  </div>
                   <div className="flex justify-between text-sm font-bold text-[#2C211B] pt-2 border-t border-[#2C211B]/15">
-                    <span>Estimated Total</span>
+                    <span>Total <span className="text-[10px] font-normal text-[#6B7055]">(incl. shipping)</span></span>
                     <span className="text-[#861F3A] font-extrabold text-base">
                       {formatPrice(finalTotal)}
                     </span>
@@ -345,18 +350,18 @@ export const CartDrawer: React.FC = () => {
                 {/* Direct Order Confirmation Form */}
                 <form onSubmit={handleOrderSubmit} className="space-y-2">
                   <input
-                    type="tel"
-                    required
-                    value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    placeholder="Enter Phone Number for 24-hr Delivery"
+                    type="text"
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder="Your Name (optional)"
+                    autoComplete="name"
                     className="w-full bg-white border border-[#2C211B]/20 px-3.5 py-2.5 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A]"
                   />
                   <button
                     type="submit"
                     className="w-full bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] py-3.5 px-6 text-xs font-mono-tech tracking-widest uppercase font-bold flex items-center justify-center gap-2 transition-all shadow-md rounded cursor-pointer"
                   >
-                    <span>CONFIRM ORDER RESERVATION</span>
+                    <span>SEND ENQUIRY ON WHATSAPP</span>
                     <ArrowRight size={15} />
                   </button>
                 </form>
@@ -364,7 +369,7 @@ export const CartDrawer: React.FC = () => {
                 {/* Security Guarantee Notice */}
                 <div className="flex items-center justify-center gap-2 text-[10px] font-mono-tech text-[#6B7055]">
                   <ShieldCheck size={13} className="text-[#861F3A]" />
-                  <span>DIRECT FROM SORA ATELIER // 30-DAY TRIAL</span>
+                  <span>UV400 PROTECTED // SHIPPING INCLUDED</span>
                 </div>
               </div>
             )}

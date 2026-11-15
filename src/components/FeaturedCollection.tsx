@@ -20,7 +20,7 @@ export const FeaturedCollection: React.FC = () => {
               <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A] text-[#861F3A]">
                 空
               </span>
-              <span className="font-bold">CURATED ATELIER ARCHIVE</span>
+              <span className="font-bold">THE COLLECTION</span>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#2C211B] uppercase">
               FEATURED EDITIONS

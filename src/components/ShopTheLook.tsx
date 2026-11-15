@@ -88,7 +88,7 @@ export const ShopTheLook: React.FC = () => {
                         {look.product.name}
                       </h4>
                       <span className="text-xs font-mono-tech text-zinc-400">
-                        {formatPrice(look.product.salePrice ?? look.product.price)}
+                        {formatPrice(look.product.price)}
                       </span>
                     </div>
                   </div>
