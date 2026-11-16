@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { useShop } from '../context/ShopContext';
 import { PRODUCTS } from '../data/products';
-import { ArrowRight, Sparkles, Sun, Wind, CloudLightning, Sunset } from 'lucide-react';
+import { ArrowRight, Sparkles, Waves, Wind, CloudLightning, Sunset } from 'lucide-react';
 
 export const HeroSection: React.FC = () => {
   const { setCurrentView, openProductDetail, formatPrice } = useShop();
 
   const frameIcons: Record<string, React.ReactNode> = {
     prod_hoshi: <Sparkles size={13} />,
-    prod_taiyo: <Sun size={13} />,
+    prod_nagi: <Waves size={13} />,
     prod_aozora: <Wind size={13} />,
     prod_arashi: <CloudLightning size={13} />,
     prod_yuhi: <Sunset size={13} />
