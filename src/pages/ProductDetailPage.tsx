@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ProductVariant, PRODUCTS, BUNDLE_OFFER, isBundleEligible } from '../data/products';
+import { ProductVariant, PRODUCTS, BUNDLE_OFFER, isBundleEligible, isLowStock } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { ProductCard } from '../components/ProductCard';
-import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag, AlertTriangle } from 'lucide-react';
 
 interface ProductDetailPageProps {
   onOpenPolicy: (key: string) => void;
@@ -79,11 +79,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               alt="SORA Emblem"
               className="h-5 w-auto object-contain"
             />
-            <img
-              src="/logo-transparent.png"
-              alt="SORA Emblem"
-              className="h-5 w-auto object-contain"
-            />
+          
           </div>
         </div>
 
@@ -254,10 +250,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               {/* Authentic Stock Status Urgency Indicator */}
               <div className="mt-2.5 p-2 rounded-lg bg-white border border-[#2C211B]/10 shadow-sm text-xs font-mono-tech">
                 {product.inStock ? (
-                  <div className="flex items-center gap-2 text-emerald-800 font-bold">
-                    <Check size={14} className="text-emerald-700" />
-                    <span>In Stock</span>
-                  </div>
+                  isLowStock(product) ? (
+                    <div className="flex items-center gap-2 text-[#861F3A] font-bold">
+                      <AlertTriangle size={14} className="text-[#861F3A]" />
+                      <span>Hurry! Only {product.stockQuantity} left in stock</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-emerald-800 font-bold">
+                      <Check size={14} className="text-emerald-700" />
+                      <span>In Stock</span>
+                    </div>
+                  )
                 ) : (
                   <div className="flex items-center gap-2 text-rose-700 font-bold">
                     <span className="w-2 h-2 rounded-full bg-rose-600" />

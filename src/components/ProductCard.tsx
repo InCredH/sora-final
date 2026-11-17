@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Product, ProductVariant, BUNDLE_OFFER, isBundleEligible } from '../data/products';
+import { Product, ProductVariant, BUNDLE_OFFER, isBundleEligible, isLowStock } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { ShoppingBag, Eye } from 'lucide-react';
 
@@ -69,6 +69,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
           {!product.inStock && (
             <span className="text-[10px] font-mono-tech tracking-normal px-2 py-0.5 uppercase bg-[#2C211B]/85 text-[#F5EFE3] rounded-md font-semibold shadow-md">
               SOLD OUT
+            </span>
+          )}
+          {isLowStock(product) && (
+            <span className="text-[10px] font-mono-tech tracking-normal px-2 py-0.5 uppercase bg-[#861F3A] text-white rounded-md font-semibold shadow-md">
+              ONLY {product.stockQuantity} LEFT
             </span>
           )}
         </div>

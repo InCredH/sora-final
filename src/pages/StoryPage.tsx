@@ -23,6 +23,58 @@ export const StoryPage: React.FC = () => {
           </p>
         </div>
 
+        {/* Origin Story: The People Behind SORA */}
+        <div className="relative py-16 sm:py-24 border-b border-[#2C211B]/10 overflow-hidden">
+          <span
+            aria-hidden="true"
+            className="absolute -top-10 -right-6 sm:right-0 font-serif-editorial text-[16rem] sm:text-[26rem] leading-none text-[#2C211B]/[0.035] select-none pointer-events-none"
+          >
+            &rdquo;
+          </span>
+
+          <div className="relative z-10 max-w-2xl">
+            <span className="text-[11px] font-mono-tech text-[#861F3A] uppercase tracking-widest block font-bold mb-4">
+              THE BEGINNING
+            </span>
+            <h2 className="font-display text-2xl sm:text-4xl font-extrabold uppercase text-[#2C211B] mb-6 leading-tight">
+              TWO PEOPLE. ONE SHARED IDEA.
+            </h2>
+
+            <p className="font-serif-editorial text-lg sm:text-2xl text-[#2C211B] italic leading-relaxed">
+              Hi &mdash; we&rsquo;re the two people behind SORA. We&rsquo;ve been together for nine years, and somewhere along the way we found ourselves sharing more than life&rsquo;s little moments: a love for fashion, styling, travelling, and the itch to build something of our own.
+            </p>
+
+            <div className="mt-8 space-y-5 text-sm sm:text-base text-[#6B7055] leading-relaxed">
+              <p>
+                The idea came to us on a trip. As we got dressed to go explore, we realised something simple: we didn&rsquo;t have sunglasses that actually went with what we were wearing.
+              </p>
+              <p>
+                Why do we keep reaching for the same one or two pairs in almost every picture? Not because we don&rsquo;t want variety &mdash; because finding the right pair isn&rsquo;t easy.
+              </p>
+              <p>
+                So we started looking around, and noticed the gap. Great designs with so-so quality. Good quality with so-so designs. Or prices too high to own more than one pair. It felt like we had to choose between style, quality and affordability.
+              </p>
+              <p className="font-semibold text-[#2C211B]">
+                We didn&rsquo;t think we should have to.
+              </p>
+              <p>
+                Sunglasses are more than eye protection &mdash; they&rsquo;re part of your style, sometimes the one detail that pulls a whole look together. If we&rsquo;re wearing them anyway, why not love how they look too?
+              </p>
+              <p>
+                So we decided to build SORA: good design, real UV protection, and prices that make it easy to own more than just one favourite pair. Because your style changes, your outfits change, and your sunglasses should have room to change with them.
+              </p>
+              <p>
+                This is just the beginning, and we&rsquo;re glad you&rsquo;re here for it.
+              </p>
+            </div>
+
+            <p className="mt-10 font-display text-xs sm:text-sm uppercase tracking-wide text-[#2C211B] font-bold">
+              With love,<br />
+              The two behind SORA.
+            </p>
+          </div>
+        </div>
+
         {/* Integrated Brand Manifesto Statement Section */}
         <div className="my-12 rounded-2xl overflow-hidden shadow-xl border border-[#2C211B]/10">
           <BrandStatement />
@@ -38,7 +90,7 @@ export const StoryPage: React.FC = () => {
               EVERY FRAME IS A PIECE OF THE SKY
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7055] font-normal leading-relaxed">
-              Each SORA frame takes its name from a Japanese word for something you&rsquo;d find overhead: <strong className="text-[#2C211B]">Hoshi</strong> (the star), <strong className="text-[#2C211B]">Taiyo</strong> (the sun), <strong className="text-[#2C211B]">Aozora</strong> (the blue sky), <strong className="text-[#2C211B]">Arashi</strong> (the storm) and <strong className="text-[#2C211B]">Yuhi</strong> (the sunset).
+              Each SORA frame takes its name from a Japanese word for something you&rsquo;d find overhead: <strong className="text-[#2C211B]">Hoshi</strong> (the star), <strong className="text-[#2C211B]">Nagi</strong> (the calm), <strong className="text-[#2C211B]">Aozora</strong> (the blue sky), <strong className="text-[#2C211B]">Arashi</strong> (the storm) and <strong className="text-[#2C211B]">Yuhi</strong> (the sunset).
             </p>
             <p className="text-xs sm:text-sm text-[#6B7055] font-normal leading-relaxed">
               The words are our inspiration. Each one sets the mood for a frame &mdash; its shape, its colour and the kind of day it&rsquo;s made for.
@@ -47,7 +99,7 @@ export const StoryPage: React.FC = () => {
 
           <div className="md:col-span-6 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
-              src="/images/hikari/model-1.jpg"
+              src="/images/hoshi/hoshi-model-1.jpeg"
               alt="Model wearing SORA HOSHI sunglasses"
               className="w-full h-full object-cover filter contrast-[1.05]"
             />

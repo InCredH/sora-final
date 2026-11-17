@@ -53,12 +53,20 @@ export interface Product {
   reelCaption: string;
 
   inStock: boolean;
+  // Edit this per product to reflect real inventory.
+  stockQuantity: number;
 
   isFeatured?: boolean;
   isEditorialHero?: boolean;
 }
 
 export const isBundleEligible = (product: Product): boolean => product.tier !== "Hero";
+
+// At or below this many units left, the UI shows a "Hurry! Only X left" message instead of "In Stock".
+export const LOW_STOCK_THRESHOLD = 2;
+
+export const isLowStock = (product: Product): boolean =>
+  product.inStock && product.stockQuantity > 0 && product.stockQuantity <= LOW_STOCK_THRESHOLD;
 
 export const PRODUCTS: Product[] = [
 
@@ -85,11 +93,12 @@ export const PRODUCTS: Product[] = [
     lens: "Warm brown",
 
     images: [
-      "/images/hikari/model-1.jpg",
-      "/images/hikari/frame-angle.jpg",
-      "/images/hikari/model-smile.jpg",
-      "/images/hikari/frame-front.jpg",
-      "/images/hikari/model-profile.jpg"
+      "/images/hoshi/hoshi-front.png",
+      "/images/hoshi/hoshi-side.png",
+      "/images/hoshi/hoshi-cross.png",
+      // "/images/hoshi/frame-front.png",
+      "/images/hoshi/hoshi-model-2.jpeg",
+      "/images/hoshi/hoshi-model-1.jpeg"
     ],
     variants: [
       {
@@ -97,7 +106,7 @@ export const PRODUCTS: Product[] = [
         name: "Gold Frame & Brown Lens",
         colorName: "Gold & Brown",
         colorHex: "#C8A96B",
-        image: "/images/hikari/model-1.jpg"
+        image: "/images/hoshi/hoshi-front.png"
       }
     ],
 
@@ -111,57 +120,64 @@ export const PRODUCTS: Product[] = [
       "Hoshi (星) means star. Gold frame. Brown lens. Sharp angles, soft glow. ✦",
 
     inStock: true,
+    stockQuantity: 4,
 
     isFeatured: true,
     isEditorialHero: true
   },
 
   // --------------------------------------------------
-  // CORE — TAIYO (太陽) · THE SUN
+  // CORE — NAGI (凪) · THE CALM
   // --------------------------------------------------
 
   {
-    id: "prod_taiyo",
-    name: "TAIYO",
-    subtitle: "The Sun",
-    pronunciation: "TIE-yoh",
-    japaneseMeaning: "太陽",
-    tagline: "Go big. Glow bigger.",
+    id: "prod_nagi",
+    name: "NAGI",
+    subtitle: "The Calm",
+    pronunciation: "NAH-gee",
+    japaneseMeaning: "凪",
+    tagline: "Find your calm.",
 
-    slug: "taiyo",
-    sku: "SORA-TY-002",
+    slug: "nagi",
+    sku: "SORA-NG-002",
 
     tier: "Core",
     price: TIER_PRICES.Core,
 
-    shape: "Oversized",
-    lens: "Warm honey-amber",
+    shape: "Square",
+    frame: "Crystal-clear transparent",
+    lens: "Warm amber",
 
     images: [
-      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=85"
+      "/images/nagi/nagi-front.png",
+      "/images/nagi/nagi-side.png",
+      "/images/nagi/nagi-cross.png",
+      "/images/nagi/nagi-model-1.jpeg",
+      "/images/nagi/nagi-model-2.jpeg"
+
+
     ],
     variants: [
       {
-        id: "v_taiyo_honey",
-        name: "Honey-Amber Lens",
-        colorName: "Honey Amber",
-        colorHex: "#C88A45",
-        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&q=85"
+        id: "v_nagi_amber",
+        name: "Clear Frame & Amber Lens",
+        colorName: "Clear & Amber",
+        colorHex: "#C9A469",
+        image: "/images/nagi/nagi-front.png"
       }
     ],
 
     shortDescription:
-      "An oversized frame with warm honey lenses, made to be noticed. Bold in scale, golden in glow.",
+      "A crystal-clear frame with warm amber-tinted lenses, designed for effortless style from day to night. Bold in shape, warm in tone, and timeless in spirit. A little statement, without saying too much.",
 
     description:
-      "Inspired by the warmth and sheer scale of the sun, Taiyo brings a big, golden presence to everyday dressing.\n\nIt works from sunlit brunches to long weekend drives, and from the first light of morning to the last of the afternoon.\n\nWide, oversized lenses in a warm honey-amber tint come together in a silhouette that's generous, glamorous and impossible to miss. Big in shape, soft in colour, Taiyo is made for the days you want to take up space and the moments you want to glow.\n\nSome things are meant to be seen from a distance. Taiyo is one of them.",
+      "Inspired by the peaceful stillness that follows the wind and waves, Nagi captures a sense of effortless calm, quiet confidence and understated style.\n\nMade for sunlit afternoons, casual city days, spontaneous road trips, relaxed evenings and nights that turn into memorable stories. From daytime adventures to late-night outings, Nagi fits right in without ever trying too hard.\n\nA crystal-clear transparent frame paired with warm amber-tinted lenses creates a distinctive yet understated look. Its bold, softly squared silhouette brings character without being overpowering, while the warm tones add a subtle vintage touch. Nagi is designed for those who appreciate simplicity but never compromise on personality.\n\nWhether it's a bright afternoon or a night out, Nagi brings the same effortless energy. Some of the best moments are found in stillness. Nagi is one of them.",
 
     reelCaption:
-      "Taiyo (太陽) means sun. Oversized frame. Honey lens. Big presence, golden light. ✦",
+      "Nagi (凪) means calm. Crystal-clear frame. Warm amber lenses. Effortless style, quiet confidence. ✦",
 
     inStock: true,
+    stockQuantity: 2,
 
     isFeatured: true
   },
@@ -189,9 +205,13 @@ export const PRODUCTS: Product[] = [
     lens: "Cool blue tint",
 
     images: [
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=85"
+      "/images/aozora/aozora-front.png",
+      "/images/aozora/aozora-side.png",
+      "/images/aozora/aozora-cross.png",
+      "/images/aozora/aozora-model-2.jpeg",
+      "/images/aozora/aozora-model-1.jpeg"
+
+
     ],
     variants: [
       {
@@ -199,7 +219,7 @@ export const PRODUCTS: Product[] = [
         name: "Silver Frame & Blue Lens",
         colorName: "Silver & Blue",
         colorHex: "#7299C4",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85"
+        image: "/images/aozora/aozora-front.png"
       }
     ],
 
@@ -213,6 +233,7 @@ export const PRODUCTS: Product[] = [
       "Aozora (青空) means blue sky. Silver frame. Blue lenses. A little piece of endless summer. ✦",
 
     inStock: true,
+    stockQuantity: 4,
 
     isFeatured: true
   },
@@ -235,15 +256,18 @@ export const PRODUCTS: Product[] = [
     tier: "Core",
     price: TIER_PRICES.Core,
 
+    shape: "Square",
     frame: "Deep sage-green acetate-style",
     lens: "Matching green tint",
 
     images: [
-      "/images/kaizo/model-1.jpg",
-      "/images/kaizo/frame-front.jpg",
-      "/images/kaizo/model-2.jpg",
-      "/images/kaizo/frame-angle.jpg",
-      "/images/kaizo/frame-sky.jpg"
+      "/images/arashi/arashi-front.png",
+      "/images/arashi/arashi-side.jpg",
+      "/images/arashi/arashi-cross.jpg",
+      "/images/arashi/arashi-model-1.jpeg",
+      "/images/arashi/arashi-model-2.jpeg"
+
+
     ],
     variants: [
       {
@@ -251,7 +275,7 @@ export const PRODUCTS: Product[] = [
         name: "Sage-Green Frame & Green Lens",
         colorName: "Sage Green",
         colorHex: "#6B7055",
-        image: "/images/kaizo/model-1.jpg"
+        image: "/images/arashi/arashi-front.png"
       }
     ],
 
@@ -265,6 +289,7 @@ export const PRODUCTS: Product[] = [
       "Arashi (嵐) means storm. Sage-green frame. Matching green lenses. Calm colour, storm-like attitude. ✦",
 
     inStock: true,
+    stockQuantity: 7,
 
     isFeatured: true
   },
@@ -279,7 +304,7 @@ export const PRODUCTS: Product[] = [
     subtitle: "The Sunset",
     pronunciation: "YOO-hee",
     japaneseMeaning: "夕日",
-    tagline: "A little warmth in every view.",
+    tagline: "A little warmth, wherever you go.",
 
     slug: "yuhi",
     sku: "SORA-YH-005",
@@ -288,31 +313,37 @@ export const PRODUCTS: Product[] = [
     price: TIER_PRICES.Entry,
 
     shape: "Rectangular",
-    frame: "Rich tortoiseshell with gold-toned accents",
-    lens: "Deep brown",
+    frame: "Rich tortoiseshell",
+    lens: "Warm brown",
 
-    // TODO: replace with real YUHI photography.
-    images: ["/images/yuhi/placeholder.svg"],
+    images: [
+      "/images/yuhi/yuhi-front.jpeg",
+      "/images/yuhi/yuhi-side.jpeg",
+      "/images/yuhi/yuhi-cross.png",
+      "/images/yuhi/yuhi-model-1.jpeg",
+      "/images/yuhi/yuhi-model-2.jpeg"
+    ],
     variants: [
       {
         id: "v_yuhi_tortoise",
         name: "Tortoiseshell Frame & Brown Lens",
         colorName: "Tortoiseshell",
         colorHex: "#7A4A26",
-        image: "/images/yuhi/placeholder.svg"
+        image: "/images/yuhi/yuhi-front.jpeg"
       }
     ],
 
     shortDescription:
-      "A vintage-inspired rectangular silhouette in rich tortoiseshell, paired with warm brown lenses. Timeless in character, effortless in style.",
+      "A softly structured rectangular frame in rich tortoiseshell, paired with warm brown lenses. Timeless, effortless and made to glow in its own way.",
 
     description:
-      "Inspired by the warmth of the setting sun and the quiet beauty of golden hour, Yuhi captures the art of understated elegance.\n\nWith its softly sculpted rectangular silhouette, rich tortoiseshell frame and deep brown lenses, Yuhi brings together vintage charm and contemporary sophistication. Subtle amber tones flow through the frame, adding depth and character, while delicate gold-toned accents lend a refined finishing touch.\n\nDesigned for slow afternoons, spontaneous escapes and evenings that linger a little longer, Yuhi is effortlessly versatile. Neither too bold nor too subtle, it makes its presence felt through thoughtful details and timeless proportions.\n\nSome things never go out of style. They simply find a new light.",
+      "Inspired by the warmth of the setting sun, Yuhi captures the beauty of golden hours and the effortless charm of timeless style.\n\nWith its softly structured rectangular silhouette, rich tortoiseshell finish and warm brown lenses, Yuhi brings together vintage character and modern simplicity.\n\nBold in its proportions yet easy to wear, it's the kind of frame that makes an impression without trying too hard. From slow afternoon drives to evenings out, Yuhi adds a little warmth to every look.\n\nSome moments don't need to be loud to be unforgettable. Yuhi is one of them.",
 
     reelCaption:
-      "Yuhi (夕日) means sunset. Tortoiseshell tones. Warm brown lenses. A timeless silhouette. An everyday classic, seen in a different light. ✦",
+      "Yuhi (夕日) means sunset. Tortoiseshell tones. Warm brown lenses. A timeless kind of glow. ✦",
 
     inStock: true,
+    stockQuantity: 5,
 
     isFeatured: true
   }
