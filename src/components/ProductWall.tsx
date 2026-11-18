@@ -11,7 +11,7 @@ export const ProductWall: React.FC = () => {
   const secondaryItem2 = PRODUCTS[4]; // SOLSTICE SHIELD
 
   return (
-    <section className="relative w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0d] border-b border-white/5">
+    <section className="relative w-full py-12 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#0a0a0d] border-b border-white/5">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-10 border-b border-white/10">
@@ -30,7 +30,7 @@ export const ProductWall: React.FC = () => {
         </div>
 
         {/* Asymmetrical Composition Grid */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="mt-6 sm:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Main Oversized Focal Frame (7 cols) */}
           <div className="lg:col-span-7 bg-[#111116] border border-white/10 flex flex-col justify-between p-6 sm:p-10 group relative overflow-hidden">
             <div className="flex items-center justify-between z-10">

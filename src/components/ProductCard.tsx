@@ -122,8 +122,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
         {/* Subtle warm gradient overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#2C211B]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
-        {/* Floating Quick Action Bar on Hover */}
-        <div className="absolute bottom-3 inset-x-3 z-20 flex items-center gap-2 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
+        {/* Floating Quick Action Bar on Hover — desktop only; mobile taps the card to open the product page */}
+        <div className="hidden sm:flex absolute bottom-3 inset-x-3 z-20 items-center gap-2 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
           <button
             type="button"
             disabled={!product.inStock}
@@ -149,19 +149,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
       </div>
 
       {/* Product Details */}
-      <div className="mt-3 flex flex-col gap-1.5 px-1">
+      <div className="mt-2.5 sm:mt-3 flex flex-col gap-1 sm:gap-1.5 px-0.5 sm:px-1">
         {/* Meaning & Shape */}
-        <div className="flex items-center justify-between text-[11px] font-mono-tech tracking-wider text-[#6B7055] uppercase font-medium">
-          <span>{product.japaneseMeaning} · {product.subtitle}</span>
-          {product.shape && <span className="text-[#C8A96B] font-semibold">{product.shape}</span>}
+        <div className="flex flex-col items-start gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-2 text-[10px] sm:text-[11px] leading-tight font-mono-tech tracking-wide sm:tracking-wider text-[#6B7055] uppercase font-medium">
+          <span className="min-w-0 truncate max-w-full">{product.japaneseMeaning} · {product.subtitle}</span>
+          {product.shape && <span className="text-[#C8A96B] font-semibold whitespace-nowrap shrink-0">{product.shape}</span>}
         </div>
 
         {/* Product Title and Price with Discount */}
         <div className="flex items-baseline justify-between gap-2">
-          <h3 className="font-display text-base font-bold tracking-wide text-[#2C211B] group-hover:text-[#861F3A] transition-colors uppercase">
+          <h3 className="min-w-0 truncate font-display text-sm sm:text-base font-bold tracking-wide text-[#2C211B] group-hover:text-[#861F3A] transition-colors uppercase">
             {product.name}
           </h3>
-          <span className="font-mono-tech text-xs text-[#2C211B] font-bold">
+          <span className="font-mono-tech text-[11px] sm:text-xs text-[#2C211B] font-bold whitespace-nowrap shrink-0">
             {formatPrice(product.price)}
           </span>
         </div>

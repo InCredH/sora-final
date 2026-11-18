@@ -16,7 +16,7 @@ import { NewsletterAndFooter } from './components/NewsletterAndFooter';
 import { CheckCircle2 } from 'lucide-react';
 
 const AppContent: React.FC = () => {
-  const { currentView, toastMessage } = useShop();
+  const { currentView, toastMessage, selectedProduct } = useShop();
   const [activePolicyKey, setActivePolicyKey] = useState<string | null>(null);
 
   return (
@@ -28,7 +28,10 @@ const AppContent: React.FC = () => {
       <main className="flex-1">
         {currentView === 'home' && <HomePage onOpenPolicy={setActivePolicyKey} />}
         {currentView === 'shop' && <ShopPage />}
-        {currentView === 'pdp' && <ProductDetailPage onOpenPolicy={setActivePolicyKey} />}
+        {currentView === 'pdp' && (
+          // key forces a fresh page (colour, image, qty) for each product
+          <ProductDetailPage key={selectedProduct?.id ?? 'pdp'} onOpenPolicy={setActivePolicyKey} />
+        )}
         {currentView === 'story' && <StoryPage />}
         {currentView === 'privacy' && <PrivacyPolicyPage />}
         {currentView === 'terms' && <TermsPage />}
@@ -40,7 +43,7 @@ const AppContent: React.FC = () => {
 
       {/* Interactive Overlays & Modals */}
       <SearchModal />
-      <CartDrawer />
+      <CartDrawer onOpenPolicy={setActivePolicyKey} />
       <PolicyModal
         policyKey={activePolicyKey}
         onClose={() => setActivePolicyKey(null)}

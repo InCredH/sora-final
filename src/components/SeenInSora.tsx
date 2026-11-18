@@ -48,7 +48,7 @@ export const SeenInSora: React.FC = () => {
   };
 
   return (
-    <section id="seen-in-sora" className="relative w-full py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0] text-[#2C211B] border-b border-[#2C211B]/10 overflow-hidden">
+    <section id="seen-in-sora" className="relative w-full py-10 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0] text-[#2C211B] border-b border-[#2C211B]/10 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#2C211B]/10">
@@ -91,7 +91,7 @@ export const SeenInSora: React.FC = () => {
         </div>
 
         {/* Patron Editorial Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-6 sm:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Submission Callout Card */}
           <div className="bg-[#2C211B] text-[#F5EFE3] border border-[#C8A96B]/30 rounded-xl p-6 sm:p-8 flex flex-col justify-between group shadow-xl">
             <div>

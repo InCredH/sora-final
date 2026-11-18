@@ -51,7 +51,7 @@ export const CollectionTiles: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#F5EFE3] text-[#2C211B] border-b border-[#2C211B]/10">
+    <section className="relative w-full py-10 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#F5EFE3] text-[#2C211B] border-b border-[#2C211B]/10">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-10 border-b border-[#2C211B]/10">
@@ -70,7 +70,7 @@ export const CollectionTiles: React.FC = () => {
         </div>
 
         {/* Bento Collection Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="mt-6 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
           {collections.map((col) => (
             <div
               key={col.id}

@@ -6,7 +6,7 @@ export const BrandManifesto: React.FC = () => {
   const icons = [Compass, Sparkles, ShieldCheck, RefreshCw];
 
   return (
-    <section className="relative w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#09090c] border-b border-white/5 overflow-hidden">
+    <section className="relative w-full py-12 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#09090c] border-b border-white/5 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Top Tag & Title */}
         <div className="max-w-3xl">
@@ -24,7 +24,7 @@ export const BrandManifesto: React.FC = () => {
         </div>
 
         {/* 4 Pillars Grid */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-8 sm:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {BRAND_VALUES.map((val, idx) => {
             const Icon = icons[idx % icons.length];
             return (

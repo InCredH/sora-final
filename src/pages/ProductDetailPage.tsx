@@ -59,7 +59,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
     .slice(0, 4);
 
   return (
-    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] pt-3 sm:pt-4 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] pt-3 sm:pt-4 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Back Navigation Bar — Clean & Compact */}
@@ -319,9 +319,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <span className="text-[8px] font-mono-tech text-[#6B7055]">On all orders</span>
                 </div>
 
-                <div className="p-2 bg-white border border-[#2C211B]/10 rounded-lg shadow-sm">
+                <div
+                  onClick={() => onOpenPolicy('returns')}
+                  className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
+                >
                   <RefreshCcw size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">No exchange/Returns</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">No exch./Returns</span>
                   <span className="text-[8px] font-mono-tech text-[#6B7055]">Unless damaged</span>
                 </div>
 
@@ -334,11 +337,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
             </div>
 
             {/* Product Details (from the product description only) */}
-            <div className="mt-6 pt-5 border-t border-[#2C211B]/10">
+            <div className="mt-5 pt-4 sm:mt-6 sm:pt-5 border-t border-[#2C211B]/10">
               <h2 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B] pb-2 border-b border-[#2C211B]/10">
                 Details
               </h2>
-              <dl className="py-4 grid grid-cols-2 gap-3 text-xs font-mono-tech">
+              <dl className="py-3 sm:py-4 grid grid-cols-2 gap-2 sm:gap-3 text-xs font-mono-tech">
                 {details.map((d) => (
                   <div key={d.label} className="p-2.5 rounded bg-white border border-[#2C211B]/10">
                     <dt className="text-[10px] text-[#6B7055] block font-semibold uppercase">{d.label}</dt>
@@ -353,7 +356,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
         {/* ------------------------------------------------------------- */}
         {/* NEW EDITORIAL GALLERY & ARCHITECTURAL SPREAD BELOW BUY BOX   */}
         {/* ------------------------------------------------------------- */}
-        <div className="mt-20 pt-16 border-t border-[#2C211B]/15">
+        <div className="mt-6 pt-6 sm:mt-20 sm:pt-16 border-t border-[#2C211B]/15">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-10 border-b border-[#2C211B]/10">
             <div>
               <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#861F3A] uppercase mb-2">
@@ -376,10 +379,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           </div>
 
           {/* Editorial Visual Story Grid */}
-          <div className="mt-10 space-y-12">
+          <div className="mt-5 sm:mt-10 space-y-5 sm:space-y-12">
             
             {/* Plate 1: Full-width Hero Editorial Model Shot */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border border-[#2C211B]/10 rounded-2xl p-6 sm:p-10 shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-center bg-white border border-[#2C211B]/10 rounded-2xl p-4 sm:p-10 shadow-sm">
               <div className="lg:col-span-7 h-[340px] sm:h-[420px] overflow-hidden rounded-xl bg-[#FAF7F0] border border-[#2C211B]/10 p-3 sm:p-5 flex items-center justify-center relative">
                 <img
                   src={product.images[0]}
@@ -403,7 +406,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
             </div>
 
             {/* Plate 2 & 3: Side-by-Side Dual Detail Spread */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
               
               {/* Left Detail Card */}
               {product.images[1] && (
@@ -415,7 +418,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                       className="max-h-full max-w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <span className="text-[10px] font-mono-tech text-[#6B7055] uppercase tracking-wider block mb-1 font-bold">
                       PLATE 02 // STUDIO DISPLAY
                     </span>
@@ -433,7 +436,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                       className="max-h-full max-w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <span className="text-[10px] font-mono-tech text-[#861F3A] uppercase tracking-wider block mb-1 font-bold">
                       PLATE 03 // IN THE LIGHT
                     </span>
@@ -451,7 +454,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
 
         {/* Related Products Recommendation Row — Compact, Sleek 4-Column Layout */}
         {relatedProducts.length > 0 && (
-          <div className="mt-14 pt-8 border-t border-[#2C211B]/10">
+          <div className="mt-8 sm:mt-14 pt-6 sm:pt-8 border-t border-[#2C211B]/10">
             <div className="flex items-center justify-between pb-5">
               <div>
                 <span className="text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase block mb-1 font-bold">

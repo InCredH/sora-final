@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useShop } from '../context/ShopContext';
-import { X, Minus, Plus, ShoppingBag, ArrowRight, Trash2, Tag, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, ArrowRight, Trash2, Tag, CheckCircle2 } from 'lucide-react';
 import { buildEnquiryMessage, openWhatsAppEnquiry } from '../utils/whatsappEnquiry';
 import { BUNDLE_OFFER, isBundleEligible } from '../data/products';
 
-export const CartDrawer: React.FC = () => {
+interface CartDrawerProps {
+  onOpenPolicy: (key: string) => void;
+}
+
+export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
   const {
     cart,
     isCartOpen,
@@ -30,6 +34,16 @@ export const CartDrawer: React.FC = () => {
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [customerName, setCustomerName] = useState('');
   const [lastEnquiryMessage, setLastEnquiryMessage] = useState('');
+  const [showPromo, setShowPromo] = useState(false);
+
+  // Bag emptied → reset the promo input UI too, so nothing is pre-filled next time.
+  useEffect(() => {
+    if (cart.length === 0) {
+      setPromoInput('');
+      setPromoMessage(null);
+      setShowPromo(false);
+    }
+  }, [cart.length]);
 
   if (!isCartOpen) return null;
 
@@ -83,13 +97,13 @@ export const CartDrawer: React.FC = () => {
       />
 
       {/* Drawer */}
-      <div className="relative w-full max-w-md bg-[#F5EFE3] text-[#2C211B] border-l border-[#2C211B]/15 shadow-2xl flex flex-col justify-between z-10 h-full overflow-hidden animate-in slide-in-from-right duration-300">
+      <div className="relative w-full max-w-md bg-[#F5EFE3] text-[#2C211B] border-l border-[#2C211B]/15 shadow-2xl flex flex-col z-10 h-full h-[100dvh] overflow-hidden animate-in slide-in-from-right duration-300">
         
         {/* Drawer Header */}
-        <div className="p-6 border-b border-[#2C211B]/10 flex items-center justify-between">
+        <div className="px-4 sm:px-5 py-3.5 border-b border-[#2C211B]/10 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ShoppingBag size={18} className="text-[#861F3A]" />
-            <h3 className="font-display text-lg font-bold uppercase tracking-wider text-[#2C211B]">
+            <h3 className="font-display text-base sm:text-lg font-bold uppercase tracking-wider text-[#2C211B]">
               YOUR SELECTIONS ({cart.reduce((s, i) => s + i.quantity, 0)})
             </h3>
           </div>
@@ -152,14 +166,14 @@ export const CartDrawer: React.FC = () => {
         ) : (
           <>
 
-            {/* Cart Items List */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            {/* Scrollable area: items + promo + name + breakdown */}
+            <div className="flex-1 overflow-y-auto overscroll-contain">
               {cart.length === 0 ? (
-                <div className="py-20 text-center flex flex-col items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-[#2C211B]/5 border border-[#2C211B]/10 flex items-center justify-center mb-4 text-[#6B7055]">
-                    <ShoppingBag size={24} />
+                <div className="py-16 px-5 text-center flex flex-col items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-[#2C211B]/5 border border-[#2C211B]/10 flex items-center justify-center mb-4 text-[#6B7055]">
+                    <ShoppingBag size={22} />
                   </div>
-                  <h4 className="font-display text-lg font-bold text-[#2C211B] uppercase tracking-wider">
+                  <h4 className="font-display text-base font-bold text-[#2C211B] uppercase tracking-wider">
                     YOUR BAG IS CURRENTLY EMPTY
                   </h4>
                   <p className="text-xs text-[#6B7055] mt-2 max-w-xs font-normal">
@@ -171,207 +185,228 @@ export const CartDrawer: React.FC = () => {
                       setIsCartOpen(false);
                       setCurrentView('shop');
                     }}
-                    className="mt-6 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-6 py-3 text-xs font-mono-tech uppercase font-bold tracking-wider transition-colors rounded shadow-md cursor-pointer"
+                    className="mt-5 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-6 py-3 text-xs font-mono-tech uppercase font-bold tracking-wider transition-colors rounded shadow-md cursor-pointer"
                   >
                     DISCOVER THE COLLECTION
                   </button>
                 </div>
               ) : (
-                cart.map((item) => {
-                  const unitPrice = item.product.price;
-                  return (
-                    <div
-                      key={item.id}
-                      className="flex gap-4 pb-6 border-b border-[#2C211B]/10 group relative"
-                    >
-                      {/* Thumbnail */}
-                      <img
-                        src={item.variant.image || item.product.images[0]}
-                        alt={`SORA ${item.product.name} in ${item.variant.colorName}`}
-                        className="w-20 h-24 object-cover bg-white border border-[#2C211B]/10 rounded flex-shrink-0"
-                      />
-
-                      {/* Item info */}
-                      <div className="flex-1 flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-start justify-between gap-2">
-                            <h4 className="font-display text-base font-bold text-[#2C211B] uppercase tracking-wide">
-                              {item.product.name}
-                            </h4>
-                            <button
-                              type="button"
-                              onClick={() => removeFromCart(item.id)}
-                              className="text-[#6B7055] hover:text-[#861F3A] p-1 transition-colors cursor-pointer"
-                              aria-label="Remove item"
-                            >
-                              <Trash2 size={14} />
-                            </button>
-                          </div>
-
-                          <div className="text-[11px] font-mono-tech text-[#6B7055] mt-0.5 flex items-center gap-2">
-                            <span
-                              className="w-2.5 h-2.5 rounded-full inline-block border border-black/10"
-                              style={{ backgroundColor: item.variant.colorHex }}
-                            />
-                            <span>{item.variant.colorName}</span>
-                          </div>
-
-                          <div className="mt-1">
-                            <span className="text-[10px] font-mono-tech font-bold text-[#6B7055]">
-                              {isBundleEligible(item.product)
-                                ? `Eligible for ${BUNDLE_OFFER.label}`
-                                : 'Not part of the bundle offer'}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Quantity Stepper & Price */}
-                        <div className="flex items-center justify-between mt-3">
-                          <div className="flex items-center border border-[#2C211B]/20 bg-white rounded">
-                            <button
-                              type="button"
-                              onClick={() => updateQuantity(item.id, -1)}
-                              className="p-1.5 text-[#2C211B] hover:text-[#861F3A] transition-colors cursor-pointer"
-                              aria-label="Decrease quantity"
-                            >
-                              <Minus size={12} />
-                            </button>
-                            <span className="w-8 text-center text-xs font-mono-tech font-bold text-[#2C211B]">
-                              {item.quantity}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => updateQuantity(item.id, 1)}
-                              className="p-1.5 text-[#2C211B] hover:text-[#861F3A] transition-colors cursor-pointer"
-                              aria-label="Increase quantity"
-                            >
-                              <Plus size={12} />
-                            </button>
-                          </div>
-
-                          <div className="text-right">
-                            <span className="text-xs font-mono-tech font-bold text-[#2C211B]">
-                              {formatPrice(unitPrice * item.quantity)}
-                            </span>
-                            {item.quantity > 1 && (
-                              <div className="text-[10px] font-mono-tech text-[#6B7055]">
-                                {formatPrice(unitPrice)} each
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+                <>
+                  {/* Bundle nudge — slim banner at top */}
+                  {unpairedEligibleUnits > 0 && (
+                    <div className="mx-4 sm:mx-5 mt-3 px-3 py-2 bg-[#C8A96B]/15 border border-[#C8A96B]/40 text-[#2C211B] text-[10.5px] leading-snug font-mono-tech rounded">
+                      Add 1 more frame (any except HOSHI) → 2 for {formatPrice(BUNDLE_OFFER.price)}
                     </div>
-                  );
-                })
+                  )}
+
+                  {/* Compact item rows */}
+                  <ul className="px-4 sm:px-5 divide-y divide-[#2C211B]/10">
+                    {cart.map((item) => {
+                      const unitPrice = item.product.price;
+                      const eligible = isBundleEligible(item.product);
+                      return (
+                        <li key={item.id} className="flex gap-3 py-3">
+                          <img
+                            src={item.variant.image || item.product.images[0]}
+                            alt={`SORA ${item.product.name} in ${item.variant.colorName}`}
+                            className="w-16 h-16 object-cover bg-white border border-[#2C211B]/10 rounded-md flex-shrink-0"
+                          />
+
+                          <div className="flex-1 min-w-0 flex flex-col justify-between">
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="min-w-0">
+                                <h4 className="font-display text-sm font-bold text-[#2C211B] uppercase tracking-wide leading-tight truncate">
+                                  {item.product.name}
+                                </h4>
+                                <div className="mt-0.5 text-[10.5px] font-mono-tech text-[#6B7055] flex items-center gap-1.5 min-w-0">
+                                  <span
+                                    className="w-2 h-2 rounded-full inline-block border border-black/10 shrink-0"
+                                    style={{ backgroundColor: item.variant.colorHex }}
+                                  />
+                                  <span className="truncate">{item.variant.colorName}</span>
+                                  {eligible && (
+                                    <span className="shrink-0 px-1 rounded-sm bg-[#861F3A]/10 text-[#861F3A] text-[9px] font-bold uppercase">
+                                      2 for {formatPrice(BUNDLE_OFFER.price)}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              <span className="text-xs font-mono-tech font-bold text-[#2C211B] whitespace-nowrap">
+                                {formatPrice(unitPrice * item.quantity)}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center justify-between mt-1.5">
+                              <div className="flex items-center border border-[#2C211B]/20 bg-white rounded h-7">
+                                <button
+                                  type="button"
+                                  onClick={() => updateQuantity(item.id, -1)}
+                                  className="px-2 h-full text-[#2C211B] hover:text-[#861F3A] transition-colors cursor-pointer"
+                                  aria-label="Decrease quantity"
+                                >
+                                  <Minus size={11} />
+                                </button>
+                                <span className="w-6 text-center text-[11px] font-mono-tech font-bold text-[#2C211B]">
+                                  {item.quantity}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateQuantity(item.id, 1)}
+                                  className="px-2 h-full text-[#2C211B] hover:text-[#861F3A] transition-colors cursor-pointer"
+                                  aria-label="Increase quantity"
+                                >
+                                  <Plus size={11} />
+                                </button>
+                              </div>
+                              {item.quantity > 1 && (
+                                <span className="text-[10px] font-mono-tech text-[#6B7055] ml-2 mr-auto">
+                                  {formatPrice(unitPrice)} each
+                                </span>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => removeFromCart(item.id)}
+                                className="flex items-center gap-1 text-[10px] font-mono-tech uppercase text-[#6B7055] hover:text-[#861F3A] p-1 transition-colors cursor-pointer"
+                                aria-label="Remove item"
+                              >
+                                <Trash2 size={12} />
+                                <span>Remove</span>
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  {/* Extras — sit below the items so they never hide products */}
+                  <div className="px-4 sm:px-5 pt-3 pb-4 border-t border-[#2C211B]/10 space-y-3">
+                    {/* Promo Code — collapsed by default */}
+                    {appliedPromo ? (
+                      <div className="flex items-center justify-between px-2.5 py-2 bg-[#861F3A]/10 border border-[#861F3A]/30 text-[#861F3A] text-[11px] font-mono-tech rounded">
+                        <div className="flex items-center gap-1.5 font-bold">
+                          <Tag size={12} />
+                          <span>CODE {appliedPromo} ACTIVE (-{formatPrice(discountAmount)})</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={removePromoCode}
+                          className="text-[#6B7055] hover:text-[#861F3A] underline text-[10px] ml-2 cursor-pointer font-bold"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ) : showPromo ? (
+                      <div>
+                        <form onSubmit={handleApplyPromo} className="flex gap-2">
+                          <input
+                            type="text"
+                            value={promoInput}
+                            onChange={(e) => setPromoInput(e.target.value)}
+                            placeholder="Promo Code"
+                            autoFocus
+                            className="flex-1 min-w-0 bg-white border border-[#2C211B]/20 px-3 py-2 text-xs font-mono-tech text-[#2C211B] uppercase placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A]"
+                          />
+                          <button
+                            type="submit"
+                            className="px-3.5 py-2 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] text-xs font-mono-tech uppercase font-bold transition-colors rounded cursor-pointer"
+                          >
+                            Apply
+                          </button>
+                        </form>
+                        {promoMessage && (
+                          <p
+                            className={`text-[10px] font-mono-tech mt-1.5 ${
+                              promoMessage.isError ? 'text-[#861F3A]' : 'text-emerald-700 font-bold'
+                            }`}
+                          >
+                            {promoMessage.text}
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setShowPromo(true)}
+                        className="flex items-center gap-1.5 text-[11px] font-mono-tech text-[#6B7055] hover:text-[#861F3A] underline underline-offset-2 cursor-pointer"
+                      >
+                        <Tag size={12} />
+                        Have a promo code?
+                      </button>
+                    )}
+
+                    {/* Name */}
+                    <input
+                      type="text"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="Your Name (optional)"
+                      autoComplete="name"
+                      className="w-full bg-white border border-[#2C211B]/20 px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A]"
+                    />
+
+                    {/* Breakdown (only when there's something to break down) */}
+                    {(bundleDiscount > 0 || discountAmount > 0) && (
+                      <div className="space-y-1 text-[11px] font-mono-tech text-[#6B7055]">
+                        <div className="flex justify-between">
+                          <span>Subtotal</span>
+                          <span className="text-[#2C211B] font-bold">{formatPrice(cartSubtotal)}</span>
+                        </div>
+                        {bundleDiscount > 0 && (
+                          <div className="flex justify-between text-[#861F3A] font-bold">
+                            <span>Bundle ({bundleCount} × 2 for {formatPrice(BUNDLE_OFFER.price)})</span>
+                            <span>-{formatPrice(bundleDiscount)}</span>
+                          </div>
+                        )}
+                        {discountAmount > 0 && (
+                          <div className="flex justify-between text-[#861F3A] font-bold">
+                            <span>Maison Privilege</span>
+                            <span>-{formatPrice(discountAmount)}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </>
               )}
             </div>
 
-            {/* Drawer Footer with Promo Code & Direct Order Reservation */}
+            {/* Slim pinned footer: total + checkout only */}
             {cart.length > 0 && (
-              <div className="p-6 border-t border-[#2C211B]/10 bg-[#FAF7F0] space-y-4">
-                {/* Bundle nudge */}
-                {unpairedEligibleUnits > 0 && (
-                  <div className="p-2.5 bg-[#C8A96B]/15 border border-[#C8A96B]/40 text-[#2C211B] text-[11px] font-mono-tech rounded">
-                    Add 1 more frame (any except HOSHI) to get 2 for {formatPrice(BUNDLE_OFFER.price)}.
-                  </div>
-                )}
-
-                {/* Promo Code Form */}
-                <div>
-                  {appliedPromo ? (
-                    <div className="flex items-center justify-between p-2.5 bg-[#861F3A]/10 border border-[#861F3A]/30 text-[#861F3A] text-xs font-mono-tech rounded">
-                      <div className="flex items-center gap-1.5 font-bold">
-                        <Tag size={13} />
-                        <span>CODE {appliedPromo} ACTIVE (-{formatPrice(discountAmount)})</span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={removePromoCode}
-                        className="text-[#6B7055] hover:text-[#861F3A] underline text-[10px] ml-2 cursor-pointer font-bold"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleApplyPromo} className="flex gap-2">
-                      <input
-                        type="text"
-                        value={promoInput}
-                        onChange={(e) => setPromoInput(e.target.value)}
-                        placeholder="Promo Code (e.g. SORA10)"
-                        className="flex-1 bg-white border border-[#2C211B]/20 px-3 py-2 text-xs font-mono-tech text-[#2C211B] uppercase placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A]"
-                      />
-                      <button
-                        type="submit"
-                        className="px-3.5 py-2 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] text-xs font-mono-tech uppercase font-bold transition-colors rounded cursor-pointer"
-                      >
-                        Apply
-                      </button>
-                    </form>
-                  )}
-                  {promoMessage && (
-                    <p
-                      className={`text-[10px] font-mono-tech mt-1.5 ${
-                        promoMessage.isError ? 'text-[#861F3A]' : 'text-emerald-700 font-bold'
-                      }`}
-                    >
-                      {promoMessage.text}
-                    </p>
-                  )}
+              <form
+                onSubmit={handleOrderSubmit}
+                className="px-4 sm:px-5 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] border-t border-[#2C211B]/15 bg-[#FAF7F0] shadow-[0_-6px_16px_-10px_rgba(44,33,27,0.25)] space-y-2"
+              >
+                <div className="flex items-baseline justify-between font-mono-tech">
+                  <span className="text-sm font-bold text-[#2C211B]">
+                    Total <span className="text-[10px] font-normal text-[#6B7055]">(incl. shipping)</span>
+                  </span>
+                  <span className="text-right">
+                    {bundleDiscount + discountAmount > 0 && (
+                      <span className="text-[11px] text-[#6B7055] line-through mr-2">{formatPrice(cartSubtotal)}</span>
+                    )}
+                    <span className="text-[#861F3A] font-extrabold text-base">{formatPrice(finalTotal)}</span>
+                  </span>
                 </div>
-
-                {/* Calculations Breakdown */}
-                <div className="space-y-1.5 text-xs font-mono-tech text-[#6B7055] border-t border-[#2C211B]/10 pt-3">
-                  <div className="flex justify-between">
-                    <span>Subtotal</span>
-                    <span className="text-[#2C211B] font-bold">{formatPrice(cartSubtotal)}</span>
-                  </div>
-                  {bundleDiscount > 0 && (
-                    <div className="flex justify-between text-[#861F3A] font-bold">
-                      <span>Bundle Offer ({bundleCount} × 2 for {formatPrice(BUNDLE_OFFER.price)})</span>
-                      <span>-{formatPrice(bundleDiscount)}</span>
-                    </div>
-                  )}
-                  {discountAmount > 0 && (
-                    <div className="flex justify-between text-[#861F3A] font-bold">
-                      <span>Maison Privilege</span>
-                      <span>-{formatPrice(discountAmount)}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between text-sm font-bold text-[#2C211B] pt-2 border-t border-[#2C211B]/15">
-                    <span>Total <span className="text-[10px] font-normal text-[#6B7055]">(incl. shipping)</span></span>
-                    <span className="text-[#861F3A] font-extrabold text-base">
-                      {formatPrice(finalTotal)}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Direct Order Confirmation Form */}
-                <form onSubmit={handleOrderSubmit} className="space-y-2">
-                  <input
-                    type="text"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Your Name (optional)"
-                    autoComplete="name"
-                    className="w-full bg-white border border-[#2C211B]/20 px-3.5 py-2.5 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A]"
-                  />
+                <button
+                  type="submit"
+                  className="w-full bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] py-3 px-6 text-xs font-mono-tech tracking-widest uppercase font-bold flex items-center justify-center gap-2 transition-all shadow-md rounded cursor-pointer"
+                >
+                  <span>SEND ENQUIRY ON WHATSAPP</span>
+                  <ArrowRight size={15} />
+                </button>
+                <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[9.5px] font-mono-tech text-[#6B7055] text-center">
+                  <span>10 AM – 12 MIDNIGHT</span>
+                  <span>·</span>
                   <button
-                    type="submit"
-                    className="w-full bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] py-3.5 px-6 text-xs font-mono-tech tracking-widest uppercase font-bold flex items-center justify-center gap-2 transition-all shadow-md rounded cursor-pointer"
+                    type="button"
+                    onClick={() => onOpenPolicy('returns')}
+                    className="underline underline-offset-2 hover:text-[#861F3A] cursor-pointer"
                   >
-                    <span>SEND ENQUIRY ON WHATSAPP</span>
-                    <ArrowRight size={15} />
+                    No returns unless damaged
                   </button>
-                </form>
-
-                {/* Security Guarantee Notice */}
-                <div className="flex items-center justify-center gap-2 text-[10px] font-mono-tech text-[#6B7055]">
-                  <ShieldCheck size={13} className="text-[#861F3A]" />
-                  <span>UV400 PROTECTED // SHIPPING INCLUDED</span>
                 </div>
-              </div>
+              </form>
             )}
           </>
         )}
