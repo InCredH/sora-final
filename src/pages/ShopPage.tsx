@@ -11,7 +11,9 @@ export const ShopPage: React.FC = () => {
   const [selectedShape, setSelectedShape] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
-  const [gridColumns, setGridColumns] = useState<'editorial' | 'dense'>('editorial');
+  const [gridColumns, setGridColumns] = useState<'editorial' | 'dense'>(() =>
+    typeof window !== 'undefined' && window.innerWidth < 640 ? 'dense' : 'editorial'
+  );
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
 
   const categories = ['All', BUNDLE_FILTER];
@@ -42,26 +44,26 @@ export const ShopPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] pt-4 pb-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         
         {/* Page Title & Breadcrumbs in warm Espresso brown */}
-        <div className="pb-8 border-b border-[#2C211B]/10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="pb-4 sm:pb-8 border-b border-[#2C211B]/10 flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-6">
           <div>
-            <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
+            <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-1.5 sm:mb-2">
               <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
               <span>SORA ARCHIVE</span>
               <span>/</span>
               <span className="text-[#2C211B] font-bold">ALL SILHOUETTES</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
+            <h1 className="font-display text-[26px] leading-none sm:leading-tight sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
               THE FULL COLLECTION
             </h1>
           </div>
 
           <div className="flex items-center gap-4">
             {/* Grid Density Switcher */}
-            <div className="hidden sm:flex items-center border border-[#2C211B]/15 bg-white p-1 rounded-lg">
+            <div className="flex items-center border border-[#2C211B]/15 bg-white p-1 rounded-lg">
               <button
                 type="button"
                 onClick={() => setGridColumns('editorial')}
@@ -99,7 +101,7 @@ export const ShopPage: React.FC = () => {
         </div>
 
         {/* Filter Bar & Controls */}
-        <div className="py-6 border-b border-[#2C211B]/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="py-3 sm:py-6 border-b border-[#2C211B]/10 flex flex-wrap items-center justify-between gap-4">
           {/* Category Chips (Desktop) */}
           <div className="hidden lg:flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             {categories.map((cat) => (
@@ -146,9 +148,9 @@ export const ShopPage: React.FC = () => {
         </div>
 
         {/* Shape Filter Pills & Active Filter Tags */}
-        <div className="py-4 flex flex-wrap items-center justify-between gap-3 text-xs font-mono-tech">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-            <span className="text-[#6B7055] uppercase text-[10px] tracking-wider mr-1 font-bold">
+        <div className="py-3 sm:py-4 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs font-mono-tech">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <span className="text-[#6B7055] uppercase text-[10px] tracking-wider mr-1 font-bold whitespace-nowrap">
               FRAME SHAPE:
             </span>
             {shapes.map((s) => (
@@ -156,7 +158,7 @@ export const ShopPage: React.FC = () => {
                 key={s}
                 type="button"
                 onClick={() => setSelectedShape(s)}
-                className={`px-3 py-1 text-[11px] rounded border transition-colors cursor-pointer ${
+                className={`px-2.5 sm:px-3 py-1 text-[11px] whitespace-nowrap rounded border transition-colors cursor-pointer ${
                   selectedShape === s
                     ? 'border-[#861F3A] bg-[#861F3A] text-white font-bold'
                     : 'border-[#2C211B]/15 text-[#6B7055] hover:text-[#2C211B] bg-white'
@@ -186,9 +188,9 @@ export const ShopPage: React.FC = () => {
         </div>
 
         {/* Main Product Grid */}
-        <div className="mt-8">
+        <div className="mt-3 sm:mt-8">
           {filteredProducts.length === 0 ? (
-            <div className="py-24 text-center border border-dashed border-[#2C211B]/20 bg-white/60 rounded-xl">
+            <div className="py-12 sm:py-24 text-center border border-dashed border-[#2C211B]/20 bg-white/60 rounded-xl">
               <Sparkles size={24} className="mx-auto text-[#6B7055] mb-3" />
               <h3 className="font-display text-xl font-bold text-[#2C211B] uppercase">
                 NO SILHOUETTES MATCH YOUR SPECIFICATIONS

@@ -12,7 +12,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
   return (
     <footer className="w-full bg-[#2C211B] text-[#F5EFE3] border-t border-[#C8A96B]/20">
       {/* Main Sitemap & Info Grid */}
-      <div className="max-w-7xl mx-auto py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-10 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-2">
@@ -30,7 +30,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
               Sunglasses inspired by the sky. Distinctive shapes, UV400-protected lenses, and shipping included in every price.
             </p>
             <div className="mt-6 text-xs font-mono-tech text-[#C8A96B]">
-              CONCIERGE: <a href="mailto:concierge@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">concierge@yoursora.shop</a>
+              CONCIERGE: <a href="mailto:hello@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">hello@yoursora.shop</a>
             </div>
           </div>
 
@@ -108,6 +108,15 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
               <li>
                 <button
                   type="button"
+                  onClick={() => onOpenPolicy('returns')}
+                  className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
+                >
+                  Returns & Exchanges
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
                   onClick={() => {
                     setCurrentView('privacy');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -134,7 +143,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
         </div>
 
         {/* Bottom Bar: Legal & Credits (Strictly INR, no currency switcher) */}
-        <div className="mt-16 pt-8 border-t border-[#C8A96B]/20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#F5EFE3]/70">
+        <div className="mt-8 sm:mt-16 pt-6 sm:pt-8 border-t border-[#C8A96B]/20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#F5EFE3]/70">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[#C8A96B] font-semibold">ALL PRICES IN INDIAN RUPEE (₹)</span>
             <span>•</span>

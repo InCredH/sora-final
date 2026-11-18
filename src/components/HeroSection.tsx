@@ -49,7 +49,7 @@ export const HeroSection: React.FC = () => {
   if (!activeProduct) return null;
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-0 select-none">
+    <section className="relative w-full sm:min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-0 select-none">
 
       {/* Background Details */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -65,7 +65,7 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Main Hero */}
-      <div className="relative z-10 my-auto py-6 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full flex-1">
+      <div className="relative z-10 my-auto py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full flex-1">
 
         {/* Left Column */}
         <div className="lg:col-span-7 flex flex-col justify-center animate-fade-up">
@@ -107,7 +107,7 @@ export const HeroSection: React.FC = () => {
           </p>
 
           {/* Frame Selector */}
-          <div className="mt-6 pt-5 border-t border-[#2C211B]/10 max-w-xl">
+          <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-[#2C211B]/10 max-w-xl">
 
             <div className="flex items-center justify-between mb-3">
               <span className="text-[10px] font-mono-tech tracking-[0.2em] text-[#6B7055] uppercase font-bold flex items-center gap-1.5">
@@ -121,15 +121,15 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Frame Name Buttons */}
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            <div className="flex flex-wrap items-center gap-2 pb-1">
               {frameProducts.map((product, idx) => (
                 <button
                   key={product.id}
                   type="button"
                   onClick={() => setActiveFrameIndex(idx)}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-mono-tech tracking-wider uppercase transition-all duration-300 cursor-pointer shrink-0 border ${
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono-tech tracking-wider uppercase transition-all duration-300 cursor-pointer shrink-0 border ${
                     activeFrameIndex === idx
-                      ? 'bg-[#2C211B] text-[#F5EFE3] border-[#2C211B] shadow-lg scale-105 font-bold'
+                      ? 'bg-[#2C211B] text-[#F5EFE3] border-[#2C211B] shadow-lg sm:scale-105 font-bold'
                       : 'bg-white/80 text-[#2C211B] border-[#2C211B]/15 hover:bg-white hover:border-[#861F3A]'
                   }`}
                 >
@@ -153,7 +153,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Explore Button */}
-          <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+          <div className="mt-5 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <button
               type="button"
               onClick={scrollToCollection}

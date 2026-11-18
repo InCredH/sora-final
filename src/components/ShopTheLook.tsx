@@ -26,7 +26,7 @@ export const ShopTheLook: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#08080a] border-b border-white/5">
+    <section className="relative w-full py-12 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#08080a] border-b border-white/5">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-10 border-b border-white/10">
@@ -45,7 +45,7 @@ export const ShopTheLook: React.FC = () => {
         </div>
 
         {/* Dual Lookbook Cards */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="mt-6 sm:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
           {looks.map((look) => (
             <div key={look.id} className="bg-[#111116] border border-white/10 overflow-hidden flex flex-col group">
               {/* Large Lifestyle Photo */}

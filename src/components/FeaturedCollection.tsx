@@ -10,11 +10,11 @@ export const FeaturedCollection: React.FC = () => {
   return (
     <section
       id="featured-collection"
-      className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#F5EFE3] text-[#2C211B] border-b border-[#2C211B]/10"
+      className="relative w-full py-8 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#F5EFE3] text-[#2C211B] border-b border-[#2C211B]/10"
     >
       <div className="max-w-7xl mx-auto">
         {/* Clean, Uncluttered Editorial Section Header */}
-        <div className="pb-8 border-b border-[#2C211B]/10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="pb-5 sm:pb-8 border-b border-[#2C211B]/10 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-[11px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
               <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A] text-[#861F3A]">
@@ -38,7 +38,7 @@ export const FeaturedCollection: React.FC = () => {
         </div>
 
         {/* Curated Product Grid */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+        <div className="mt-5 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}

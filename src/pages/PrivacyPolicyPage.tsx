@@ -11,11 +11,11 @@ export const PrivacyPolicyPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-6 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         
         {/* Navigation Breadcrumb */}
-        <div className="pb-8 border-b border-[#2C211B]/10 flex items-center justify-between">
+        <div className="pb-5 sm:pb-8 border-b border-[#2C211B]/10 flex items-center justify-between">
           <button
             type="button"
             onClick={() => {
@@ -37,7 +37,7 @@ export const PrivacyPolicyPage: React.FC = () => {
         </div>
 
         {/* Page Header */}
-        <div className="mt-10 pb-10 border-b border-[#2C211B]/10">
+        <div className="mt-6 sm:mt-10 pb-6 sm:pb-10 border-b border-[#2C211B]/10">
           <div className="flex items-center gap-2 text-[11px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
             <Shield size={14} className="text-[#861F3A]" />
             <span>Patron Confidentiality Protocol</span>
@@ -59,7 +59,7 @@ export const PrivacyPolicyPage: React.FC = () => {
         </div>
 
         {/* Policy Body */}
-        <div className="mt-12 space-y-12">
+        <div className="mt-6 sm:mt-12 space-y-8 sm:space-y-12">
           
           {/* Section 1 */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
@@ -165,10 +165,10 @@ export const PrivacyPolicyPage: React.FC = () => {
                 <span className="text-[10px] font-mono-tech text-[#C8A96B] tracking-wider uppercase block font-bold">
                   DEDICATED PRIVACY CONCIERGE
                 </span>
-                <span className="text-sm font-semibold">concierge@yoursora.shop</span>
+                <span className="text-sm font-semibold">hello@yoursora.shop</span>
               </div>
               <a
-                href="mailto:concierge@yoursora.shop?subject=SORA%20Data%20Privacy%20Request"
+                href="mailto:hello@yoursora.shop?subject=SORA%20Data%20Privacy%20Request"
                 className="bg-[#861F3A] hover:bg-[#6b182e] text-[#F5EFE3] px-4 py-2 text-xs font-mono-tech font-bold uppercase rounded-lg transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
                 <Mail size={13} />
@@ -180,7 +180,7 @@ export const PrivacyPolicyPage: React.FC = () => {
         </div>
 
         {/* Back to top footer */}
-        <div className="mt-16 pt-8 border-t border-[#2C211B]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#6B7055]">
+        <div className="mt-8 sm:mt-16 pt-6 sm:pt-8 border-t border-[#2C211B]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#6B7055]">
           <span>SORA (空) // SUNGLASSES INSPIRED BY THE SKY</span>
           <button
             type="button"

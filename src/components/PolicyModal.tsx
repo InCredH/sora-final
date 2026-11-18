@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Truck, Lock } from 'lucide-react';
+import { X, Truck, Lock, RefreshCcw } from 'lucide-react';
 
 interface PolicyModalProps {
   policyKey: string | null;
@@ -25,6 +25,27 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
         </div>
       )
     },
+    returns: {
+      title: 'RETURNS & EXCHANGES',
+      subtitle: 'No exchanges or returns, unless damaged',
+      icon: RefreshCcw,
+      content: (
+        <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
+          <p>
+            All purchases are final. We do not offer exchanges or returns for reasons such as a change of mind, incorrect fit, or styling preference — please review your selection carefully before ordering.
+          </p>
+          <p>
+            The only exception is a frame that arrives damaged or defective. In that case:
+          </p>
+          <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
+            <li>Film an unedited, continuous unboxing video from the moment the sealed package is opened. This is required to assess the damage — claims without one cannot be processed.</li>
+            <li>Share the video with us at <span className="text-white font-medium">hello@yoursora.shop</span> within 48 hours of delivery.</li>
+            <li>Once the damage is verified, we'll replace the item with the same frame and variant.</li>
+            <li>If that exact item is out of stock at the time of replacement, we'll issue a full refund instead.</li>
+          </ul>
+        </div>
+      )
+    },
     privacy: {
       title: 'CONFIDENTIALITY & SECURITY',
       subtitle: 'Institutional-grade data protection',
@@ -37,7 +58,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
           <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
             <li>End-to-end 256-bit TLS encryption across all browsing and checkout channels.</li>
             <li>Tokenized payment gateway integrations ensuring zero payment card numbers are stored on our servers.</li>
-            <li>Right to erasure: Request immediate deletion of your digital purchasing history at concierge@yoursora.shop.</li>
+            <li>Right to erasure: Request immediate deletion of your digital purchasing history at hello@yoursora.shop.</li>
           </ul>
         </div>
       )

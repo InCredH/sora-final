@@ -1,6 +1,6 @@
 import React from 'react';
 import { REVIEWS } from '../data/products';
-import { Star, CheckCircle, Truck, Lock } from 'lucide-react';
+import { Star, CheckCircle, Truck, Lock, RefreshCcw } from 'lucide-react';
 
 interface TrustAndReviewsProps {
   onOpenPolicy?: (policyKey: string) => void;
@@ -8,7 +8,7 @@ interface TrustAndReviewsProps {
 
 export const TrustAndReviews: React.FC<TrustAndReviewsProps> = ({ onOpenPolicy }) => {
   return (
-    <section className="relative w-full py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0] text-[#2C211B] border-b border-[#2C211B]/10">
+    <section className="relative w-full py-10 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#FAF7F0] text-[#2C211B] border-b border-[#2C211B]/10">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-10 border-b border-[#2C211B]/10">
@@ -28,7 +28,7 @@ export const TrustAndReviews: React.FC<TrustAndReviewsProps> = ({ onOpenPolicy }
         </div>
 
         {/* Reviews Cards */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-6 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
           {REVIEWS.map((rev) => (
             <div
               key={rev.id}
@@ -72,7 +72,7 @@ export const TrustAndReviews: React.FC<TrustAndReviewsProps> = ({ onOpenPolicy }
         </div>
 
         {/* Trust Badges Bar */}
-        <div className="mt-16 sm:mt-20 pt-10 border-t border-[#2C211B]/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center sm:text-left">
+        <div className="mt-8 sm:mt-20 pt-10 border-t border-[#2C211B]/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center sm:text-left">
           <div
             onClick={() => onOpenPolicy?.('shipping')}
             className="p-5 bg-white border border-[#2C211B]/10 hover:border-[#861F3A] rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md"
@@ -96,6 +96,19 @@ export const TrustAndReviews: React.FC<TrustAndReviewsProps> = ({ onOpenPolicy }
             </h4>
             <p className="text-[11px] text-[#6B7055] mt-1 font-normal">
               256-bit TLS commerce transactions.
+            </p>
+          </div>
+
+          <div
+            onClick={() => onOpenPolicy?.('returns')}
+            className="p-5 bg-white border border-[#2C211B]/10 hover:border-[#861F3A] rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md"
+          >
+            <RefreshCcw size={22} className="text-[#861F3A] mb-2.5" />
+            <h4 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B] tracking-wider">
+              DAMAGE REPLACEMENT
+            </h4>
+            <p className="text-[11px] text-[#6B7055] mt-1 font-normal">
+              No returns, but we replace damaged items.
             </p>
           </div>
         </div>

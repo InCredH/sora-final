@@ -183,6 +183,12 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [cart]);
 
+  // A promo code never carries over: once the bag is emptied, the code is dropped
+  // and the customer must re-enter it after adding frames again.
+  useEffect(() => {
+    if (cart.length === 0) setAppliedPromo(null);
+  }, [cart.length]);
+
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => {
@@ -202,7 +208,9 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addToCart = (product: Product, variant?: ProductVariant, quantity: number = 1) => {
-    const selectedVariant = variant || product.variants[0];
+    // Only accept a variant that actually belongs to this product.
+    const selectedVariant =
+      (variant && product.variants.find((v) => v.id === variant.id)) || product.variants[0];
     const itemId = `${product.id}_${selectedVariant.id}`;
 
     setCart(prev => {

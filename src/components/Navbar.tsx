@@ -188,11 +188,18 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-2 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-3.5 sm:px-4 py-2 transition-all duration-300 rounded cursor-pointer shadow-sm hover:shadow-md"
-              aria-label="Open Bag"
+              className="relative flex items-center gap-2 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] px-3 sm:px-4 py-2 transition-all duration-300 rounded cursor-pointer shadow-sm hover:shadow-md"
+              aria-label={`Open Bag${cartCount > 0 ? `, ${cartCount} items` : ''}`}
             >
-              <ShoppingBag size={15} className="text-[#C8A96B]" />
-              <span className="text-xs font-mono-tech font-bold tracking-wider">
+              <span className="relative inline-flex">
+                <ShoppingBag size={15} className="text-[#C8A96B]" />
+                {cartCount > 0 && (
+                  <span className="sm:hidden absolute -top-1.5 -right-1.5 min-w-[14px] h-3.5 px-0.5 flex items-center justify-center rounded-full bg-[#861F3A] text-[#F5EFE3] text-[8px] font-bold leading-none">
+                    {cartCount}
+                  </span>
+                )}
+              </span>
+              <span className="hidden sm:inline text-xs font-mono-tech font-bold tracking-wider whitespace-nowrap">
                 BAG ({cartCount})
               </span>
             </button>
@@ -234,22 +241,6 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* Navigation links */}
-              <div className="py-6 flex flex-col gap-4 text-sm font-mono-tech tracking-wider uppercase">
-                {/* Mobile Search Button */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsSearchOpen(true);
-                  }}
-                  className="flex items-center gap-3 p-3 bg-white border border-[#2C211B]/15 rounded-xl text-xs font-mono-tech text-[#6B7055] hover:text-[#861F3A] hover:border-[#861F3A] transition-all cursor-pointer mb-2"
-                >
-                  <Search size={16} className="text-[#861F3A]" />
-                  <span>Search Silhouettes...</span>
-                </button>
-
-                </div>
-
               <div className="py-6 flex flex-col gap-4 text-sm font-mono-tech tracking-wider uppercase">
                 {/* Mobile Search Button */}
                 <button
@@ -309,7 +300,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => handleNavClick('story')}
                   className="text-left text-[#2C211B] hover:text-[#861F3A] py-1 flex items-center justify-between cursor-pointer"
                 >
-                  <span>The Manifesto</span>
+                  <span>Our Story</span>
                   <ArrowRight size={14} className="text-[#6B7055]" />
                 </button>
 

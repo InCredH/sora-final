@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useShop } from '../context/ShopContext';
-import { ArrowLeft, Scale, Award, Truck, Mail } from 'lucide-react';
+import { ArrowLeft, Scale, Award, Truck, Mail, RefreshCcw } from 'lucide-react';
 
 export const TermsPage: React.FC = () => {
   const { setCurrentView } = useShop();
@@ -11,11 +11,11 @@ export const TermsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-6 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         
         {/* Navigation Breadcrumb */}
-        <div className="pb-8 border-b border-[#2C211B]/10 flex items-center justify-between">
+        <div className="pb-5 sm:pb-8 border-b border-[#2C211B]/10 flex items-center justify-between">
           <button
             type="button"
             onClick={() => {
@@ -37,7 +37,7 @@ export const TermsPage: React.FC = () => {
         </div>
 
         {/* Page Header */}
-        <div className="mt-10 pb-10 border-b border-[#2C211B]/10">
+        <div className="mt-6 sm:mt-10 pb-6 sm:pb-10 border-b border-[#2C211B]/10">
           <div className="flex items-center gap-2 text-[11px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
             <Scale size={14} className="text-[#861F3A]" />
             <span>Client Services & Patron Agreement</span>
@@ -51,7 +51,7 @@ export const TermsPage: React.FC = () => {
         </div>
 
         {/* Policy Body */}
-        <div className="mt-12 space-y-12">
+        <div className="mt-6 sm:mt-12 space-y-8 sm:space-y-12">
           
           {/* Section 1: Our Products */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
@@ -105,11 +105,34 @@ export const TermsPage: React.FC = () => {
             </div>
           </section>
 
-          {/* Section 4: Concierge & Dispute Resolution */}
+          {/* Section 4: Returns & Exchanges */}
+          <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-9 h-9 rounded-lg bg-[#C8A96B]/20 text-[#2C211B] flex items-center justify-center font-bold">
+                <RefreshCcw size={18} className="text-[#861F3A]" />
+              </div>
+              <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
+                Returns & Exchanges
+              </h2>
+            </div>
+            <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
+              <p>
+                All purchases are final. We do not offer exchanges or returns for reasons such as a change of mind, incorrect fit, or styling preference — please review your selection carefully before ordering.
+              </p>
+              <p>
+                The only exception is a frame that arrives damaged or defective. Shoot an unedited, continuous unboxing video from the moment the sealed package is opened, and share it with us at <a href="mailto:hello@yoursora.shop" className="font-semibold hover:text-[#861F3A]">hello@yoursora.shop</a> within 48 hours of delivery — this is required so we can assess the damage. Claims without an unboxing video cannot be processed.
+              </p>
+              <p>
+                Once the damage is verified, we&rsquo;ll replace the item with the same frame and variant. If that exact item is out of stock at the time of replacement, we&rsquo;ll issue a full refund instead.
+              </p>
+            </div>
+          </section>
+
+          {/* Section 5: Concierge & Dispute Resolution */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-lg bg-[#861F3A]/10 text-[#861F3A] flex items-center justify-center font-bold">
-                04
+                05
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
                 Concierge Assistance & Governing Law
@@ -124,10 +147,10 @@ export const TermsPage: React.FC = () => {
                 <span className="text-[10px] font-mono-tech text-[#C8A96B] tracking-wider uppercase block font-bold">
                   DIRECT CLIENT CONCIERGE
                 </span>
-                <span className="text-sm font-semibold">concierge@yoursora.shop</span>
+                <span className="text-sm font-semibold">hello@yoursora.shop</span>
               </div>
               <a
-                href="mailto:concierge@yoursora.shop?subject=SORA%20Terms%20Inquiry"
+                href="mailto:hello@yoursora.shop?subject=SORA%20Terms%20Inquiry"
                 className="bg-[#861F3A] hover:bg-[#6b182e] text-[#F5EFE3] px-4 py-2 text-xs font-mono-tech font-bold uppercase rounded-lg transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
                 <Mail size={13} />
@@ -139,7 +162,7 @@ export const TermsPage: React.FC = () => {
         </div>
 
         {/* Back to top footer */}
-        <div className="mt-16 pt-8 border-t border-[#2C211B]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#6B7055]">
+        <div className="mt-8 sm:mt-16 pt-6 sm:pt-8 border-t border-[#2C211B]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-tech text-[#6B7055]">
           <span>SORA (空) // SUNGLASSES INSPIRED BY THE SKY</span>
           <button
             type="button"

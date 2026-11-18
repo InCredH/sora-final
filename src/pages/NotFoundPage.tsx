@@ -15,7 +15,7 @@ export const NotFoundPage: React.FC = () => {
   const recommendedProducts = PRODUCTS.slice(0, 3);
 
   return (
-    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center">
         
         {/* Hanko Badge */}
@@ -74,7 +74,7 @@ export const NotFoundPage: React.FC = () => {
             className="px-6 py-3.5 bg-transparent hover:bg-[#2C211B]/5 text-[#6B7055] hover:text-[#2C211B] text-xs font-mono-tech font-semibold uppercase rounded-xl tracking-wider transition-colors inline-flex items-center gap-2 cursor-pointer"
           >
             <BookOpen size={14} />
-            <span>Read The Manifesto</span>
+            <span>Read Our Story</span>
           </button>
         </div>
 

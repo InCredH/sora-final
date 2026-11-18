@@ -7,10 +7,10 @@ export const StoryPage: React.FC = () => {
   const { setCurrentView } = useShop();
 
   return (
-    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-[#F5EFE3] text-[#2C211B] py-6 sm:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         {/* Top Tag & Title */}
-        <div className="pb-12 border-b border-[#2C211B]/10 text-center sm:text-left">
+        <div className="pb-6 sm:pb-12 border-b border-[#2C211B]/10 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/80 border border-[#2C211B]/15 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-4 rounded">
             <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
             <span>OUR STORY</span>
@@ -24,15 +24,8 @@ export const StoryPage: React.FC = () => {
         </div>
 
         {/* Origin Story: The People Behind SORA */}
-        <div className="relative py-16 sm:py-24 border-b border-[#2C211B]/10 overflow-hidden">
-          <span
-            aria-hidden="true"
-            className="absolute -top-10 -right-6 sm:right-0 font-serif-editorial text-[16rem] sm:text-[26rem] leading-none text-[#2C211B]/[0.035] select-none pointer-events-none"
-          >
-            &rdquo;
-          </span>
-
-          <div className="relative z-10 max-w-2xl">
+        <div className="py-8 sm:py-24 border-b border-[#2C211B]/10 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start">
+          <div className="md:col-span-7">
             <span className="text-[11px] font-mono-tech text-[#861F3A] uppercase tracking-widest block font-bold mb-4">
               THE BEGINNING
             </span>
@@ -73,15 +66,28 @@ export const StoryPage: React.FC = () => {
               The two behind SORA.
             </p>
           </div>
+
+          <div className="md:col-span-5 md:sticky md:top-24">
+            <div className="relative aspect-[4/5] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
+              <img
+                src="/images/story/founders.jpg"
+                alt="The two people behind SORA, on the trip that inspired it"
+                className="w-full h-full object-cover filter contrast-[1.05]"
+              />
+              <div className="absolute bottom-3 left-3 bg-[#2C211B]/80 text-[#F5EFE3] px-2.5 py-1 text-[9px] font-mono-tech uppercase rounded backdrop-blur-md">
+                THE TWO BEHIND SORA
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Integrated Brand Manifesto Statement Section */}
-        <div className="my-12 rounded-2xl overflow-hidden shadow-xl border border-[#2C211B]/10">
+        {/* <div className="my-6 sm:my-12 rounded-2xl overflow-hidden shadow-xl border border-[#2C211B]/10">
           <BrandStatement />
-        </div>
+        </div> */}
 
         {/* Chapter 01: The Names */}
-        <div className="py-16 sm:py-20 border-b border-[#2C211B]/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="py-8 sm:py-20 border-b border-[#2C211B]/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-4">
             <span className="text-[11px] font-mono-tech text-[#861F3A] uppercase tracking-widest block font-bold">
               CHAPTER 01 // THE NAMES
@@ -110,7 +116,7 @@ export const StoryPage: React.FC = () => {
         </div>
 
         {/* Chapter 02: The Design */}
-        <div className="py-16 sm:py-20 border-b border-[#2C211B]/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="py-8 sm:py-20 border-b border-[#2C211B]/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 order-2 md:order-1 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
               src="/images/kaizo/model-1.jpg"
@@ -139,7 +145,7 @@ export const StoryPage: React.FC = () => {
         </div>
 
         {/* Chapter 03: Protection */}
-        <div className="py-16 sm:py-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="py-8 sm:py-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-4">
             <span className="text-[11px] font-mono-tech text-[#861F3A] uppercase tracking-widest block font-bold">
               CHAPTER 03 // EVERYDAY PROTECTION
@@ -168,7 +174,7 @@ export const StoryPage: React.FC = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-12 p-8 sm:p-12 bg-white border border-[#2C211B]/15 rounded-2xl text-center space-y-4 shadow-lg">
+        <div className="mt-6 sm:mt-12 p-6 sm:p-12 bg-white border border-[#2C211B]/15 rounded-2xl text-center space-y-4 shadow-lg">
           <h3 className="font-display text-2xl sm:text-3xl font-black text-[#2C211B] uppercase">
             FIND YOUR PAIR
           </h3>

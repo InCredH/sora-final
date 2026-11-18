@@ -2,7 +2,7 @@ import React from 'react';
 
 export const BrandStatement: React.FC = () => {
   return (
-    <section className="relative w-full py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#2C211B] text-[#F5EFE3] border-b border-[#C8A96B]/20 overflow-hidden">
+    <section className="relative w-full py-10 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#2C211B] text-[#F5EFE3] border-b border-[#C8A96B]/20 overflow-hidden">
       {/* Background 空 (sky) watermark */}
       <div className="absolute right-6 top-1/2 -translate-y-1/2 font-japanese text-[22vw] text-white/[0.025] select-none pointer-events-none leading-none">
         空
@@ -10,7 +10,7 @@ export const BrandStatement: React.FC = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Subtle section header with Official Emblem */}
-        <div className="flex items-center gap-3 text-[11px] font-mono-tech tracking-widest uppercase mb-8 sm:mb-12">
+        <div className="flex items-center gap-3 text-[11px] font-mono-tech tracking-widest uppercase mb-5 sm:mb-12">
           <img src="/logo-transparent.png" alt="SORA" className="h-5 w-auto object-contain brightness-110" />
           <span className="text-[#C8A96B]">THE SORA MANIFESTO // PHILOSOPHY OF PERSPECTIVE</span>
         </div>
@@ -27,7 +27,7 @@ export const BrandStatement: React.FC = () => {
         </div>
 
         {/* Sub-narrative split layout with technical note */}
-        <div className="mt-12 sm:mt-16 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div className="mt-8 sm:mt-16 pt-6 sm:pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           <div className="md:col-span-5">
             <span className="text-xs font-mono-tech tracking-widest text-[#C8A96B] uppercase block mb-2 font-bold">
               INDIVIDUALITY AS ART
