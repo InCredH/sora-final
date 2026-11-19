@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useShop } from '../context/ShopContext';
 import { X, Minus, Plus, ShoppingBag, ArrowRight, Trash2, Tag, CheckCircle2 } from 'lucide-react';
 import { buildEnquiryMessage, openWhatsAppEnquiry } from '../utils/whatsappEnquiry';
@@ -33,6 +33,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
   const [promoMessage, setPromoMessage] = useState<{ text: string; isError: boolean } | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [customerName, setCustomerName] = useState('');
+  const [customerAddress, setCustomerAddress] = useState('');
+  const [customerPincode, setCustomerPincode] = useState('');
+  const [customerCity, setCustomerCity] = useState('');
+  const [showErrors, setShowErrors] = useState(false);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLTextAreaElement>(null);
+  const pincodeRef = useRef<HTMLInputElement>(null);
+  const cityRef = useRef<HTMLInputElement>(null);
+
+  // Field validity (Indian pincode: 6 digits, can't start with 0).
+  const nameInvalid = !customerName.trim();
+  const addressInvalid = customerAddress.trim().length < 8;
+  const pincodeInvalid = !/^[1-9][0-9]{5}$/.test(customerPincode);
+  const cityInvalid = customerCity.trim().length < 2;
   const [lastEnquiryMessage, setLastEnquiryMessage] = useState('');
   const [showPromo, setShowPromo] = useState(false);
 
@@ -63,6 +77,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (cart.length === 0) return;
+
+    // All delivery details are required before we open WhatsApp.
+    const firstInvalid =
+      (nameInvalid && nameRef.current) ||
+      (addressInvalid && addressRef.current) ||
+      (pincodeInvalid && pincodeRef.current) ||
+      (cityInvalid && cityRef.current) ||
+      null;
+    if (firstInvalid) {
+      setShowErrors(true);
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalid.focus({ preventScroll: true });
+      return;
+    }
+
     const message = buildEnquiryMessage({
       cart,
       subtotal: cartSubtotal,
@@ -73,6 +102,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
       total: finalTotal,
       formatPrice,
       customerName,
+      customerAddress,
+      customerCity,
+      customerPincode,
     });
     setLastEnquiryMessage(message);
     openWhatsAppEnquiry(message);
@@ -335,15 +367,92 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                       </button>
                     )}
 
-                    {/* Name */}
-                    <input
-                      type="text"
-                      value={customerName}
-                      onChange={(e) => setCustomerName(e.target.value)}
-                      placeholder="Your Name (optional)"
-                      autoComplete="name"
-                      className="w-full bg-white border border-[#2C211B]/20 px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A]"
-                    />
+                    {/* Delivery details — all required */}
+                    <div className="space-y-2">
+                      <span className="block text-[10px] font-mono-tech uppercase tracking-wider font-bold text-[#6B7055]">
+                        Delivery details <span className="text-[#861F3A]">*</span>
+                      </span>
+
+                      <div>
+                        <input
+                          ref={nameRef}
+                          type="text"
+                          value={customerName}
+                          onChange={(e) => setCustomerName(e.target.value)}
+                          placeholder="Full Name *"
+                          autoComplete="name"
+                          required
+                          aria-invalid={showErrors && nameInvalid}
+                          className={`w-full bg-white border px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A] ${
+                            showErrors && nameInvalid ? 'border-[#861F3A] ring-1 ring-[#861F3A]' : 'border-[#2C211B]/20'
+                          }`}
+                        />
+                        {showErrors && nameInvalid && (
+                          <p className="mt-1 text-[10px] font-mono-tech text-[#861F3A]">Please enter your name.</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <textarea
+                          ref={addressRef}
+                          value={customerAddress}
+                          onChange={(e) => setCustomerAddress(e.target.value)}
+                          placeholder="House / Flat, Street, Area, Landmark *"
+                          autoComplete="street-address"
+                          rows={2}
+                          required
+                          aria-invalid={showErrors && addressInvalid}
+                          className={`w-full resize-none bg-white border px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A] ${
+                            showErrors && addressInvalid ? 'border-[#861F3A] ring-1 ring-[#861F3A]' : 'border-[#2C211B]/20'
+                          }`}
+                        />
+                        {showErrors && addressInvalid && (
+                          <p className="mt-1 text-[10px] font-mono-tech text-[#861F3A]">Please enter your house, street and area.</p>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <input
+                            ref={pincodeRef}
+                            type="text"
+                            inputMode="numeric"
+                            pattern="[1-9][0-9]{5}"
+                            maxLength={6}
+                            value={customerPincode}
+                            onChange={(e) => setCustomerPincode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                            placeholder="Pincode *"
+                            autoComplete="postal-code"
+                            required
+                            aria-invalid={showErrors && pincodeInvalid}
+                            className={`w-full bg-white border px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A] ${
+                            showErrors && pincodeInvalid ? 'border-[#861F3A] ring-1 ring-[#861F3A]' : 'border-[#2C211B]/20'
+                          }`}
+                          />
+                          {showErrors && pincodeInvalid && (
+                            <p className="mt-1 text-[10px] font-mono-tech text-[#861F3A]">Enter a valid 6-digit pincode.</p>
+                          )}
+                        </div>
+                        <div>
+                          <input
+                            ref={cityRef}
+                            type="text"
+                            value={customerCity}
+                            onChange={(e) => setCustomerCity(e.target.value)}
+                            placeholder="City *"
+                            autoComplete="address-level2"
+                            required
+                            aria-invalid={showErrors && cityInvalid}
+                            className={`w-full bg-white border px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A] ${
+                            showErrors && cityInvalid ? 'border-[#861F3A] ring-1 ring-[#861F3A]' : 'border-[#2C211B]/20'
+                          }`}
+                          />
+                          {showErrors && cityInvalid && (
+                            <p className="mt-1 text-[10px] font-mono-tech text-[#861F3A]">Please enter your city.</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
 
                     {/* Breakdown (only when there's something to break down) */}
                     {(bundleDiscount > 0 || discountAmount > 0) && (

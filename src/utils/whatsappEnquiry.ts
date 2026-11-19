@@ -14,6 +14,9 @@ interface EnquiryDetails {
   total: number;
   formatPrice: (amount: number) => string;
   customerName?: string;
+  customerAddress?: string;
+  customerCity?: string;
+  customerPincode?: string;
 }
 
 export const buildEnquiryMessage = ({
@@ -26,6 +29,9 @@ export const buildEnquiryMessage = ({
   total,
   formatPrice,
   customerName,
+  customerAddress,
+  customerCity,
+  customerPincode,
 }: EnquiryDetails): string => {
   const totalUnits = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -33,7 +39,7 @@ export const buildEnquiryMessage = ({
     const unitPrice = item.product.price;
     return [
       `${index + 1}. *${item.product.name}*`,
-      `   SKU: ${item.product.sku}`,
+      `   SKU: ${item.variant.sku ?? item.product.sku}`,
       `   Colour: ${item.variant.colorName}`,
       `   Bundle offer: ${isBundleEligible(item.product) ? 'Eligible' : 'Not eligible'}`,
       `   Quantity: ${item.quantity}`,
@@ -44,7 +50,11 @@ export const buildEnquiryMessage = ({
   const lines = [
     'Hello SORA, I would like to place an enquiry for the following:',
     '',
-    ...(customerName?.trim() ? [`Name: ${customerName.trim()}`, ''] : []),
+    ...(customerName?.trim() ? [`Name: ${customerName.trim()}`] : []),
+    ...(customerAddress?.trim() ? [`Address: ${customerAddress.trim().replace(/\s*\n\s*/g, ', ')}`] : []),
+    ...(customerCity?.trim() ? [`City: ${customerCity.trim()}`] : []),
+    ...(customerPincode?.trim() ? [`Pincode: ${customerPincode.trim()}`] : []),
+    ...(customerName?.trim() || customerAddress?.trim() ? [''] : []),
     ...itemLines.flatMap((block) => [block, '']),
     `Total items: ${totalUnits}`,
     `Subtotal: ${formatPrice(subtotal)}`,

@@ -27,14 +27,10 @@ export const HeroSection: React.FC = () => {
     activeProduct?.images?.[0] ||
     '';
 
+  // Opens the full Collection page (same as the "Collection" nav link).
   const scrollToCollection = () => {
-    const el = document.getElementById('featured-collection');
-
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setCurrentView('shop');
-    }
+    setCurrentView('shop');
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   const marqueeItems = [
@@ -65,13 +61,13 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Main Hero */}
-      <div className="relative z-10 my-auto py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full flex-1">
+      <div className="relative z-10 my-auto py-4 sm:pb-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center max-w-7xl mx-auto w-full flex-1">
 
         {/* Left Column */}
         <div className="lg:col-span-7 flex flex-col justify-center animate-fade-up">
 
           {/* Brand Label */}
-          <div className="flex items-center gap-3 mb-3.5 sm:mb-4">
+          {/* <div className="flex items-center gap-3 mb-3.5 sm:mb-4">
             <img
               src="/logo-transparent.png"
               alt="SORA"
@@ -87,7 +83,7 @@ export const HeroSection: React.FC = () => {
             <span className="text-[10px] font-mono-tech tracking-widest text-[#861F3A] uppercase font-bold">
               SS-26
             </span>
-          </div>
+          </div> */}
 
           {/* Main Heading */}
           <h1 className="font-display text-4xl sm:text-6xl md:text-7xl xl:text-[80px] font-black uppercase text-[#2C211B] tracking-tight leading-[0.95]">
