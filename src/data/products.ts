@@ -1,10 +1,25 @@
 
 export interface ProductVariant {
-  id: string;
+  id: string; // must be unique within the product
   name: string;
   colorName: string;
   colorHex: string;
+  /** Main (front) image for this colour — used in the cart and swatches. */
   image: string;
+
+  // ---- Optional per-variant overrides. Anything left out falls back to the product's value. ----
+  /** Gallery images shown when this colour is selected. */
+  images?: string[];
+  /** Units in stock for this colour. */
+  stockQuantity?: number;
+  /** Set false to mark just this colour sold out. Defaults to stockQuantity > 0. */
+  inStock?: boolean;
+  sku?: string;
+  frame?: string;
+  lens?: string;
+  shortDescription?: string;
+  description?: string;
+  reelCaption?: string;
 }
 
 // --------------------------------------------------
@@ -68,6 +83,36 @@ export const LOW_STOCK_THRESHOLD = 2;
 export const isLowStock = (product: Product): boolean =>
   product.inStock && product.stockQuantity > 0 && product.stockQuantity <= LOW_STOCK_THRESHOLD;
 
+/**
+ * The product as it looks with a given colour selected: the variant's own images, stock,
+ * description etc. override the product's, and anything the variant doesn't set falls back.
+ */
+export const withVariant = (product: Product, variant?: ProductVariant): Product => {
+  const v = variant ?? product.variants[0];
+  if (!v) return product;
+  const stockQuantity = v.stockQuantity ?? product.stockQuantity;
+  const inStock =
+    v.inStock ?? (v.stockQuantity !== undefined ? v.stockQuantity > 0 : product.inStock);
+  return {
+    ...product,
+    images: v.images && v.images.length > 0 ? v.images : v.image && !product.images.includes(v.image) ? [v.image, ...product.images] : product.images,
+    stockQuantity,
+    inStock,
+    sku: v.sku ?? product.sku,
+    frame: v.frame ?? product.frame,
+    lens: v.lens ?? product.lens,
+    shortDescription: v.shortDescription ?? product.shortDescription,
+    description: v.description ?? product.description,
+    reelCaption: v.reelCaption ?? product.reelCaption
+  };
+};
+
+/** True if at least one colour of the product can be bought. */
+export const isProductInStock = (product: Product): boolean =>
+  product.variants.length > 0
+    ? product.variants.some((v) => withVariant(product, v).inStock)
+    : product.inStock;
+
 export const PRODUCTS: Product[] = [
 
   // --------------------------------------------------
@@ -98,15 +143,41 @@ export const PRODUCTS: Product[] = [
       "/images/hoshi/hoshi-cross.png",
       // "/images/hoshi/frame-front.png",
       "/images/hoshi/hoshi-model-2.jpeg",
-      "/images/hoshi/hoshi-model-1.jpeg"
+      // "/images/hoshi/hoshi-model-1.jpeg"
     ],
     variants: [
       {
-        id: "v_hikari_gold",
+        id: "v_hoshi_goldBrown",
         name: "Gold Frame & Brown Lens",
         colorName: "Gold & Brown",
         colorHex: "#C8A96B",
-        image: "/images/hoshi/hoshi-front.png"
+        image: "/images/hoshi/hoshi-front.png",
+        stockQuantity: 4
+        // Uses the product's images, description and lens above.
+      },
+      {
+        id: "v_hoshi_goldBlack",
+        name: "Gold Frame & Black Lens",
+        colorName: "Gold & Black",
+        colorHex: "#000000",
+        image: "/images/hoshi/hoshi-black-front.JPEG",
+        // Add more angles here as you shoot them (side, cross, model…).
+        images: [
+          "/images/hoshi/hoshi-black-front.JPEG",
+          "/images/hoshi/hoshi-black-side.JPEG",
+          "/images/hoshi/hoshi-black-cross.JPEG",
+          "/images/hoshi/hoshi-black-model-1.jpeg",
+
+        ],
+        stockQuantity: 5, // ← set the real count for the black variant
+        sku: "SORA-HS-001-BLK",
+        lens: "Black",
+        shortDescription:
+          "A gold geometric frame with deep black lenses — the same sharp star shape, turned up to midnight. Bold in contrast, calm in tone.",
+        description:
+          "Inspired by the sharp, steady light of a star, Hoshi brings a touch of gold to everyday dressing — this time set against deep black lenses.\n\nIt works from bright city afternoons to beach days and late golden-hour evenings.\n\nThe same sleek geometric frame with clean angles and fine gold-toned metal, paired with black lenses for a sharper, more graphic contrast. Polished, a little dramatic, and quietly luxurious.\n\nGold on black. A star against the night sky.",
+        reelCaption:
+          "Hoshi (星) in black. Gold frame. Black lens. A star against the night. ✦"
       }
     ],
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ProductVariant, PRODUCTS, BUNDLE_OFFER, isBundleEligible, isLowStock } from '../data/products';
+import { ProductVariant, PRODUCTS, BUNDLE_OFFER, isBundleEligible, isLowStock, withVariant } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { ProductCard } from '../components/ProductCard';
 import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag, AlertTriangle } from 'lucide-react';
@@ -16,8 +16,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
     formatPrice
   } = useShop();
 
-  const product = selectedProduct || PRODUCTS[0];
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(product.variants[0]);
+  const baseProduct = selectedProduct || PRODUCTS[0];
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(baseProduct.variants[0]);
+  // Everything below reads from the selected colour's images, stock, description, lens etc.
+  const product = withVariant(baseProduct, selectedVariant);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const bundleEligible = isBundleEligible(product);
@@ -35,10 +37,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
 
   const handleVariantSelect = (variant: ProductVariant) => {
     setSelectedVariant(variant);
-    const varIdx = product.images.findIndex((img) => img === variant.image);
-    if (varIdx !== -1) {
-      setActiveImageIndex(varIdx);
-    }
+    setActiveImageIndex(0);
+    // Keep quantity within the new colour's stock.
+    const stock = withVariant(baseProduct, variant).stockQuantity;
+    setQuantity((q) => Math.max(1, Math.min(q, stock || 1)));
   };
 
   const handlePrevImage = () => {
@@ -50,7 +52,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
   };
 
   const handleAddToCart = () => {
-    addToCart(product, selectedVariant, quantity);
+    addToCart(baseProduct, selectedVariant, quantity);
   };
 
   // Other frames — bundle-eligible ones first so shoppers can complete a pair.
@@ -150,6 +152,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
             </div>
 
             {/* Thumbnail Ribbon — Extended & Balanced */}
+            {product.images.length > 1 && (
             <div className="grid grid-cols-5 gap-2 sm:gap-3">
               {product.images.map((img, idx) => (
                 <button
@@ -173,6 +176,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 </button>
               ))}
             </div>
+            )}
           </div>
 
           {/* Right Column: Specifications, Variants & Shopping Flow (5 cols) — Tight Spacing Above Fold */}
@@ -285,8 +289,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   </span>
                   <button
                     type="button"
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="px-2.5 py-2 text-[#2C211B] hover:text-[#861F3A] transition-colors cursor-pointer font-bold"
+                    onClick={() => setQuantity(Math.min(quantity + 1, Math.max(1, product.stockQuantity)))}
+                    disabled={quantity >= product.stockQuantity}
+                    className="px-2.5 py-2 text-[#2C211B] hover:text-[#861F3A] transition-colors cursor-pointer font-bold disabled:opacity-30 disabled:cursor-not-allowed"
                     aria-label="Increase quantity"
                   >
                     +
@@ -357,29 +362,29 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
         {/* NEW EDITORIAL GALLERY & ARCHITECTURAL SPREAD BELOW BUY BOX   */}
         {/* ------------------------------------------------------------- */}
         <div className="mt-6 pt-6 sm:mt-20 sm:pt-16 border-t border-[#2C211B]/15">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-10 border-b border-[#2C211B]/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4   border-[#2C211B]/10">
             <div>
-              <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#861F3A] uppercase mb-2">
+              {/* <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#861F3A] uppercase mb-2">
                 <span className="hanko-stamp text-[9px] px-1 py-0 border-[#861F3A]">空</span>
                 <span className="font-bold">IN THE FIELD & ON THE RUNWAY</span>
-              </div>
+              </div> */}
               <h2 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
-                VISUAL ARCHIVE // {product.name}
+                ARCHIVE // {product.name}
               </h2>
               <p className="text-xs sm:text-sm text-[#6B7055] mt-2 max-w-xl font-normal">
-                Photography and the story behind the frame.
+                The story behind the frame.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <span className="text-xs font-mono-tech text-[#6B7055]">
                 {product.images.length} High-Resolution Photographic Plates
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* Editorial Visual Story Grid */}
-          <div className="mt-5 sm:mt-10 space-y-5 sm:space-y-12">
+          <div className="mt-5 sm:mt-6 space-y-5 sm:space-y-12">
             
             {/* Plate 1: Full-width Hero Editorial Model Shot */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-center bg-white border border-[#2C211B]/10 rounded-2xl p-4 sm:p-10 shadow-sm">
@@ -406,9 +411,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
             </div>
 
             {/* Plate 2 & 3: Side-by-Side Dual Detail Spread */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
               
-              {/* Left Detail Card */}
+              Left Detail Card
               {product.images[1] && (
                 <div className="bg-white border border-[#2C211B]/10 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between group">
                   <div className="h-64 sm:h-72 overflow-hidden bg-[#FAF7F0] p-4 flex items-center justify-center">
@@ -426,7 +431,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 </div>
               )}
 
-              {/* Right Detail Card (Sky / Optic Test) */}
+              Right Detail Card (Sky / Optic Test)
               {product.images[4] || product.images[2] ? (
                 <div className="bg-white border border-[#2C211B]/10 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between group">
                   <div className="h-64 sm:h-72 overflow-hidden bg-[#FAF7F0] p-4 flex items-center justify-center">
@@ -446,7 +451,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   </div>
                 </div>
               ) : null}
-            </div>
+            </div> */}
 
 
           </div>

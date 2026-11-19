@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { PRODUCTS, BUNDLE_OFFER, isBundleEligible } from '../data/products';
+import { PRODUCTS, BUNDLE_OFFER, isBundleEligible, isProductInStock } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
 import { useShop } from '../context/ShopContext';
 import { SlidersHorizontal, X, Grid, LayoutGrid, Check, Sparkles } from 'lucide-react';
@@ -23,7 +23,7 @@ export const ShopPage: React.FC = () => {
     return PRODUCTS.filter((p) => {
       if (selectedCategoryFilter === BUNDLE_FILTER && !isBundleEligible(p)) return false;
       if (selectedShape !== 'All' && p.shape !== selectedShape) return false;
-      if (inStockOnly && !p.inStock) return false;
+      if (inStockOnly && !isProductInStock(p)) return false;
       return true;
     }).sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price;

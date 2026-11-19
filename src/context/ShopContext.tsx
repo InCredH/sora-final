@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product, ProductVariant, PRODUCTS } from '../data/products';
+import { Product, ProductVariant, PRODUCTS, withVariant } from '../data/products';
 import { calculateBundle } from '../utils/pricing';
 
 export interface CartItem {
@@ -214,10 +214,11 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const itemId = `${product.id}_${selectedVariant.id}`;
 
     setCart(prev => {
+      const maxQty = Math.max(1, withVariant(product, selectedVariant).stockQuantity);
       const existing = prev.find(item => item.id === itemId);
       if (existing) {
         return prev.map(item =>
-          item.id === itemId ? { ...item, quantity: item.quantity + quantity } : item
+          item.id === itemId ? { ...item, quantity: Math.min(maxQty, item.quantity + quantity) } : item
         );
       }
       return [
@@ -226,7 +227,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
           id: itemId,
           product,
           variant: selectedVariant,
-          quantity,
+          quantity: Math.min(maxQty, quantity),
           addedAt: Date.now()
         }
       ];
@@ -246,7 +247,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       prev
         .map(item => {
           if (item.id === itemId) {
-            const newQty = item.quantity + delta;
+            const maxQty = Math.max(1, withVariant(item.product, item.variant).stockQuantity);
+            const newQty = Math.min(maxQty, item.quantity + delta);
             return newQty > 0 ? { ...item, quantity: newQty } : null;
           }
           return item;
