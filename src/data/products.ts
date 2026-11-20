@@ -71,6 +71,10 @@ export interface Product {
   // Edit this per product to reflect real inventory.
   stockQuantity: number;
 
+  // Shown in the product page Details box. Leave weightGrams out until the frame is weighed.
+  unisex?: boolean;
+  weightGrams?: number;
+
   isFeatured?: boolean;
   isEditorialHero?: boolean;
 }
@@ -193,6 +197,9 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     stockQuantity: 4,
 
+    unisex: true,
+    weightGrams: 23,
+
     isFeatured: true,
     isEditorialHero: true
   },
@@ -250,6 +257,9 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     stockQuantity: 2,
 
+    unisex: true,
+    weightGrams: 44,
+
     isFeatured: true
   },
 
@@ -305,6 +315,9 @@ export const PRODUCTS: Product[] = [
 
     inStock: true,
     stockQuantity: 4,
+
+    unisex: true,
+    weightGrams: 23,
 
     isFeatured: true
   },
@@ -362,6 +375,9 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     stockQuantity: 7,
 
+    unisex: true,
+    weightGrams: 44,
+
     isFeatured: true
   },
 
@@ -415,6 +431,9 @@ export const PRODUCTS: Product[] = [
 
     inStock: true,
     stockQuantity: 5,
+
+    unisex: true,
+    weightGrams: 23,
 
     isFeatured: true
   }

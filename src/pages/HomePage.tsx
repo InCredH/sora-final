@@ -18,7 +18,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       <HeroSection />
 
       {/* 2. Curated Flagship Silhouettes Grid */}
-      <FeaturedCollection />
+      {/* <FeaturedCollection /> */}
 
       {/* 3. "SEEN IN SORA" — Real Patrons & Community Runway */}
       <SeenInSora />

@@ -35,7 +35,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
     { label: 'Silhouette', value: product.shape },
     { label: 'Frame', value: product.frame },
     { label: 'Lenses', value: product.lens },
-    { label: 'UV Protection', value: 'UV400 Protected' }
+    { label: 'UV Protection', value: 'UV400 Protected' },
+    { label: 'Fit', value: product.unisex ? 'Unisex' : undefined },
+    { label: 'Weight', value: product.weightGrams ? `${product.weightGrams} g` : undefined }
   ].filter((d): d is { label: string; value: string } => Boolean(d.value));
 
   const handleVariantSelect = (variant: ProductVariant) => {

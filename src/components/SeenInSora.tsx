@@ -79,14 +79,14 @@ export const SeenInSora: React.FC = () => {
               {copiedTag ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} className="text-[#6B7055]" />}
             </button>
 
-            <button
+            {/* <button
               type="button"
               onClick={() => setIsSubmitModalOpen(true)}
               className="px-6 py-2.5 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] text-xs font-mono-tech font-bold uppercase tracking-wider flex items-center gap-2 transition-colors shadow-md rounded cursor-pointer"
             >
               <span>SUBMIT YOUR LOOK</span>
               <ArrowRight size={14} />
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -100,28 +100,31 @@ export const SeenInSora: React.FC = () => {
                 <span>COMMUNITY DIRECTIVE</span>
               </div>
               <h3 className="font-display text-2xl font-black uppercase text-[#F5EFE3] leading-tight">
-                CLAIM YOUR SPOT ON THE RUNWAY
+                CLAIM YOUR SPOT
               </h3>
-              <p className="text-xs text-[#F5EFE3]/70 mt-3 font-light leading-relaxed">
-                Wearing SORA? Snap a candid photograph in natural sunlight and tag us on your Instagram story.
-              </p>
 
-              <div className="mt-6 space-y-2.5 text-xs font-mono-tech text-[#F5EFE3]/80">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C8A96B]" />
-                  <span>Authentic community stories</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C8A96B]" />
-                  <span>Curated & Updated Weekly</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C8A96B]" />
-                  <span>₹1,000 Store Credit upon Feature</span>
-                </div>
-              </div>
+              <ol className="mt-5 space-y-3.5 text-xs text-[#F5EFE3]/85 leading-relaxed">
+                {[
+                  'Wear your SORA and snap a candid photo.',
+                  'Post it on your Instagram story and tag @yoursora.shop.',
+                  'DM us the photo with a short review.',
+                  'Get featured here and enjoy 10% off your next order.'
+                ].map((step, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="shrink-0 w-5 h-5 rounded-full border border-[#C8A96B] text-[#C8A96B] font-mono-tech text-[10px] font-bold flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    <span className="pt-0.5">{step}</span>
+                  </li>
+                ))}
+              </ol>
+
+              <p className="mt-5 text-[10px] font-mono-tech uppercase tracking-wider text-[#F5EFE3]/50">
+                Features updated weekly
+              </p>
             </div>
 
+            {/* "Become the next face" button: hidden for now. Remove this comment wrapper to bring it back.
             <button
               type="button"
               onClick={() => setIsSubmitModalOpen(true)}
@@ -130,6 +133,7 @@ export const SeenInSora: React.FC = () => {
               <span>BECOME THE NEXT FACE</span>
               <ArrowRight size={14} />
             </button>
+            */}
           </div>
 
           {/* Patron Cards */}
