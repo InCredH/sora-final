@@ -209,7 +209,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                     YOUR BAG IS CURRENTLY EMPTY
                   </h4>
                   <p className="text-xs text-[#6B7055] mt-2 max-w-xs font-normal">
-                    Explore the collection — any 2 frames (except HOSHI) for ₹2,499.
+                    Explore the collection. Any 2 frames (except HOSHI) for ₹2,499.
                   </p>
                   <button
                     type="button"
@@ -488,7 +488,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
               >
                 <div className="flex items-baseline justify-between font-mono-tech">
                   <span className="text-sm font-bold text-[#2C211B]">
-                    Total <span className="text-[10px] font-normal text-[#6B7055]">(incl. shipping)</span>
+                    Total <span className="text-[10px] font-normal text-[#6B7055]">(Free shipping)</span>
                   </span>
                   <span className="text-right">
                     {bundleDiscount + discountAmount > 0 && (
@@ -505,7 +505,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                   <ArrowRight size={15} />
                 </button>
                 <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[9.5px] font-mono-tech text-[#6B7055] text-center">
-                  <span>10 AM – 12 MIDNIGHT</span>
+                  <span>10 AM TO 12 MIDNIGHT</span>
                   <span>·</span>
                   <button
                     type="button"

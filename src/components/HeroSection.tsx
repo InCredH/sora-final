@@ -34,7 +34,7 @@ export const HeroSection: React.FC = () => {
   };
 
   const marqueeItems = [
-    'SORA — SEE YOUR WAY',
+    'SORA · SEE YOUR WAY',
     'UV400 PROTECTED',
     'COMPLIMENTARY DELIVERY',
     'ANY 2 FOR ₹2,499',
@@ -45,7 +45,7 @@ export const HeroSection: React.FC = () => {
   if (!activeProduct) return null;
 
   return (
-    <section className="relative w-full sm:min-h-[calc(100vh-105px)] lg:min-h-[calc(100vh-112px)] flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-0 select-none">
+    <section className="relative w-full flex flex-col justify-between bg-[#F5EFE3] text-[#2C211B] px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-0 select-none">
 
       {/* Background Details */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -75,7 +75,7 @@ export const HeroSection: React.FC = () => {
             />
 
             <span className="text-[10px] sm:text-[11px] font-mono-tech tracking-[0.25em] text-[#6B7055] uppercase font-bold">
-              SORA — SEE YOUR WAY
+              SORA · SEE YOUR WAY
             </span>
 
             <span className="w-8 h-px bg-[#C8A96B]" />
@@ -97,10 +97,10 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           {/* Brand Description */}
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base text-[#2C211B]/80 font-normal leading-relaxed max-w-xl">
+          {/* <p className="mt-4 sm:mt-5 text-sm sm:text-base text-[#2C211B]/80 font-normal leading-relaxed max-w-xl">
             More than what you wear. A little expression of who you are.
             Discover pieces that feel like you.
-          </p>
+          </p> */}
 
           {/* Frame Selector */}
           <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-[#2C211B]/10 max-w-xl">
@@ -191,7 +191,7 @@ export const HeroSection: React.FC = () => {
             <img
               key={activeImage}
               src={activeImage}
-              alt={`SORA ${activeProduct.name} — ${activeProduct.subtitle}`}
+              alt={`SORA ${activeProduct.name}, ${activeProduct.subtitle}`}
               className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
             />
 

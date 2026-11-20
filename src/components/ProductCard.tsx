@@ -90,7 +90,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
               <img
                 key={img}
                 src={img}
-                alt={`SORA ${product.name} sunglasses — Angle ${idx + 1}`}
+                alt={`SORA ${product.name} sunglasses, angle ${idx + 1}`}
                 loading={idx === 0 ? "eager" : "lazy"}
                 className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
                   isFrameAngle ? 'object-contain p-2.5' : 'object-cover'

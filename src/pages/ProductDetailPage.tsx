@@ -11,13 +11,16 @@ interface ProductDetailPageProps {
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPolicy }) => {
   const {
     selectedProduct,
+    initialVariantId,
     closeProductDetail,
     addToCart,
     formatPrice
   } = useShop();
 
   const baseProduct = selectedProduct || PRODUCTS[0];
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(baseProduct.variants[0]);
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant>(
+    () => baseProduct.variants.find((v) => v.id === initialVariantId) ?? baseProduct.variants[0]
+  );
   // Everything below reads from the selected colour's images, stock, description, lens etc.
   const product = withVariant(baseProduct, selectedVariant);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -27,7 +30,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
 
   // Only details stated in the product description.
   const details = [
-    { label: 'Meaning', value: `${product.japaneseMeaning} — ${product.subtitle}` },
+    { label: 'Meaning', value: `${product.japaneseMeaning} (${product.subtitle})` },
     { label: 'Pronunciation', value: `${product.name.charAt(0)}${product.name.slice(1).toLowerCase()} (${product.pronunciation})` },
     { label: 'Silhouette', value: product.shape },
     { label: 'Frame', value: product.frame },
@@ -106,7 +109,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               <img
                 key={activeImageIndex}
                 src={product.images[activeImageIndex] || selectedVariant.image}
-                alt={`SORA ${product.name} sunglasses — View ${activeImageIndex + 1}`}
+                alt={`SORA ${product.name} sunglasses, view ${activeImageIndex + 1}`}
                 className="relative z-10 max-h-full max-w-full object-contain filter contrast-[1.02] transition-all duration-500 ease-out animate-in fade-in zoom-in-95 duration-300 drop-shadow-sm"
               />
 
@@ -214,7 +217,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
 
               {/* Subtitle, Tagline & Short Description */}
               <p className="mt-1.5 text-[11px] font-mono-tech text-[#6B7055] uppercase font-semibold tracking-wider">
-                {product.subtitle} — <span className="normal-case italic">{product.tagline}</span>
+                {product.subtitle} · <span className="normal-case italic">{product.tagline}</span>
               </p>
               <p className="mt-1 text-xs text-[#2C211B]/80 font-normal leading-relaxed">
                 {product.shortDescription}

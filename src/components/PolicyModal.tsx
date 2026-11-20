@@ -11,13 +11,13 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
 
   const policies: Record<string, { title: string; subtitle: string; icon: any; content: React.ReactNode }> = {
     shipping: {
-      title: 'SHIPPING INCLUDED',
+      title: 'FREE SHIPPING',
       subtitle: 'No extra charges at checkout',
       icon: Truck,
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            Shipping is included in every SORA price — there are no extra delivery charges on any order.
+            Shipping is included in every SORA price. There are no extra delivery charges on any order.
           </p>
           <p>
             Once your order is confirmed on WhatsApp, we'll share the expected delivery time and tracking details with you.
@@ -32,13 +32,13 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            All purchases are final. We do not offer exchanges or returns for reasons such as a change of mind, incorrect fit, or styling preference — please review your selection carefully before ordering.
+            All purchases are final. We do not offer exchanges or returns for reasons such as a change of mind, incorrect fit, or styling preference. Please review your selection carefully before ordering.
           </p>
           <p>
             The only exception is a frame that arrives damaged or defective. In that case:
           </p>
           <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
-            <li>Film an unedited, continuous unboxing video from the moment the sealed package is opened. This is required to assess the damage — claims without one cannot be processed.</li>
+            <li>Film an unedited, continuous unboxing video from the moment the sealed package is opened. This is required to assess the damage, and claims without one cannot be processed.</li>
             <li>Share the video with us at <span className="text-white font-medium">hello@yoursora.shop</span> within 48 hours of delivery.</li>
             <li>Once the damage is verified, we'll replace the item with the same frame and variant.</li>
             <li>If that exact item is out of stock at the time of replacement, we'll issue a full refund instead.</li>

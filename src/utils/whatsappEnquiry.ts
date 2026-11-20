@@ -64,7 +64,7 @@ export const buildEnquiryMessage = ({
     ...(discountAmount > 0
       ? [`Discount${appliedPromo ? ` (${appliedPromo})` : ''}: -${formatPrice(discountAmount)}`]
       : []),
-    `*Total (incl. shipping): ${formatPrice(total)}*`,
+    `*Total (Free shipping): ${formatPrice(total)}*`,
     '',
     'Please confirm availability and next steps. Thank you!',
   ];
