@@ -231,3 +231,9 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Hero carousel progress bar */
+@keyframes soraProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}

@@ -80,7 +80,7 @@ export const CollectionTiles: React.FC = () => {
               {/* Background Image */}
               <img
                 src={col.image}
-                alt={`SORA ${col.title} — ${col.subtitle}`}
+                alt={`SORA ${col.title}, ${col.subtitle}`}
                 loading="lazy"
                 className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-90 transition-transform duration-1000 ease-out group-hover:scale-105"
               />

@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = '404 — Page Not Found | SORA (空)';
+    document.title = '404: Page Not Found | SORA (空)';
   }, []);
 
   const recommendedProducts = PRODUCTS.slice(0, 3);

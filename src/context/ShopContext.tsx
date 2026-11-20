@@ -19,7 +19,9 @@ interface ShopContextType {
   currentView: AppView;
   setCurrentView: (view: AppView) => void;
   selectedProduct: Product | null;
-  openProductDetail: (product: Product) => void;
+  /** Optionally pass a variant id to open the product with that colour selected. */
+  openProductDetail: (product: Product, variantId?: string) => void;
+  initialVariantId: string | null;
   closeProductDetail: () => void;
 
   // Cart
@@ -76,6 +78,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Views
   const [currentView, _setCurrentView] = useState<AppView>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [initialVariantId, setInitialVariantId] = useState<string | null>(null);
 
   const setCurrentView = (view: AppView) => {
     _setCurrentView(view);
@@ -83,22 +86,22 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (view === 'home') {
         setSelectedProduct(null);
         window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        document.title = 'SORA (空) — Sunglasses Inspired by the Sky';
+        document.title = 'SORA (空) | Sunglasses Inspired by the Sky';
       } else if (view === 'shop') {
         window.history.replaceState(null, '', '#collection');
-        document.title = 'The Collection — SORA (空) Sunglasses';
+        document.title = 'The Collection | SORA (空) Sunglasses';
       } else if (view === 'story') {
         window.history.replaceState(null, '', '#manifesto');
-        document.title = 'Our Story — SORA (空)';
+        document.title = 'Our Story | SORA (空)';
       } else if (view === 'privacy') {
         window.history.replaceState(null, '', '#privacy');
-        document.title = 'Privacy Policy — SORA (空)';
+        document.title = 'Privacy Policy | SORA (空)';
       } else if (view === 'terms') {
         window.history.replaceState(null, '', '#terms');
-        document.title = 'Terms & Conditions — SORA (空)';
+        document.title = 'Terms & Conditions | SORA (空)';
       } else if (view === '404') {
         window.history.replaceState(null, '', '#404');
-        document.title = '404 — Silhouette Not Found | SORA (空)';
+        document.title = '404: Silhouette Not Found | SORA (空)';
       }
     } catch {}
   };
@@ -114,33 +117,33 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
           }
         } catch {}
         _setCurrentView('home');
-        document.title = 'SORA (空) — Sunglasses Inspired by the Sky';
+        document.title = 'SORA (空) | Sunglasses Inspired by the Sky';
       } else if (hash === 'shop' || hash === 'collection' || hash === 'frames') {
         _setCurrentView('shop');
-        document.title = 'The Collection — SORA (空) Sunglasses';
+        document.title = 'The Collection | SORA (空) Sunglasses';
       } else if (hash === 'story' || hash === 'manifesto') {
         _setCurrentView('story');
-        document.title = 'Our Story — SORA (空)';
+        document.title = 'Our Story | SORA (空)';
       } else if (hash === 'privacy' || hash === 'privacy-policy') {
         _setCurrentView('privacy');
-        document.title = 'Privacy Policy — SORA (空)';
+        document.title = 'Privacy Policy | SORA (空)';
       } else if (hash === 'terms' || hash === 'terms-and-conditions') {
         _setCurrentView('terms');
-        document.title = 'Terms & Conditions — SORA (空)';
+        document.title = 'Terms & Conditions | SORA (空)';
       } else if (hash.startsWith('product/')) {
         // Automatically clear any leftover #product/... hash from URL so reload goes cleanly to Home
         try {
           window.history.replaceState(null, '', window.location.pathname + window.location.search);
         } catch {}
         _setCurrentView('home');
-        document.title = 'SORA (空) — Sunglasses Inspired by the Sky';
+        document.title = 'SORA (空) | Sunglasses Inspired by the Sky';
       } else if (hash === '404') {
         _setCurrentView('404');
-        document.title = '404 — Silhouette Not Found | SORA (空)';
+        document.title = '404: Silhouette Not Found | SORA (空)';
       } else if (hash) {
         // Unrecognized route -> 404 page
         _setCurrentView('404');
-        document.title = '404 — Silhouette Not Found | SORA (空)';
+        document.title = '404: Silhouette Not Found | SORA (空)';
       }
     };
 
@@ -196,10 +199,11 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, 3200);
   };
 
-  const openProductDetail = (product: Product) => {
+  const openProductDetail = (product: Product, variantId?: string) => {
+    setInitialVariantId(variantId ?? null);
     setSelectedProduct(product);
     _setCurrentView('pdp');
-    document.title = `${product.name} — SORA (空) Eyewear`;
+    document.title = `${product.name} | SORA (空) Eyewear`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -318,6 +322,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setCurrentView,
         selectedProduct,
         openProductDetail,
+        initialVariantId,
         closeProductDetail,
         cart,
         addToCart,

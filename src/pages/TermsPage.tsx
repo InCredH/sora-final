@@ -7,7 +7,7 @@ export const TermsPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = 'Terms & Conditions — SORA (空)';
+    document.title = 'Terms & Conditions | SORA (空)';
   }, []);
 
   return (
@@ -100,7 +100,7 @@ export const TermsPage: React.FC = () => {
             </div>
             <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
               <p>
-                Shipping is included in every price — no delivery charges are added at checkout. Once your order is confirmed on WhatsApp, we&rsquo;ll share the expected delivery time and tracking details with you.
+                Shipping is included in every price, so no delivery charges are added at checkout. Once your order is confirmed on WhatsApp, we&rsquo;ll share the expected delivery time and tracking details with you.
               </p>
             </div>
           </section>
@@ -117,10 +117,10 @@ export const TermsPage: React.FC = () => {
             </div>
             <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
               <p>
-                All purchases are final. We do not offer exchanges or returns for reasons such as a change of mind, incorrect fit, or styling preference — please review your selection carefully before ordering.
+                All purchases are final. We do not offer exchanges or returns for reasons such as a change of mind, incorrect fit, or styling preference. Please review your selection carefully before ordering.
               </p>
               <p>
-                The only exception is a frame that arrives damaged or defective. Shoot an unedited, continuous unboxing video from the moment the sealed package is opened, and share it with us at <a href="mailto:hello@yoursora.shop" className="font-semibold hover:text-[#861F3A]">hello@yoursora.shop</a> within 48 hours of delivery — this is required so we can assess the damage. Claims without an unboxing video cannot be processed.
+                The only exception is a frame that arrives damaged or defective. Shoot an unedited, continuous unboxing video from the moment the sealed package is opened, and share it with us at <a href="mailto:hello@yoursora.shop" className="font-semibold hover:text-[#861F3A]">hello@yoursora.shop</a> within 48 hours of delivery. This is required so we can assess the damage. Claims without an unboxing video cannot be processed.
               </p>
               <p>
                 Once the damage is verified, we&rsquo;ll replace the item with the same frame and variant. If that exact item is out of stock at the time of replacement, we&rsquo;ll issue a full refund instead.

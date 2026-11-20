@@ -7,7 +7,7 @@ export const PrivacyPolicyPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = 'Privacy Policy — SORA (空)';
+    document.title = 'Privacy Policy | SORA (空)';
   }, []);
 
   return (

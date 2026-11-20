@@ -27,7 +27,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
               </span>
             </div>
             <p className="mt-4 text-xs text-[#F5EFE3]/75 font-normal leading-relaxed max-w-sm">
-              Sunglasses inspired by the sky. Distinctive shapes, UV400-protected lenses, and shipping included in every price.
+              Sunglasses inspired by the sky. Distinctive shapes, UV400-protected lenses, and free shipping in every price.
             </p>
             <div className="mt-6 text-xs font-mono-tech text-[#C8A96B]">
               CONCIERGE: <a href="mailto:hello@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">hello@yoursora.shop</a>
@@ -148,28 +148,6 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
             <span className="text-[#C8A96B] font-semibold">ALL PRICES IN INDIAN RUPEE (₹)</span>
             <span>•</span>
             <span>TAXES INCLUDED</span>
-            <span>•</span>
-            <button
-              type="button"
-              onClick={() => {
-                setCurrentView('privacy');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="hover:text-[#C8A96B] underline cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-            <span>•</span>
-            <button
-              type="button"
-              onClick={() => {
-                setCurrentView('terms');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="hover:text-[#C8A96B] underline cursor-pointer"
-            >
-              Terms of Service
-            </button>
           </div>
 
           <div className="flex items-center gap-6">

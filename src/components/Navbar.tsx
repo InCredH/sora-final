@@ -17,12 +17,17 @@ export const Navbar: React.FC = () => {
 
   const OFFERS = [
     {
-      title: 'BUNDLE OFFER: ANY 2 FRAMES FOR ₹2,499 (EXCLUDES HOSHI)',
+      title: 'NEW: HOSHI IN GOLD & BLACK',
       code: null,
-      tag: 'NO CODE NEEDED'
+      tag: 'JUST IN'
     },
     {
-      title: 'Complimentary Shipping on Every Order',
+      title: 'SUNGLASSES FROM ₹1,299 · FREE SHIPPING',
+      code: null,
+      tag: 'EVERY ORDER'
+    },
+    {
+      title: 'ANY 2 FRAMES FOR ₹2,499 (EXCLUDES HOSHI)',
       code: null,
       tag: 'NO CODE NEEDED'
     }
@@ -329,7 +334,7 @@ export const Navbar: React.FC = () => {
             {/* Mobile Footer information */}
             <div className="pt-8 border-t border-[#2C211B]/10 text-[11px] font-mono-tech text-[#6B7055] flex flex-col gap-1">
               <span className="text-[#2C211B] font-semibold">SORA (空) // INSPIRED BY THE SKY</span>
-              <span>UV400 PROTECTED • SHIPPING INCLUDED</span>
+              <span>UV400 PROTECTED • FREE SHIPPING</span>
               <span className="text-[#861F3A] font-bold mt-2">ALL PRICES IN INR (₹)</span>
             </div>
           </div>

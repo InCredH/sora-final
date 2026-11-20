@@ -173,9 +173,9 @@ export const PRODUCTS: Product[] = [
         sku: "SORA-HS-001-BLK",
         lens: "Black",
         shortDescription:
-          "A gold geometric frame with deep black lenses — the same sharp star shape, turned up to midnight. Bold in contrast, calm in tone.",
+          "A gold geometric frame with deep black lenses. The same sharp star shape, turned up to midnight. Bold in contrast, calm in tone.",
         description:
-          "Inspired by the sharp, steady light of a star, Hoshi brings a touch of gold to everyday dressing — this time set against deep black lenses.\n\nIt works from bright city afternoons to beach days and late golden-hour evenings.\n\nThe same sleek geometric frame with clean angles and fine gold-toned metal, paired with black lenses for a sharper, more graphic contrast. Polished, a little dramatic, and quietly luxurious.\n\nGold on black. A star against the night sky.",
+          "Inspired by the sharp, steady light of a star, Hoshi brings a touch of gold to everyday dressing, this time set against deep black lenses.\n\nIt works from bright city afternoons to beach days and late golden-hour evenings.\n\nThe same sleek geometric frame with clean angles and fine gold-toned metal, paired with black lenses for a sharper, more graphic contrast. Polished, a little dramatic, and quietly luxurious.\n\nGold on black. A star against the night sky.",
         reelCaption:
           "Hoshi (星) in black. Gold frame. Black lens. A star against the night. ✦"
       }

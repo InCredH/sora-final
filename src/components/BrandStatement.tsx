@@ -33,13 +33,13 @@ export const BrandStatement: React.FC = () => {
               INDIVIDUALITY AS ART
             </span>
             <p className="font-serif-editorial text-2xl sm:text-3xl text-[#F5EFE3] italic leading-snug">
-              "We reject the uniform gaze. Style is not about blending in — it is about honoring the quiet power of your own perspective."
+              "We reject the uniform gaze. Style is not about blending in. It is about honoring the quiet power of your own perspective."
             </p>
           </div>
 
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm text-[#F5EFE3]/80 leading-relaxed font-light">
             <p>
-              In Japanese, <strong className="text-white font-medium">SORA (空)</strong> means the open sky — boundless, ever-shifting in colour, and completely free. That idea inspires everything we design, from the names of our frames to their colours.
+              In Japanese, <strong className="text-white font-medium">SORA (空)</strong> means the open sky: boundless, ever-shifting in colour, and completely free. That idea inspires everything we design, from the names of our frames to their colours.
             </p>
             <p>
               Every pair comes with UV400-protected lenses, and every silhouette is designed to help you feel like yourself. Sunglasses are simply the starting point; what matters is your confidence and self-expression.
