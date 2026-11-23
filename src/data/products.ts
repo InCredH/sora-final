@@ -36,6 +36,12 @@ export const TIER_PRICES: Record<PriceTier, number> = {
   Hero: 1799
 };
 
+// Each bundle size and its price. The cart picks the mix that saves the customer the most.
+// To bring back a 3-frame offer, add: { size: 3, price: 3499, label: "3 for ₹3,499" }
+export const BUNDLE_TIERS: readonly { size: number; price: number; label: string }[] = [
+  { size: 2, price: 2499, label: "2 for ₹2,499" }
+];
+
 export const BUNDLE_OFFER = {
   size: 2,
   price: 2499,
@@ -142,12 +148,12 @@ export const PRODUCTS: Product[] = [
     lens: "Warm brown",
 
     images: [
-      "/images/hoshi/hoshi-front.png",
-      "/images/hoshi/hoshi-side.png",
+      "/images/hoshi/hoshi-front.jpeg",
+      "/images/hoshi/hoshi-side.jpeg",
       "/images/hoshi/hoshi-cross.png",
       // "/images/hoshi/frame-front.png",
       "/images/hoshi/hoshi-model-2.jpeg",
-      // "/images/hoshi/hoshi-model-1.jpeg"
+      "/images/hoshi/hoshi-model-3.jpeg"
     ],
     variants: [
       {
@@ -155,7 +161,7 @@ export const PRODUCTS: Product[] = [
         name: "Gold Frame & Brown Lens",
         colorName: "Gold & Brown",
         colorHex: "#C8A96B",
-        image: "/images/hoshi/hoshi-front.png",
+        image: "/images/hoshi/hoshi-front.jpeg",
         stockQuantity: 4
         // Uses the product's images, description and lens above.
       },
@@ -289,8 +295,10 @@ export const PRODUCTS: Product[] = [
       "/images/aozora/aozora-front.png",
       "/images/aozora/aozora-side.png",
       "/images/aozora/aozora-cross.png",
-      "/images/aozora/aozora-model-2.jpeg",
-      "/images/aozora/aozora-model-1.jpeg"
+      // "/images/aozora/aozora-model-2.jpeg",
+      "/images/aozora/aozora-model-1.jpeg",
+      "/images/aozora/aozora-model-3.jpeg"
+
 
 
     ],
@@ -407,8 +415,10 @@ export const PRODUCTS: Product[] = [
       "/images/yuhi/yuhi-front.jpeg",
       "/images/yuhi/yuhi-side.jpeg",
       "/images/yuhi/yuhi-cross.png",
-      "/images/yuhi/yuhi-model-1.jpeg",
-      "/images/yuhi/yuhi-model-2.jpeg"
+      // "/images/yuhi/yuhi-model-1.jpeg",
+      "/images/yuhi/yuhi-model-2.jpeg",
+      "/images/yuhi/yuhi-model-3.jpeg"
+
     ],
     variants: [
       {

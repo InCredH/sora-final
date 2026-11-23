@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
       tag: 'EVERY ORDER'
     },
     {
-      title: 'ANY 2 FRAMES FOR ₹2,499 (EXCLUDES HOSHI)',
+      title: 'ANY 2 FOR ₹2,499* · *EXCEPT HOSHI',
       code: null,
       tag: 'NO CODE NEEDED'
     }

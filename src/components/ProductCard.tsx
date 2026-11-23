@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Product, ProductVariant, BUNDLE_OFFER, isBundleEligible, isLowStock, withVariant } from '../data/products';
+import { Product, ProductVariant, BUNDLE_TIERS, isBundleEligible, isLowStock, withVariant } from '../data/products';
 import { useShop } from '../context/ShopContext';
+import { StarRating } from './StarRating';
+import { getRatingSummary } from '../data/reviews';
 import { ShoppingBag, Eye } from 'lucide-react';
 
 interface ProductCardProps {
@@ -62,11 +64,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
         
         {/* Badges & Discount Percentage — Perfectly Inset & Aligned */}
         <div className="absolute top-2.5 left-2.5 z-20 flex flex-col gap-1 items-start pointer-events-none">
-          {isBundleEligible(product) && (
-            <span className="text-[10px] font-mono-tech tracking-normal px-2 py-0.5 uppercase rounded-md bg-[#861F3A] text-white font-bold shadow-md">
-              {BUNDLE_OFFER.label}
-            </span>
-          )}
+          {isBundleEligible(product) &&
+            BUNDLE_TIERS.map((t) => (
+              <span key={t.size} className="text-[10px] font-mono-tech tracking-normal px-2 py-0.5 uppercase rounded-md bg-[#861F3A] text-white font-bold shadow-md">
+                {t.label}
+              </span>
+            ))}
           {!view.inStock && (
             <span className="text-[10px] font-mono-tech tracking-normal px-2 py-0.5 uppercase bg-[#2C211B]/85 text-[#F5EFE3] rounded-md font-semibold shadow-md">
               SOLD OUT
@@ -164,6 +167,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
             {formatPrice(product.price)}
           </span>
         </div>
+
+        {/* Rating */}
+        {(() => {
+          const rating = getRatingSummary(product.id);
+          return rating ? (
+            <div className="flex items-center gap-1 text-[10px] font-mono-tech text-[#6B7055]">
+              <StarRating rating={rating.average} size={10} />
+              <span>({rating.count})</span>
+            </div>
+          ) : null;
+        })()}
 
         {/* Tagline */}
         <p className="text-[11px] text-[#6B7055] italic mb-auto">{product.tagline}</p>

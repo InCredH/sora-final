@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Tag, Truck, ShieldCheck, BadgeIndianRupee } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
-import { PRODUCTS, BUNDLE_OFFER, isBundleEligible } from '../data/products';
+import { PRODUCTS, BUNDLE_TIERS, isBundleEligible } from '../data/products';
 
 /* ------------------------------------------------------------------ */
 /* Data derived from the catalogue, so prices/names never go stale.   */
@@ -13,10 +13,15 @@ const hoshiBlack =
 
 const eligible = PRODUCTS.filter(isBundleEligible);
 const lowestPrice = Math.min(...PRODUCTS.map((p) => p.price));
-const topTwo = [...eligible].sort((a, b) => b.price - a.price).slice(0, 2);
-const maxBundleSaving = Math.max(0, topTwo.reduce((s, p) => s + p.price, 0) - BUNDLE_OFFER.price);
+// Biggest saving from a single bundle of the priciest eligible frames.
+const maxBundleSaving = Math.max(
+  ...BUNDLE_TIERS.map((t) => {
+    const top = [...eligible].sort((a, b) => b.price - a.price).slice(0, t.size);
+    return top.length === t.size ? top.reduce((s, p) => s + p.price, 0) - t.price : 0;
+  })
+);
 
-const AUTOPLAY_MS = 4500;
+const AUTOPLAY_MS = 3500;
 
 type SlideImage = { src: string; srcSm: string; alt: string; position?: string };
 
@@ -56,7 +61,7 @@ export const HeroCarousel: React.FC = () => {
           Any 2 frames
           <br />
           <span className="font-serif-editorial italic font-normal normal-case text-[#F5D9A8]">
-            for {formatPrice(BUNDLE_OFFER.price)}.
+            for {formatPrice(BUNDLE_TIERS[0].price)}*
           </span>
         </>
       ),
@@ -67,6 +72,7 @@ export const HeroCarousel: React.FC = () => {
       priceLine: (
         <>
           <span className="text-[#F5EFE3] font-extrabold">Save up to {formatPrice(maxBundleSaving)}</span>
+          <span className="text-[#F5D9A8]"> · *Except HOSHI</span>
           <span className="hidden sm:inline text-[#F5EFE3]/60"> · Applied automatically in your bag</span>
         </>
       ),
@@ -153,15 +159,15 @@ export const HeroCarousel: React.FC = () => {
             priceLine: (
               <>
                 <span className="text-[#F5EFE3] font-extrabold">{formatPrice(arashi.price)}</span>
-                <span className="text-[#F5EFE3]/60"> · or pair it: 2 for {formatPrice(BUNDLE_OFFER.price)}</span>
+                <span className="text-[#F5EFE3]/60"> · or pair it: 2 for {formatPrice(BUNDLE_TIERS[0].price)}</span>
               </>
             ),
             primary: { label: 'Shop ARASHI', onClick: () => openProductDetail(arashi) },
             secondary: { label: 'All Frames', onClick: goShop },
             images: [
               {
-                src: '/images/hero/arashi-model-1.jpg',
-                srcSm: '/images/hero/arashi-model-1-sm.jpg',
+                src: '/images/hero/arashi-model-3.jpeg',
+                srcSm: '/images/hero/arashi-model-3-sm.jpeg',
                 alt: 'Model wearing SORA ARASHI sage green square sunglasses',
                 position: 'center 20%'
               }
@@ -372,7 +378,7 @@ export const HeroCarousel: React.FC = () => {
         <ul className="mt-2.5 sm:mt-3 grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-2 text-[10.5px] sm:text-[11px] font-mono-tech uppercase tracking-wide text-[#2C211B]">
           {[
             { icon: <BadgeIndianRupee size={14} />, text: <>Frames from <b>{formatPrice(lowestPrice)}</b></> },
-            { icon: <Tag size={14} />, text: <>Any 2 for <b>{formatPrice(BUNDLE_OFFER.price)}</b></> },
+            { icon: <Tag size={14} />, text: <>Any 2 for <b>{formatPrice(BUNDLE_TIERS[0].price)}</b>*</> },
             { icon: <Truck size={14} />, text: <>Free shipping</> },
             { icon: <ShieldCheck size={14} />, text: <>UV400 protected</> }
           ].map((v, i) => (
@@ -385,6 +391,9 @@ export const HeroCarousel: React.FC = () => {
             </li>
           ))}
         </ul>
+        <p className="mt-1.5 text-center text-[10px] font-mono-tech uppercase tracking-wide text-[#6B7055]">
+          *Bundle offer valid on all frames except HOSHI
+        </p>
       </div>
     </section>
   );

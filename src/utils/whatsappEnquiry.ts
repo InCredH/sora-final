@@ -1,5 +1,6 @@
 import type { CartItem } from '../context/ShopContext';
-import { BUNDLE_OFFER, isBundleEligible } from '../data/products';
+import { isBundleEligible } from '../data/products';
+import { AppliedBundle, describeBundles } from './pricing';
 
 // Business WhatsApp number in international format (country code + number, no "+" or spaces).
 export const ENQUIRY_WHATSAPP_NUMBER = '917021240047';
@@ -9,7 +10,7 @@ interface EnquiryDetails {
   subtotal: number;
   discountAmount: number;
   appliedPromo: string | null;
-  bundleCount: number;
+  bundles: AppliedBundle[];
   bundleDiscount: number;
   total: number;
   formatPrice: (amount: number) => string;
@@ -24,7 +25,7 @@ export const buildEnquiryMessage = ({
   subtotal,
   discountAmount,
   appliedPromo,
-  bundleCount,
+  bundles,
   bundleDiscount,
   total,
   formatPrice,
@@ -59,7 +60,7 @@ export const buildEnquiryMessage = ({
     `Total items: ${totalUnits}`,
     `Subtotal: ${formatPrice(subtotal)}`,
     ...(bundleDiscount > 0
-      ? [`Bundle offer (${bundleCount} x 2 for ${formatPrice(BUNDLE_OFFER.price)}): -${formatPrice(bundleDiscount)}`]
+      ? [`Bundle offer (${describeBundles(bundles, formatPrice)}): -${formatPrice(bundleDiscount)}`]
       : []),
     ...(discountAmount > 0
       ? [`Discount${appliedPromo ? ` (${appliedPromo})` : ''}: -${formatPrice(discountAmount)}`]
