@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariant, PRODUCTS, withVariant } from '../data/products';
-import { calculateBundle } from '../utils/pricing';
+import { calculateBundle, AppliedBundle } from '../utils/pricing';
 
 export interface CartItem {
   id: string; // unique item key: productId + variantId
@@ -40,7 +40,10 @@ interface ShopContextType {
   /** Saving from the "any 2 for ₹2,499" bundle offer. */
   bundleDiscount: number;
   bundleCount: number;
-  /** Bundle-eligible frames in the cart that still need a partner (0 or 1). */
+  bundles: AppliedBundle[];
+  /** Bundle-eligible frames in the cart (everything except HOSHI). */
+  eligibleUnits: number;
+  /** Bundle-eligible frames in the cart that are not in a bundle. */
   unpairedEligibleUnits: number;
   /** Final amount payable (shipping is included in product prices). */
   cartTotal: number;
@@ -270,7 +273,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const cartSubtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
-  const { bundleCount, bundleDiscount, bundledValue, unpairedEligibleUnits } = calculateBundle(cart);
+  const { bundles, bundleCount, bundleDiscount, bundledValue, eligibleUnits, unpairedEligibleUnits } = calculateBundle(cart);
 
   const applyPromoCode = (code: string) => {
     const trimmed = code.trim().toUpperCase();
@@ -337,6 +340,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         discountAmount,
         bundleDiscount,
         bundleCount,
+        bundles,
+        eligibleUnits,
         unpairedEligibleUnits,
         cartTotal,
         applyPromoCode,

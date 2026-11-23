@@ -37,7 +37,8 @@ export const HeroSection: React.FC = () => {
     'SORA · SEE YOUR WAY',
     'UV400 PROTECTED',
     'COMPLIMENTARY DELIVERY',
-    'ANY 2 FOR ₹2,499',
+    'ANY 2 FOR ₹2,499*',
+    '*EXCEPT HOSHI',
     'MADE FOR EVERY MOOD',
     'SORA ON YOU'
   ];

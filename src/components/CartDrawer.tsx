@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useShop } from '../context/ShopContext';
 import { X, Minus, Plus, ShoppingBag, ArrowRight, Trash2, Tag, CheckCircle2 } from 'lucide-react';
 import { buildEnquiryMessage, openWhatsAppEnquiry } from '../utils/whatsappEnquiry';
-import { BUNDLE_OFFER, isBundleEligible } from '../data/products';
+import { BUNDLE_TIERS, isBundleEligible } from '../data/products';
+import { describeBundles } from '../utils/pricing';
 
 interface CartDrawerProps {
   onOpenPolicy: (key: string) => void;
@@ -20,7 +21,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
     appliedPromo,
     discountAmount,
     bundleDiscount,
-    bundleCount,
+    bundles,
     unpairedEligibleUnits,
     cartTotal,
     applyPromoCode,
@@ -97,7 +98,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
       subtotal: cartSubtotal,
       discountAmount,
       appliedPromo,
-      bundleCount,
+      bundles,
       bundleDiscount,
       total: finalTotal,
       formatPrice,
@@ -209,7 +210,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                     YOUR BAG IS CURRENTLY EMPTY
                   </h4>
                   <p className="text-xs text-[#6B7055] mt-2 max-w-xs font-normal">
-                    Explore the collection. Any 2 frames (except HOSHI) for ₹2,499.
+                    Explore the collection. Any 2 for ₹2,499*. *Except HOSHI.
                   </p>
                   <button
                     type="button"
@@ -227,7 +228,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                   {/* Bundle nudge — slim banner at top */}
                   {unpairedEligibleUnits > 0 && (
                     <div className="mx-4 sm:mx-5 mt-3 px-3 py-2 bg-[#C8A96B]/15 border border-[#C8A96B]/40 text-[#2C211B] text-[10.5px] leading-snug font-mono-tech rounded">
-                      Add 1 more frame (any except HOSHI) → 2 for {formatPrice(BUNDLE_OFFER.price)}
+                      Add 1 more frame (any except HOSHI) → 2 for {formatPrice(BUNDLE_TIERS[0].price)}
                     </div>
                   )}
 
@@ -258,7 +259,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                                   <span className="truncate">{item.variant.colorName}</span>
                                   {eligible && (
                                     <span className="shrink-0 px-1 rounded-sm bg-[#861F3A]/10 text-[#861F3A] text-[9px] font-bold uppercase">
-                                      2 for {formatPrice(BUNDLE_OFFER.price)}
+                                      Bundle
                                     </span>
                                   )}
                                 </div>
@@ -463,7 +464,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                         </div>
                         {bundleDiscount > 0 && (
                           <div className="flex justify-between text-[#861F3A] font-bold">
-                            <span>Bundle ({bundleCount} × 2 for {formatPrice(BUNDLE_OFFER.price)})</span>
+                            <span>Bundle ({describeBundles(bundles, formatPrice)})</span>
                             <span>-{formatPrice(bundleDiscount)}</span>
                           </div>
                         )}
@@ -501,19 +502,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                   type="submit"
                   className="w-full bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] py-3 px-6 text-xs font-mono-tech tracking-widest uppercase font-bold flex items-center justify-center gap-2 transition-all shadow-md rounded cursor-pointer"
                 >
-                  <span>SEND ENQUIRY ON WHATSAPP</span>
+                  <span>Checkout on WhatsApp</span>
                   <ArrowRight size={15} />
                 </button>
                 <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[9.5px] font-mono-tech text-[#6B7055] text-center">
-                  <span>10 AM TO 12 MIDNIGHT</span>
-                  <span>·</span>
-                  <button
+                  <span>You'll get a secure Razorpay payment link on WhatsApp · UPI, cards & netbanking</span>
+                  <span>AVAILABLE FROM 10AM - 12 MIDNIGHT</span>
+                  {/* <button
                     type="button"
                     onClick={() => onOpenPolicy('returns')}
                     className="underline underline-offset-2 hover:text-[#861F3A] cursor-pointer"
                   >
                     No returns unless damaged
-                  </button>
+                  </button> */}
                 </div>
               </form>
             )}

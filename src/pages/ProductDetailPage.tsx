@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { ProductVariant, PRODUCTS, BUNDLE_OFFER, isBundleEligible, isLowStock, withVariant } from '../data/products';
+import React, { useRef, useState } from 'react';
+import { ProductVariant, PRODUCTS, BUNDLE_OFFER, BUNDLE_TIERS, isBundleEligible, isLowStock, withVariant } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { ProductCard } from '../components/ProductCard';
-import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag, AlertTriangle } from 'lucide-react';
+import { StarRating } from '../components/StarRating';
+import { ImageLightbox } from '../components/ImageLightbox';
+import { getRatingSummary } from '../data/reviews';
+import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag, AlertTriangle, Expand } from 'lucide-react';
 
 interface ProductDetailPageProps {
   onOpenPolicy: (key: string) => void;
@@ -25,8 +28,38 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
   const product = withVariant(baseProduct, selectedVariant);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Finger-swipe on the main photo. A swipe changes the photo; a tap opens the zoom viewer.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const didSwipe = useRef(false);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+    didSwipe.current = false;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStart.current.x;
+    const dy = t.clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (product.images.length > 1 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      didSwipe.current = true;
+      if (dx < 0) handleNextImage();
+      else handlePrevImage();
+    }
+  };
+  const openLightbox = (index: number) => {
+    if (didSwipe.current) {
+      didSwipe.current = false;
+      return;
+    }
+    setLightboxIndex(index);
+  };
   const bundleEligible = isBundleEligible(product);
   const descriptionParagraphs = product.description.split('\n\n');
+  const rating = getRatingSummary(baseProduct.id);
 
   // Only details stated in the product description.
   const details = [
@@ -97,7 +130,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           <div className="lg:col-span-7 space-y-2.5 sm:space-y-3">
             
             {/* Primary Hero Image Viewport - Extended downward to eliminate empty space and showcase frame details */}
-            <div className="relative h-[360px] sm:h-[440px] lg:h-[490px] xl:h-[530px] w-full overflow-hidden bg-[#FAF7F0] border border-[#2C211B]/15 rounded-2xl shadow-sm group flex items-center justify-center">
+            <div
+              className="relative h-[360px] sm:h-[440px] lg:h-[490px] xl:h-[530px] w-full overflow-hidden bg-[#FAF7F0] border border-[#2C211B]/15 rounded-2xl shadow-sm group flex items-center justify-center cursor-zoom-in touch-pan-y"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onClick={() => openLightbox(activeImageIndex)}
+              role="button"
+              tabIndex={0}
+              aria-label={`Open ${product.name} photo ${activeImageIndex + 1} full screen`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setLightboxIndex(activeImageIndex);
+                }
+              }}
+            >
               
               {/* Subtle ambient backdrop */}
               <img
@@ -117,15 +164,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
 
               {/* Badges on detail photo - Perfectly Inset & Aligned */}
               <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 items-start pointer-events-none">
-                {bundleEligible && (
-                  <span className="text-[10px] font-mono-tech tracking-normal px-2.5 py-0.5 uppercase rounded-md bg-[#861F3A] text-white font-bold shadow-sm">
-                    {BUNDLE_OFFER.label}
-                  </span>
-                )}
+                {bundleEligible &&
+                  BUNDLE_TIERS.map((t) => (
+                    <span key={t.size} className="text-[10px] font-mono-tech tracking-normal px-2.5 py-0.5 uppercase rounded-md bg-[#861F3A] text-white font-bold shadow-sm">
+                      {t.label}
+                    </span>
+                  ))}
                 <span className="text-[9px] font-mono-tech bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded uppercase font-semibold">
                   Photo {activeImageIndex + 1} of {product.images.length}
                 </span>
               </div>
+
+              {/* Tap-to-zoom hint */}
+              <span className="absolute bottom-3 right-3 z-20 flex items-center gap-1 text-[9px] font-mono-tech uppercase font-semibold bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded pointer-events-none">
+                <Expand size={11} /> Tap to zoom
+              </span>
 
               {/* Prev / Next Navigation Arrows */}
               {product.images.length > 1 && (
@@ -198,6 +251,18 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 {product.name}
               </h1>
 
+              {rating && (
+                <a
+                  href="#reviews"
+                  onClick={(e) => { e.preventDefault(); document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+                  className="mt-1 inline-flex items-center gap-1.5 text-[11px] font-mono-tech text-[#6B7055] hover:text-[#861F3A]"
+                >
+                  <StarRating rating={rating.average} />
+                  <span className="font-bold text-[#2C211B]">{rating.average.toFixed(1)}</span>
+                  <span className="underline underline-offset-2">({rating.count} {rating.count === 1 ? 'review' : 'reviews'})</span>
+                </a>
+              )}
+
               <div className="mt-1.5 flex items-baseline gap-2.5">
                 <span className="font-mono-tech text-2xl sm:text-3xl text-[#2C211B] font-extrabold">
                   {formatPrice(product.price)}
@@ -212,7 +277,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 <Tag size={12} />
                 <span>
                   {bundleEligible
-                    ? `Bundle offer: ${BUNDLE_OFFER.label} (excludes HOSHI)`
+                    ? `Bundle offer: ${BUNDLE_OFFER.label}* · *Except HOSHI`
                     : 'Not part of the bundle offer'}
                 </span>
               </div>
@@ -360,6 +425,31 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 ))}
               </dl>
             </div>
+
+            {/* Customer Reviews */}
+            {rating && (
+              <div id="reviews" className="mt-2 pt-4 sm:pt-5 border-t border-[#2C211B]/10 scroll-mt-24">
+                <div className="flex items-center justify-between pb-2 border-b border-[#2C211B]/10">
+                  <h2 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B]">Reviews</h2>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono-tech text-[#6B7055]">
+                    <StarRating rating={rating.average} />
+                    <span className="font-bold text-[#2C211B]">{rating.average.toFixed(1)}</span>
+                    <span>({rating.count})</span>
+                  </span>
+                </div>
+                <ul className="py-3 sm:py-4 space-y-2 sm:space-y-3">
+                  {rating.reviews.map((r) => (
+                    <li key={r.id} className="p-3 rounded bg-white border border-[#2C211B]/10">
+                      <div className="flex items-center justify-between gap-2">
+                        <StarRating rating={r.rating} size={11} />
+                        <span className="text-[10px] font-mono-tech uppercase text-[#6B7055] truncate">{r.author} · {r.city}</span>
+                      </div>
+                      <p className="mt-1.5 text-xs text-[#2C211B]/85 leading-relaxed">{r.comment}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
@@ -397,7 +487,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 <img
                   src={product.images[0]}
                   alt={`Model styled in SORA ${product.name} sunglasses`}
-                  className="max-h-full max-w-full object-contain drop-shadow-sm hover:scale-102 transition-transform duration-500"
+                  onClick={() => setLightboxIndex(0)}
+                  className="max-h-full max-w-full object-contain drop-shadow-sm hover:scale-102 transition-transform duration-500 cursor-zoom-in"
                 />
               </div>
               <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
@@ -484,6 +575,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
           </div>
         )}
       </div>
+      {lightboxIndex !== null && (
+        <ImageLightbox
+          images={product.images}
+          startIndex={lightboxIndex}
+          alt={`SORA ${product.name} sunglasses`}
+          onClose={() => setLightboxIndex(null)}
+          onIndexChange={setActiveImageIndex}
+        />
+      )}
     </div>
   );
 };
