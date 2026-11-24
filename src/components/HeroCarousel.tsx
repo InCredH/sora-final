@@ -72,8 +72,8 @@ export const HeroCarousel: React.FC = () => {
       priceLine: (
         <>
           <span className="text-[#F5EFE3] font-extrabold">Save up to {formatPrice(maxBundleSaving)}</span>
-          <span className="text-[#F5D9A8]"> · *Except HOSHI</span>
-          <span className="hidden sm:inline text-[#F5EFE3]/60"> · Applied automatically in your bag</span>
+          {/* <span className="text-[#F5D9A8]"> *Except HOSHI</span> */}
+          {/* <span className="hidden sm:inline text-[#F5EFE3]/60"> · Applied automatically in your bag</span> */}
         </>
       ),
       primary: { label: 'Build Your Pair', onClick: goShop },

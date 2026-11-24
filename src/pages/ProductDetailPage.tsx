@@ -320,7 +320,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 <Tag size={12} />
                 <span>
                   {bundleEligible
-                    ? `Bundle offer: ${BUNDLE_OFFER.label}* · *Except HOSHI`
+                    ? `Bundle offer: ${BUNDLE_OFFER.label}`
                     : 'Not part of the bundle offer'}
                 </span>
               </div> */}
