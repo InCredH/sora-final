@@ -267,10 +267,10 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Bottom Marquee */}
-      <div className="relative z-10 w-full overflow-hidden border-t border-[#2C211B]/10 py-3 sm:py-3.5 bg-[#FAF7F0] -mx-4 sm:-mx-8 lg:-mx-12 px-0 shrink-0 mt-auto">
-        <div className="animate-marquee items-center gap-8 text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#6B7055] whitespace-nowrap">
+      <div className="relative z-10 self-stretch overflow-hidden border-t border-[#2C211B]/10 py-3 sm:py-3.5 bg-[#FAF7F0] -mx-4 sm:-mx-8 lg:-mx-12 px-0 shrink-0 mt-auto">
+        <div className="animate-marquee items-center text-[11px] font-mono-tech tracking-[0.2em] uppercase text-[#6B7055] whitespace-nowrap">
           {marqueeItems.concat(marqueeItems).map((text, idx) => (
-            <span key={idx} className="flex items-center gap-8">
+            <span key={idx} className="flex items-center gap-8 pr-8">
               <span className="hover:text-[#861F3A] transition-colors">
                 {text}
               </span>
