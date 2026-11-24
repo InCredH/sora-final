@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useShop } from '../context/ShopContext';
-import { ArrowLeft, Scale, Award, Truck, Mail, RefreshCcw } from 'lucide-react';
+import { ArrowLeft, Scale, Truck, Mail, RefreshCcw, XCircle } from 'lucide-react';
+import { ENQUIRY_WHATSAPP_NUMBER } from '../utils/whatsappEnquiry';
 
 export const TermsPage: React.FC = () => {
   const { setCurrentView } = useShop();
@@ -25,12 +26,12 @@ export const TermsPage: React.FC = () => {
             className="flex items-center gap-2 text-xs font-mono-tech tracking-wider text-[#6B7055] hover:text-[#861F3A] uppercase transition-colors cursor-pointer font-bold"
           >
             <ArrowLeft size={16} />
-            <span>Return to Collection</span>
+            <span>Back to shop</span>
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2">
             <span className="text-[11px] font-mono-tech text-[#6B7055] uppercase font-semibold">
-              Legal Terms // S/S 2026
+              Terms & Conditions
             </span>
             <span className="hanko-stamp text-[9px] px-1.5 py-0.5 border-[#861F3A] text-[#861F3A]">空</span>
           </div>
@@ -40,7 +41,7 @@ export const TermsPage: React.FC = () => {
         <div className="mt-6 sm:mt-10 pb-6 sm:pb-10 border-b border-[#2C211B]/10">
           <div className="flex items-center gap-2 text-[11px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-2">
             <Scale size={14} className="text-[#861F3A]" />
-            <span>Client Services & Patron Agreement</span>
+            <span>Terms of sale</span>
           </div>
           <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#2C211B]">
             TERMS & CONDITIONS
@@ -128,14 +129,37 @@ export const TermsPage: React.FC = () => {
             </div>
           </section>
 
-          {/* Section 5: Concierge & Dispute Resolution */}
+          {/* Section 5: Cancellations */}
+          <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-9 h-9 rounded-lg bg-[#C8A96B]/20 text-[#2C211B] flex items-center justify-center font-bold">
+                <XCircle size={18} className="text-[#861F3A]" />
+              </div>
+              <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
+                Cancellations
+              </h2>
+            </div>
+            <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
+              <p>
+                You can cancel anytime before your order is dispatched. Just{' '}
+                <a href={`https://wa.me/${ENQUIRY_WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="font-semibold underline hover:text-[#861F3A]">message us on WhatsApp</a>{' '}
+                and we&rsquo;ll refund you in full to your original payment method within 5 to 7 working days.
+              </p>
+              <p>Once your order has shipped, it can&rsquo;t be cancelled.</p>
+              <p>
+                Orders using a bundle offer (Any 2 for ₹2,499) can be cancelled before dispatch, but only as a whole order, not individual frames. If you&rsquo;d like to keep some frames, we&rsquo;ll recalculate the price for what you keep (full price, or the bundle price that still applies) and refund the difference.
+              </p>
+            </div>
+          </section>
+
+          {/* Section 6: Support & Dispute Resolution */}
           <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#2C211B]/10 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-lg bg-[#861F3A]/10 text-[#861F3A] flex items-center justify-center font-bold">
-                05
+                06
               </div>
               <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                Concierge Assistance & Governing Law
+                Support & Governing Law
               </h2>
             </div>
             <p className="text-sm text-[#2C211B]/80 leading-relaxed mb-6">
@@ -145,7 +169,7 @@ export const TermsPage: React.FC = () => {
             <div className="p-4 rounded-xl bg-[#2C211B] text-[#F5EFE3] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <span className="text-[10px] font-mono-tech text-[#C8A96B] tracking-wider uppercase block font-bold">
-                  DIRECT CLIENT CONCIERGE
+                  CUSTOMER SUPPORT
                 </span>
                 <span className="text-sm font-semibold">hello@yoursora.shop</span>
               </div>
@@ -154,7 +178,7 @@ export const TermsPage: React.FC = () => {
                 className="bg-[#861F3A] hover:bg-[#6b182e] text-[#F5EFE3] px-4 py-2 text-xs font-mono-tech font-bold uppercase rounded-lg transition-colors inline-flex items-center gap-2 cursor-pointer"
               >
                 <Mail size={13} />
-                <span>Contact Concierge</span>
+                <span>Contact Support</span>
               </a>
             </div>
           </section>

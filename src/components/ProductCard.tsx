@@ -168,7 +168,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
           </span>
         </div>
 
-        {/* Rating */}
+        {/* Star rating: hidden until SORA has real customer reviews. Remove this comment wrapper to show it again.
         {(() => {
           const rating = getRatingSummary(product.id);
           return rating ? (
@@ -178,6 +178,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, editorialMode
             </div>
           ) : null;
         })()}
+        */}
 
         {/* Tagline */}
         <p className="text-[11px] text-[#6B7055] italic mb-auto">{product.tagline}</p>

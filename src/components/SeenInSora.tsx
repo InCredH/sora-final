@@ -32,7 +32,7 @@ export const SeenInSora: React.FC = () => {
       id: `patron-${Date.now()}`,
       instagramHandle: `@${data.handle}`,
       name: data.name,
-      city: data.city || 'Flagship Community',
+      city: data.city || 'India',
       image: data.selectedPreviewImage,
       productId: matchedProd.id,
       productName: matchedProd.name,

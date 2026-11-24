@@ -77,7 +77,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
             BECOME THE FACE OF SORA
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-[#2C211B]/75 font-normal leading-relaxed">
-            We don't believe in studio mannequins. Real patrons wearing SORA in their daily lives define our aesthetic. Tag us on Instagram or submit your look below to be featured on our global flagship.
+            We don't believe in studio mannequins. Real patrons wearing SORA in their daily lives define our aesthetic. Tag us on Instagram or submit your look below to be featured on our website.
           </p>
         </div>
 
@@ -239,7 +239,7 @@ export const SubmitLookModal: React.FC<SubmitLookModalProps> = ({ isOpen, onClos
                 THANK YOU, {name.toUpperCase() || 'PATRON'}
               </h3>
               <p className="text-xs text-[#6B7055] mt-2 font-normal max-w-md mx-auto leading-relaxed">
-                Your photograph wearing SORA has been sent to the SORA team for review. Once verified against <strong className="text-[#2C211B]">@{handle || 'yourhandle'}</strong>, your look will be published in the flagship community runway.
+                Your photograph wearing SORA has been sent to the SORA team for review. Once verified against <strong className="text-[#2C211B]">@{handle || 'yourhandle'}</strong>, your look will be featured in our community section.
               </p>
             </div>
 

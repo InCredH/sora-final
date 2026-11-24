@@ -85,6 +85,23 @@ export interface Product {
   isEditorialHero?: boolean;
 }
 
+// Shareable link for a product page, e.g. "#product/hoshi/gold-black".
+const slugify = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+export const productHash = (product: Product, variant?: ProductVariant): string => {
+  const v = variant && product.variants.length > 1 ? `/${slugify(variant.colorName)}` : '';
+  return `#product/${product.slug}${v}`;
+};
+
+/** Finds the product (and colour) a "#product/..." link points to. */
+export const findProductFromHash = (path: string): { product: Product; variantId?: string } | null => {
+  const [, slug, colour] = path.split('/');
+  const product = PRODUCTS.find((p) => p.slug === slug);
+  if (!product) return null;
+  const variant = colour ? product.variants.find((v) => slugify(v.colorName) === colour) : undefined;
+  return { product, variantId: variant?.id };
+};
+
 export const isBundleEligible = (product: Product): boolean => product.tier !== "Hero";
 
 // At or below this many units left, the UI shows a "Hurry! Only X left" message instead of "In Stock".
@@ -148,12 +165,12 @@ export const PRODUCTS: Product[] = [
     lens: "Warm brown",
 
     images: [
-      "/images/hoshi/hoshi-front.jpeg",
-      "/images/hoshi/hoshi-side.jpeg",
-      "/images/hoshi/hoshi-cross.png",
+      "/images-web/hoshi/hoshi-front.jpg",
+      "/images-web/hoshi/hoshi-side.jpg",
+      "/images-web/hoshi/hoshi-cross.jpg",
       // "/images/hoshi/frame-front.png",
-      "/images/hoshi/hoshi-model-2.jpeg",
-      "/images/hoshi/hoshi-model-3.jpeg"
+      "/images-web/hoshi/hoshi-model-2.jpg",
+      "/images-web/hoshi/hoshi-model-3.jpg"
     ],
     variants: [
       {
@@ -161,7 +178,7 @@ export const PRODUCTS: Product[] = [
         name: "Gold Frame & Brown Lens",
         colorName: "Gold & Brown",
         colorHex: "#C8A96B",
-        image: "/images/hoshi/hoshi-front.jpeg",
+        image: "/images-web/hoshi/hoshi-front.jpg",
         stockQuantity: 4
         // Uses the product's images, description and lens above.
       },
@@ -170,13 +187,13 @@ export const PRODUCTS: Product[] = [
         name: "Gold Frame & Black Lens",
         colorName: "Gold & Black",
         colorHex: "#000000",
-        image: "/images/hoshi/hoshi-black-front.JPEG",
+        image: "/images-web/hoshi/hoshi-black-front.jpg",
         // Add more angles here as you shoot them (side, cross, model…).
         images: [
-          "/images/hoshi/hoshi-black-front.JPEG",
-          "/images/hoshi/hoshi-black-side.JPEG",
-          "/images/hoshi/hoshi-black-cross.JPEG",
-          "/images/hoshi/hoshi-black-model-1.jpeg",
+          "/images-web/hoshi/hoshi-black-front.jpg",
+          "/images-web/hoshi/hoshi-black-side.jpg",
+          "/images-web/hoshi/hoshi-black-cross.jpg",
+          "/images-web/hoshi/hoshi-black-model-1.jpg",
 
         ],
         stockQuantity: 5, // ← set the real count for the black variant
@@ -233,11 +250,11 @@ export const PRODUCTS: Product[] = [
     lens: "Warm amber",
 
     images: [
-      "/images/nagi/nagi-front.png",
-      "/images/nagi/nagi-side.png",
-      "/images/nagi/nagi-cross.png",
-      "/images/nagi/nagi-model-1.jpeg",
-      "/images/nagi/nagi-model-2.jpeg"
+      "/images-web/nagi/nagi-front.jpg",
+      "/images-web/nagi/nagi-side.jpg",
+      "/images-web/nagi/nagi-cross.jpg",
+      "/images-web/nagi/nagi-model-1.jpg",
+      "/images-web/nagi/nagi-model-2.jpg"
 
 
     ],
@@ -247,7 +264,7 @@ export const PRODUCTS: Product[] = [
         name: "Clear Frame & Amber Lens",
         colorName: "Clear & Amber",
         colorHex: "#C9A469",
-        image: "/images/nagi/nagi-front.png"
+        image: "/images-web/nagi/nagi-front.jpg"
       }
     ],
 
@@ -292,12 +309,12 @@ export const PRODUCTS: Product[] = [
     lens: "Cool blue tint",
 
     images: [
-      "/images/aozora/aozora-front.png",
-      "/images/aozora/aozora-side.png",
-      "/images/aozora/aozora-cross.png",
-      // "/images/aozora/aozora-model-2.jpeg",
-      "/images/aozora/aozora-model-1.jpeg",
-      "/images/aozora/aozora-model-3.jpeg"
+      "/images-web/aozora/aozora-front.jpg",
+      "/images-web/aozora/aozora-side.jpg",
+      "/images-web/aozora/aozora-cross.jpg",
+      // "/images-web/aozora/aozora-model-2.jpg",
+      "/images-web/aozora/aozora-model-1.jpg",
+      "/images-web/aozora/aozora-model-3.jpg"
 
 
 
@@ -308,7 +325,7 @@ export const PRODUCTS: Product[] = [
         name: "Silver Frame & Blue Lens",
         colorName: "Silver & Blue",
         colorHex: "#7299C4",
-        image: "/images/aozora/aozora-front.png"
+        image: "/images-web/aozora/aozora-front.jpg"
       }
     ],
 
@@ -353,11 +370,11 @@ export const PRODUCTS: Product[] = [
     lens: "Matching green tint",
 
     images: [
-      "/images/arashi/arashi-front.png",
-      "/images/arashi/arashi-side.jpg",
-      "/images/arashi/arashi-cross.jpg",
-      "/images/arashi/arashi-model-1.jpeg",
-      "/images/arashi/arashi-model-2.jpeg"
+      "/images-web/arashi/arashi-front.jpg",
+      "/images-web/arashi/arashi-side.jpg",
+      "/images-web/arashi/arashi-cross.jpg",
+      "/images-web/arashi/arashi-model-1.jpg",
+      "/images-web/arashi/arashi-model-2.jpg"
 
 
     ],
@@ -367,7 +384,7 @@ export const PRODUCTS: Product[] = [
         name: "Sage-Green Frame & Green Lens",
         colorName: "Sage Green",
         colorHex: "#6B7055",
-        image: "/images/arashi/arashi-front.png"
+        image: "/images-web/arashi/arashi-front.jpg"
       }
     ],
 
@@ -412,12 +429,12 @@ export const PRODUCTS: Product[] = [
     lens: "Warm brown",
 
     images: [
-      "/images/yuhi/yuhi-front.jpeg",
-      "/images/yuhi/yuhi-side.jpeg",
-      "/images/yuhi/yuhi-cross.png",
-      // "/images/yuhi/yuhi-model-1.jpeg",
-      "/images/yuhi/yuhi-model-2.jpeg",
-      "/images/yuhi/yuhi-model-3.jpeg"
+      "/images-web/yuhi/yuhi-front.jpg",
+      "/images-web/yuhi/yuhi-side.jpg",
+      "/images-web/yuhi/yuhi-cross.jpg",
+      // "/images-web/yuhi/yuhi-model-1.jpg",
+      "/images-web/yuhi/yuhi-model-2.jpg",
+      "/images-web/yuhi/yuhi-model-3.jpg"
 
     ],
     variants: [
@@ -426,7 +443,7 @@ export const PRODUCTS: Product[] = [
         name: "Tortoiseshell Frame & Brown Lens",
         colorName: "Tortoiseshell",
         colorHex: "#7A4A26",
-        image: "/images/yuhi/yuhi-front.jpeg"
+        image: "/images-web/yuhi/yuhi-front.jpg"
       }
     ],
 
@@ -489,9 +506,9 @@ export const BRAND_VALUES = [
   },
   {
     number: "02",
-    title: "COMPLIMENTARY DELIVERY",
+    title: "FREE SHIPPING",
     description:
-      "Enjoy free delivery on every order, with no minimum purchase."
+      "Enjoy free shipping on every order, with no minimum purchase."
   },
   {
     number: "03",

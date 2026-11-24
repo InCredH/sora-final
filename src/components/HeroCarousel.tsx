@@ -166,8 +166,8 @@ export const HeroCarousel: React.FC = () => {
             secondary: { label: 'All Frames', onClick: goShop },
             images: [
               {
-                src: '/images/hero/arashi-model-3.jpeg',
-                srcSm: '/images/hero/arashi-model-3-sm.jpeg',
+                src: '/images/hero/arashi-model-3.jpg',
+                srcSm: '/images/hero/arashi-model-3-sm.jpg',
                 alt: 'Model wearing SORA ARASHI sage green square sunglasses',
                 position: 'center 20%'
               }

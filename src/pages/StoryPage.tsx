@@ -70,7 +70,7 @@ export const StoryPage: React.FC = () => {
           <div className="md:col-span-5 md:sticky md:top-24">
             <div className="relative aspect-[4/5] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
               <img
-                src="/images/story/founders.jpg"
+                src="/images-web/story/founders.jpg"
                 alt="The two people behind SORA, on the trip that inspired it"
                 className="w-full h-full object-cover filter contrast-[1.05]"
               />
@@ -105,7 +105,7 @@ export const StoryPage: React.FC = () => {
 
           <div className="md:col-span-6 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
-              src="/images/hoshi/hoshi-black-model-1.jpeg"
+              src="/images-web/hoshi/hoshi-black-model-1.jpg"
               alt="Model wearing SORA HOSHI sunglasses"
               className="w-full h-full object-cover filter contrast-[1.05]"
             />
@@ -119,7 +119,7 @@ export const StoryPage: React.FC = () => {
         <div className="py-8 sm:py-20 border-b border-[#2C211B]/10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 order-2 md:order-1 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
-              src="/images/kaizo/model-1.jpg"
+              src="/images-web/kaizo/model-1.jpg"
               alt="Model wearing SORA ARASHI sunglasses"
               className="w-full h-full object-cover filter contrast-[1.05]"
             />
@@ -163,7 +163,7 @@ export const StoryPage: React.FC = () => {
 
           <div className="md:col-span-6 relative aspect-[4/3] bg-white border border-[#2C211B]/15 rounded-xl overflow-hidden shadow-md">
             <img
-              src="/images/kaizo/frame-sky.jpg"
+              src="/images-web/kaizo/frame-sky.jpg"
               alt="SORA ARASHI sunglasses held up against the sky"
               className="w-full h-full object-cover filter contrast-[1.05]"
             />

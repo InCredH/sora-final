@@ -52,9 +52,9 @@ export const ShopPage: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase mb-1.5 sm:mb-2">
               <img src="/logo-transparent.png" alt="SORA" className="h-4 w-auto object-contain" />
-              <span>SORA ARCHIVE</span>
+              <span>SORA</span>
               <span>/</span>
-              <span className="text-[#2C211B] font-bold">ALL SILHOUETTES</span>
+              <span className="text-[#2C211B] font-bold">ALL FRAMES</span>
             </div>
             <h1 className="font-display text-[26px] leading-none sm:leading-tight sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
               THE FULL COLLECTION
@@ -139,7 +139,7 @@ export const ShopPage: React.FC = () => {
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="bg-white border border-[#2C211B]/20 text-[#2C211B] text-xs font-mono-tech py-2 px-3 rounded focus:outline-none focus:border-[#861F3A] cursor-pointer"
               >
-                <option value="featured">Featured Sequence</option>
+                <option value="featured">Featured</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
               </select>
@@ -171,7 +171,7 @@ export const ShopPage: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <span className="text-[#6B7055]">
-              Showing <strong className="text-[#2C211B]">{filteredProducts.length}</strong> silhouettes
+              Showing <strong className="text-[#2C211B]">{filteredProducts.length}</strong> {filteredProducts.length === 1 ? 'frame' : 'frames'}
             </span>
 
             {activeFiltersCount > 0 && (
@@ -193,7 +193,7 @@ export const ShopPage: React.FC = () => {
             <div className="py-12 sm:py-24 text-center border border-dashed border-[#2C211B]/20 bg-white/60 rounded-xl">
               <Sparkles size={24} className="mx-auto text-[#6B7055] mb-3" />
               <h3 className="font-display text-xl font-bold text-[#2C211B] uppercase">
-                NO SILHOUETTES MATCH YOUR SPECIFICATIONS
+                NO FRAMES MATCH YOUR FILTERS
               </h3>
               <p className="text-xs text-[#6B7055] font-mono-tech mt-2">
                 Try widening your category or shape selections.

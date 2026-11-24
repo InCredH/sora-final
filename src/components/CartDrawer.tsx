@@ -168,7 +168,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                 THANK YOU FOR CHOOSING SORA
               </h4>
               <p className="text-xs sm:text-sm text-[#6B7055] mt-3 max-w-sm mx-auto leading-relaxed">
-                Your enquiry for <strong>{cart.reduce((s, i) => s + i.quantity, 0)} frame{cart.reduce((s, i) => s + i.quantity, 0) > 1 ? 's' : ''}</strong> has been prepared in WhatsApp. Tap <strong>Send</strong> there and our concierge will confirm availability and delivery.
+                Your enquiry for <strong>{cart.reduce((s, i) => s + i.quantity, 0)} frame{cart.reduce((s, i) => s + i.quantity, 0) > 1 ? 's' : ''}</strong> has been prepared in WhatsApp. Tap <strong>Send</strong> there and our support team will confirm availability and delivery.
               </p>
               <button
                 type="button"
@@ -470,7 +470,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                         )}
                         {discountAmount > 0 && (
                           <div className="flex justify-between text-[#861F3A] font-bold">
-                            <span>Maison Privilege</span>
+                            <span>Coupon{appliedPromo ? ` (${appliedPromo})` : ''}</span>
                             <span>-{formatPrice(discountAmount)}</span>
                           </div>
                         )}
@@ -506,7 +506,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                   <ArrowRight size={15} />
                 </button>
                 <div className="flex flex-wrap items-center justify-center gap-x-1.5 text-[9.5px] font-mono-tech text-[#6B7055] text-center">
-                  <span>You'll get a secure Razorpay payment link on WhatsApp · UPI, cards & netbanking</span>
+                  <span>You'll get a secure Razorpay payment link on WhatsApp  UPI, cards & netbanking</span>
                   <span>AVAILABLE FROM 10AM - 12 MIDNIGHT</span>
                   {/* <button
                     type="button"
