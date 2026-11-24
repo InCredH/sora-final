@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { ProductVariant, PRODUCTS, BUNDLE_OFFER, BUNDLE_TIERS, isBundleEligible, isLowStock, withVariant } from '../data/products';
+import { ProductVariant, PRODUCTS, BUNDLE_OFFER, BUNDLE_TIERS, productHash, isBundleEligible, isLowStock, withVariant } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { ProductCard } from '../components/ProductCard';
 import { StarRating } from '../components/StarRating';
 import { ImageLightbox } from '../components/ImageLightbox';
 import { getRatingSummary } from '../data/reviews';
-import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag, AlertTriangle, Expand } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Truck, RefreshCcw, ShieldCheck, Check, ChevronLeft, ChevronRight, Tag, AlertTriangle, Expand, Share2 } from 'lucide-react';
 
 interface ProductDetailPageProps {
   onOpenPolicy: (key: string) => void;
@@ -17,7 +17,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
     initialVariantId,
     closeProductDetail,
     addToCart,
-    formatPrice
+    formatPrice,
+    showToast
   } = useShop();
 
   const baseProduct = selectedProduct || PRODUCTS[0];
@@ -29,6 +30,27 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Share this frame (and the colour being viewed). Phones open the share sheet
+  // (WhatsApp, Instagram, etc.); elsewhere the link is copied.
+  const handleShare = async () => {
+    const url = `${window.location.origin}${window.location.pathname}${productHash(baseProduct, selectedVariant)}`;
+    const text = `SORA ${baseProduct.name} sunglasses${baseProduct.variants.length > 1 ? ` in ${selectedVariant.colorName}` : ''}, ${formatPrice(product.price)}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: `SORA ${baseProduct.name}`, text, url });
+      } catch {
+        // Share sheet closed: nothing to do.
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      showToast('Link copied. Paste it anywhere to share.');
+    } catch {
+      window.prompt('Copy this link to share:', url);
+    }
+  };
 
   // Finger-swipe on the main photo. A swipe changes the photo; a tap opens the zoom viewer.
   const touchStart = useRef<{ x: number; y: number } | null>(null);
@@ -65,7 +87,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
   const details = [
     { label: 'Meaning', value: `${product.japaneseMeaning} (${product.subtitle})` },
     { label: 'Pronunciation', value: `${product.name.charAt(0)}${product.name.slice(1).toLowerCase()} (${product.pronunciation})` },
-    { label: 'Silhouette', value: product.shape },
+    { label: 'Shape', value: product.shape },
     { label: 'Frame', value: product.frame },
     { label: 'Lenses', value: product.lens },
     { label: 'UV Protection', value: 'UV400 Protected' },
@@ -76,6 +98,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
   const handleVariantSelect = (variant: ProductVariant) => {
     setSelectedVariant(variant);
     setActiveImageIndex(0);
+    // Keep the page link in step with the colour, so a shared link opens this colour.
+    try {
+      window.history.replaceState(null, '', productHash(baseProduct, variant));
+    } catch {}
     // Keep quantity within the new colour's stock.
     const stock = withVariant(baseProduct, variant).stockQuantity;
     setQuantity((q) => Math.max(1, Math.min(q, stock || 1)));
@@ -235,6 +261,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               ))}
             </div>
             )}
+
+            <p className="text-[10.5px] text-[#6B7055] italic leading-snug">
+              Images are for reference. Actual frame and lens colours may look slightly different depending on lighting and your screen.
+            </p>
           </div>
 
           {/* Right Column: Specifications, Variants & Shopping Flow (5 cols) — Tight Spacing Above Fold */}
@@ -247,10 +277,22 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               </div>
 
               {/* Title & Price */}
-              <h1 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#2C211B] tracking-tight mt-1">
-                {product.name}
-              </h1>
+              <div className="mt-1 flex items-center justify-between gap-3">
+                <h1 className="font-display text-2xl sm:text-3xl font-extrabold uppercase text-[#2C211B] tracking-tight">
+                  {product.name}
+                </h1>
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#2C211B]/15 bg-white hover:border-[#861F3A] hover:text-[#861F3A] text-[#2C211B] text-[10.5px] font-mono-tech font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  aria-label={`Share ${product.name}`}
+                >
+                  <Share2 size={13} />
+                  Share
+                </button>
+              </div>
 
+              {/* Reviews hidden until SORA has real customer reviews. Remove this comment wrapper to show the star rating again.
               {rating && (
                 <a
                   href="#reviews"
@@ -262,6 +304,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   <span className="underline underline-offset-2">({rating.count} {rating.count === 1 ? 'review' : 'reviews'})</span>
                 </a>
               )}
+              */}
 
               <div className="mt-1.5 flex items-baseline gap-2.5">
                 <span className="font-mono-tech text-2xl sm:text-3xl text-[#2C211B] font-extrabold">
@@ -273,14 +316,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               </div>
 
               {/* Bundle offer note */}
-              <div className="mt-2 flex items-center gap-1.5 text-[11px] font-mono-tech font-bold text-[#861F3A]">
+              {/* <div className="mt-2 flex items-center gap-1.5 text-[11px] font-mono-tech font-bold text-[#861F3A]">
                 <Tag size={12} />
                 <span>
                   {bundleEligible
                     ? `Bundle offer: ${BUNDLE_OFFER.label}* · *Except HOSHI`
                     : 'Not part of the bundle offer'}
                 </span>
-              </div>
+              </div> */}
 
               {/* Subtitle, Tagline & Short Description */}
               <p className="mt-1.5 text-[11px] font-mono-tech text-[#6B7055] uppercase font-semibold tracking-wider">
@@ -390,7 +433,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                   className="p-2 bg-white border border-[#2C211B]/10 rounded-lg cursor-pointer hover:border-[#861F3A] transition-colors shadow-sm"
                 >
                   <Truck size={14} className="mx-auto text-[#861F3A] mb-0.5" />
-                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">Free Delivery</span>
+                  <span className="text-[9px] font-mono-tech text-[#2C211B] uppercase block font-bold">Free Shipping</span>
                   <span className="text-[8px] font-mono-tech text-[#6B7055]">On all orders</span>
                 </div>
 
@@ -426,7 +469,31 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
               </dl>
             </div>
 
-            {/* Customer Reviews */}
+            {/* What's in the box */}
+            <div className="pt-4 sm:pt-5 border-t border-[#2C211B]/10">
+              <h2 className="text-xs font-mono-tech uppercase font-bold text-[#2C211B] pb-2 border-b border-[#2C211B]/10">
+                What's in the box
+              </h2>
+              <ul className="py-3 sm:py-4 grid grid-cols-2 gap-x-3 gap-y-2 text-xs text-[#2C211B]">
+                {[
+                  `SORA ${product.name} sunglasses`,
+                  'Recyclable kraft paper tube jar',
+                  'Drawstring pouch',
+                  'Microfiber lens cleaning cloth',
+                  'Product details card',
+                  'Care card',
+                  'Discount card',
+                  'Thank-you card'
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-1.5">
+                    <Check size={13} className="mt-0.5 shrink-0 text-[#861F3A]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Customer reviews: hidden until SORA has real customer reviews. Remove this comment wrapper to show them again.
             {rating && (
               <div id="reviews" className="mt-2 pt-4 sm:pt-5 border-t border-[#2C211B]/10 scroll-mt-24">
                 <div className="flex items-center justify-between pb-2 border-b border-[#2C211B]/10">
@@ -450,6 +517,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 </ul>
               </div>
             )}
+            */}
           </div>
         </div>
 
@@ -464,7 +532,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
                 <span className="font-bold">IN THE FIELD & ON THE RUNWAY</span>
               </div> */}
               <h2 className="font-display text-3xl sm:text-5xl font-black uppercase text-[#2C211B] tracking-tight">
-                ARCHIVE // {product.name}
+                MEET {product.name}
               </h2>
               <p className="text-xs sm:text-sm text-[#6B7055] mt-2 max-w-xl font-normal">
                 The story behind the frame.
@@ -559,7 +627,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenPoli
             <div className="flex items-center justify-between pb-5">
               <div>
                 <span className="text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase block mb-1 font-bold">
-                  MORE SILHOUETTES
+                  YOU MAY ALSO LIKE
                 </span>
                 <h3 className="font-display text-xl sm:text-2xl font-extrabold uppercase text-[#2C211B]">
                   EXPLORE SIMILAR FRAMES

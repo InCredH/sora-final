@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product, ProductVariant, PRODUCTS, withVariant } from '../data/products';
+import { Product, ProductVariant, PRODUCTS, withVariant, productHash, findProductFromHash } from '../data/products';
 import { calculateBundle, AppliedBundle } from '../utils/pricing';
 
 export interface CartItem {
@@ -104,7 +104,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         document.title = 'Terms & Conditions | SORA (空)';
       } else if (view === '404') {
         window.history.replaceState(null, '', '#404');
-        document.title = '404: Silhouette Not Found | SORA (空)';
+        document.title = 'Page Not Found | SORA (空)';
       }
     } catch {}
   };
@@ -134,19 +134,24 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         _setCurrentView('terms');
         document.title = 'Terms & Conditions | SORA (空)';
       } else if (hash.startsWith('product/')) {
-        // Automatically clear any leftover #product/... hash from URL so reload goes cleanly to Home
-        try {
-          window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        } catch {}
-        _setCurrentView('home');
-        document.title = 'SORA (空) | Sunglasses Inspired by the Sky';
+        // Shared product link, e.g. #product/hoshi or #product/hoshi/gold-black
+        const match = findProductFromHash(hash);
+        if (match) {
+          setInitialVariantId(match.variantId ?? null);
+          setSelectedProduct(match.product);
+          _setCurrentView('pdp');
+          document.title = `${match.product.name} | SORA (空) Eyewear`;
+        } else {
+          _setCurrentView('404');
+          document.title = 'Page Not Found | SORA (空)';
+        }
       } else if (hash === '404') {
         _setCurrentView('404');
-        document.title = '404: Silhouette Not Found | SORA (空)';
+        document.title = 'Page Not Found | SORA (空)';
       } else if (hash) {
         // Unrecognized route -> 404 page
         _setCurrentView('404');
-        document.title = '404: Silhouette Not Found | SORA (空)';
+        document.title = 'Page Not Found | SORA (空)';
       }
     };
 
@@ -207,6 +212,12 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setSelectedProduct(product);
     _setCurrentView('pdp');
     document.title = `${product.name} | SORA (空) Eyewear`;
+    // Give the page its own link so it can be shared, and so the phone's back button returns here.
+    try {
+      const variant = variantId ? product.variants.find((v) => v.id === variantId) : undefined;
+      const hash = productHash(product, variant);
+      if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+    } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -277,19 +288,21 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const applyPromoCode = (code: string) => {
     const trimmed = code.trim().toUpperCase();
-    if (trimmed === 'SORA10') {
-      setAppliedPromo('SORA10');
-      return { success: true, message: 'VIP 10% Maison Privilège applied' };
-    }
+    // SORA10 (VIP 10% Maison Privilège): switched off for now.
+    // if (trimmed === 'SORA10') {
+    //   setAppliedPromo('SORA10');
+    //   return { success: true, message: 'VIP 10% Maison Privilège applied' };
+    // }
     if (trimmed === 'SORA15') {
       setAppliedPromo('SORA15');
       return { success: true, message: 'Exclusive 15% discount applied' };
     }
-    if (trimmed === 'FLAGSHIP') {
-      setAppliedPromo('FLAGSHIP');
-      return { success: true, message: '₹500 Flagship Debut discount applied' };
-    }
-    return { success: false, message: 'Invalid promo code. Try "SORA10" or "FLAGSHIP"' };
+    // FLAGSHIP (₹500 Flagship Debut discount): switched off for now.
+    // if (trimmed === 'FLAGSHIP') {
+    //   setAppliedPromo('FLAGSHIP');
+    //   return { success: true, message: '₹500 Flagship Debut discount applied' };
+    // }
+    return { success: false, message: 'Coupon code not found' };
   };
 
   const removePromoCode = () => {
@@ -299,13 +312,15 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Promo codes don't stack with the bundle offer: they only apply to frames not in a bundle.
   const promoEligibleAmount = cartSubtotal - bundledValue;
   let discountAmount = 0;
-  if (appliedPromo === 'SORA10') {
-    discountAmount = Math.round(promoEligibleAmount * 0.1);
-  } else if (appliedPromo === 'SORA15') {
+  // if (appliedPromo === 'SORA10') {
+  //   discountAmount = Math.round(promoEligibleAmount * 0.1);
+  // } else
+  if (appliedPromo === 'SORA15') {
     discountAmount = Math.round(promoEligibleAmount * 0.15);
-  } else if (appliedPromo === 'FLAGSHIP') {
-    discountAmount = Math.min(promoEligibleAmount, 500);
   }
+  // else if (appliedPromo === 'FLAGSHIP') {
+  //   discountAmount = Math.min(promoEligibleAmount, 500);
+  // }
 
   const cartTotal = Math.max(0, cartSubtotal - bundleDiscount - discountAmount);
 

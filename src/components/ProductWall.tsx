@@ -35,7 +35,7 @@ export const ProductWall: React.FC = () => {
           <div className="lg:col-span-7 bg-[#111116] border border-white/10 flex flex-col justify-between p-6 sm:p-10 group relative overflow-hidden">
             <div className="flex items-center justify-between z-10">
               <span className="text-[10px] font-mono-tech tracking-widest bg-white text-black px-2.5 py-1 uppercase font-semibold">
-                FLAGSHIP SPOTLIGHT
+                IN THE SPOTLIGHT
               </span>
               <span className="text-xs font-mono-tech text-zinc-400">
                 17G PURE TITANIUM

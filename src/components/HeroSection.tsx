@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
   const marqueeItems = [
     'SORA · SEE YOUR WAY',
     'UV400 PROTECTED',
-    'COMPLIMENTARY DELIVERY',
+    'FREE SHIPPING',
     'ANY 2 FOR ₹2,499*',
     '*EXCEPT HOSHI',
     'MADE FOR EVERY MOOD',
@@ -172,7 +172,7 @@ export const HeroSection: React.FC = () => {
           {/* Editorial Side Label */}
           <div className="hidden sm:flex flex-col items-center gap-4 mr-3 vertical-rl font-mono-tech text-[10px] text-[#6B7055] tracking-[0.25em] uppercase select-none opacity-80">
             <span className="font-semibold text-[#2C211B]">
-              SORA ARCHIVE // SS-26
+              SORA COLLECTION // 2026
             </span>
 
             <span className="w-px h-10 bg-[#C8A96B]" />

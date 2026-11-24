@@ -1,5 +1,6 @@
 import React from 'react';
-import { X, Truck, Lock, RefreshCcw } from 'lucide-react';
+import { X, Truck, Lock, RefreshCcw, XCircle } from 'lucide-react';
+import { ENQUIRY_WHATSAPP_NUMBER } from '../utils/whatsappEnquiry';
 
 interface PolicyModalProps {
   policyKey: string | null;
@@ -46,19 +47,38 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
         </div>
       )
     },
+    cancellation: {
+      title: 'CANCELLATIONS',
+      subtitle: 'Cancel anytime before dispatch',
+      icon: XCircle,
+      content: (
+        <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
+          <p>
+            You can cancel anytime before your order is dispatched. Just{' '}
+            <a href={`https://wa.me/${ENQUIRY_WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="text-white font-medium underline">message us on WhatsApp</a>{' '}
+            and we&rsquo;ll refund you in full to your original payment method within 5 to 7 working days.
+          </p>
+          <p>Once your order has shipped, it can&rsquo;t be cancelled.</p>
+          <p>
+            Orders using a bundle offer (Any 2 for ₹2,499) can be cancelled before dispatch, but only as a whole order, not individual frames. If you&rsquo;d like to keep some frames, we&rsquo;ll recalculate the price for what you keep (full price, or the bundle price that still applies) and refund the difference.
+          </p>
+        </div>
+      )
+    },
     privacy: {
-      title: 'CONFIDENTIALITY & SECURITY',
-      subtitle: 'Institutional-grade data protection',
+      title: 'YOUR PRIVACY',
+      subtitle: 'What we collect and why',
       icon: Lock,
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            We hold patron privacy to the highest standard. We do not sell, rent, or trade your contact or sizing data with third-party advertising networks.
+            We only collect what we need to deliver your order: your name, address, city, pincode and WhatsApp number. We never sell, rent or trade it.
           </p>
           <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
-            <li>End-to-end 256-bit TLS encryption across all browsing and checkout channels.</li>
-            <li>Tokenized payment gateway integrations ensuring zero payment card numbers are stored on our servers.</li>
-            <li>Right to erasure: Request immediate deletion of your digital purchasing history at hello@yoursora.shop.</li>
+            <li>Payments go through a secure Razorpay link. We never see your card or bank details.</li>
+            <li>We share your delivery details only with our delivery partner.</li>
+            <li>No advertising cookies, tracking or analytics.</li>
+            <li>To see, correct or delete your information, email <span className="text-white font-medium">hello@yoursora.shop</span>.</li>
           </ul>
         </div>
       )

@@ -30,7 +30,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
               Sunglasses inspired by the sky. Distinctive shapes, UV400-protected lenses, and free shipping in every price.
             </p>
             <div className="mt-6 text-xs font-mono-tech text-[#C8A96B]">
-              CONCIERGE: <a href="mailto:hello@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">hello@yoursora.shop</a>
+              SUPPORT: <a href="mailto:hello@yoursora.shop" className="text-[#F5EFE3] hover:underline font-semibold">hello@yoursora.shop</a>
             </div>
           </div>
 
@@ -102,7 +102,7 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                   onClick={() => onOpenPolicy('shipping')}
                   className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
                 >
-                  Complimentary Shipping
+                  Free Shipping
                 </button>
               </li>
               <li>
@@ -112,6 +112,15 @@ export const NewsletterAndFooter: React.FC<NewsletterAndFooterProps> = ({ onOpen
                   className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
                 >
                   Returns & Exchanges
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onOpenPolicy('cancellation')}
+                  className="hover:text-[#C8A96B] transition-colors text-left cursor-pointer"
+                >
+                  Cancellations
                 </button>
               </li>
               <li>

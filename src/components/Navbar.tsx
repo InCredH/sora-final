@@ -257,7 +257,7 @@ export const Navbar: React.FC = () => {
                   className="flex items-center gap-3 p-3 bg-white border border-[#2C211B]/15 rounded-xl text-xs font-mono-tech text-[#6B7055] hover:text-[#861F3A] hover:border-[#861F3A] transition-all cursor-pointer mb-2"
                 >
                   <Search size={16} className="text-[#861F3A]" />
-                  <span>Search Silhouettes...</span>
+                  <span>Search frames...</span>
                 </button>
 
                 <button

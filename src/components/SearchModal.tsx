@@ -113,7 +113,7 @@ export const SearchModal: React.FC = () => {
         <div className="max-h-[60vh] overflow-y-auto p-4 sm:p-5">
           {query && searchResults.length === 0 ? (
             <div className="py-12 text-center text-xs font-mono-tech text-[#6B7055]">
-              NO SILHOUETTES MATCHING "{searchQuery.toUpperCase()}".
+              NO FRAMES MATCHING "{searchQuery.toUpperCase()}".
             </div>
           ) : query && searchResults.length > 0 ? (
             <div className="space-y-3">
@@ -159,7 +159,7 @@ export const SearchModal: React.FC = () => {
             <div className="py-8 text-center">
               <Sparkles size={20} className="mx-auto text-[#C8A96B] mb-2" />
               <p className="text-xs font-mono-tech text-[#6B7055] uppercase tracking-wider font-semibold">
-                TYPE TO DISCOVER SORA SILHOUETTES
+                TYPE TO SEARCH SORA FRAMES
               </p>
             </div>
           )}

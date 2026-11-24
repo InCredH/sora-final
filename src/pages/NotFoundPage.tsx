@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.title = '404: Page Not Found | SORA (空)';
+    document.title = 'Page Not Found | SORA (空)';
   }, []);
 
   const recommendedProducts = PRODUCTS.slice(0, 3);
@@ -21,7 +21,7 @@ export const NotFoundPage: React.FC = () => {
         {/* Hanko Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#861F3A]/10 border border-[#861F3A]/20 text-[11px] font-mono-tech tracking-widest text-[#861F3A] uppercase mb-6">
           <span className="hanko-stamp text-[9px] py-0 px-1 border-[#861F3A] text-[#861F3A]">空</span>
-          <span>404 // VOID COORDINATES</span>
+          <span>Error 404</span>
         </div>
 
         {/* 404 Headline */}
@@ -32,11 +32,11 @@ export const NotFoundPage: React.FC = () => {
         <div className="w-16 h-0.5 bg-[#C8A96B] mx-auto my-6" />
 
         <h2 className="font-display text-2xl sm:text-3xl font-extrabold uppercase tracking-wide text-[#2C211B]">
-          SILHOUETTE NOT FOUND IN CURRENT ARCHIVE
+          PAGE NOT FOUND
         </h2>
 
         <p className="mt-4 text-sm sm:text-base text-[#6B7055] font-normal max-w-lg mx-auto leading-relaxed">
-          The page you are looking for doesn't exist or has been moved.
+          We couldn&rsquo;t find that page. It may have moved, or the link may be wrong.
         </p>
 
         {/* Action Buttons */}
@@ -50,7 +50,7 @@ export const NotFoundPage: React.FC = () => {
             className="px-6 py-3.5 bg-[#2C211B] hover:bg-[#861F3A] text-[#F5EFE3] text-xs font-mono-tech font-bold uppercase rounded-xl tracking-wider transition-all duration-300 shadow-md inline-flex items-center gap-2 cursor-pointer"
           >
             <ShoppingBag size={14} className="text-[#C8A96B]" />
-            <span>Explore All Silhouettes</span>
+            <span>Shop All Frames</span>
           </button>
 
           <button
@@ -62,7 +62,7 @@ export const NotFoundPage: React.FC = () => {
             className="px-6 py-3.5 bg-white hover:bg-[#FAF7F0] text-[#2C211B] border border-[#2C211B]/15 text-xs font-mono-tech font-bold uppercase rounded-xl tracking-wider transition-all duration-300 shadow-sm inline-flex items-center gap-2 cursor-pointer"
           >
             <Compass size={14} className="text-[#861F3A]" />
-            <span>Return to Runway</span>
+            <span>Go to Home</span>
           </button>
 
           <button
@@ -83,10 +83,10 @@ export const NotFoundPage: React.FC = () => {
           <div className="flex items-center justify-between mb-8">
             <div>
               <span className="text-[10px] font-mono-tech tracking-widest text-[#6B7055] uppercase block mb-1 font-bold">
-                CURATED DISCOVERY
+                YOU MAY LIKE
               </span>
               <h3 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#2C211B]">
-                EXPLORE FLAGSHIP FRAMES
+                EXPLORE ALL FRAMES
               </h3>
             </div>
             <button
