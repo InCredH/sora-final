@@ -113,6 +113,11 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const handleHashRoute = () => {
       const hash = window.location.hash.replace(/^#\/?/, '').trim().toLowerCase();
+      if (hash === 'admin') {
+        // The admin page is a separate app: load it fresh.
+        window.location.reload();
+        return;
+      }
       if (!hash || hash === 'home') {
         try {
           if (window.location.hash) {

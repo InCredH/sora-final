@@ -1,3 +1,4 @@
+import catalog from './catalog.json';
 
 export interface ProductVariant {
   id: string; // must be unique within the product
@@ -140,7 +141,8 @@ export const isProductInStock = (product: Product): boolean =>
     ? product.variants.some((v) => withVariant(product, v).inStock)
     : product.inStock;
 
-export const PRODUCTS: Product[] = [
+/** Products exactly as written in this file, before any admin changes. */
+export const BASE_PRODUCTS: Product[] = [
 
   // --------------------------------------------------
   // HERO — HOSHI (星) · THE STAR
@@ -278,7 +280,7 @@ export const PRODUCTS: Product[] = [
       "Nagi (凪) means calm. Crystal-clear frame. Warm amber lenses. Effortless style, quiet confidence. ✦",
 
     inStock: true,
-    stockQuantity: 2,
+    stockQuantity: 1,
 
     unisex: true,
     weightGrams: 44,
@@ -466,6 +468,76 @@ export const PRODUCTS: Product[] = [
   }
 
 ];
+
+// --------------------------------------------------
+// ADMIN CHANGES
+// The admin page (yoursora.shop/#admin) saves stock, prices and text to catalog.json.
+// Anything saved there wins over the values written above. Delete an entry from
+// catalog.json (or set it back in the admin page) to fall back to this file.
+// --------------------------------------------------
+
+export interface VariantOverride {
+  stockQuantity?: number;
+  /** true marks the colour sold out even if units are left. */
+  soldOut?: boolean;
+}
+
+export interface ProductOverride {
+  price?: number;
+  isFeatured?: boolean;
+  tagline?: string;
+  shortDescription?: string;
+  description?: string;
+  shape?: string;
+  frame?: string;
+  lens?: string;
+  weightGrams?: number;
+  unisex?: boolean;
+  variants?: Record<string, VariantOverride>;
+}
+
+export interface CatalogFile {
+  updatedAt: string | null;
+  products: Record<string, ProductOverride>;
+}
+
+export const OVERRIDE_FIELDS = [
+  'price', 'isFeatured', 'tagline', 'shortDescription', 'description',
+  'shape', 'frame', 'lens', 'weightGrams', 'unisex'
+] as const;
+
+/** Applies the admin's saved changes to a product. */
+export const applyOverrides = (base: Product, o?: ProductOverride): Product => {
+  if (!o) return base;
+  const product: Product = { ...base };
+  for (const key of OVERRIDE_FIELDS) {
+    if (o[key] !== undefined) (product as unknown as Record<string, unknown>)[key] = o[key];
+  }
+  // Give every colour its own stock first, so changing one never affects another.
+  product.variants = base.variants.map((v) => {
+    const current = withVariant(base, v);
+    const next: ProductVariant = {
+      ...v,
+      stockQuantity: current.stockQuantity,
+      inStock: v.inStock ?? (current.inStock ? undefined : false)
+    };
+    const vo = o.variants?.[v.id];
+    if (vo?.stockQuantity !== undefined) next.stockQuantity = Math.max(0, Math.floor(vo.stockQuantity));
+    if (vo?.soldOut === true) next.inStock = false;
+    if (vo?.soldOut === false) next.inStock = undefined;
+    return next;
+  });
+  if (product.variants.length > 0) {
+    const views = product.variants.map((v) => withVariant(product, v));
+    product.stockQuantity = views.reduce((sum, v) => sum + v.stockQuantity, 0);
+    product.inStock = views.some((v) => v.inStock);
+  }
+  return product;
+};
+
+export const PRODUCTS: Product[] = BASE_PRODUCTS.map((p) =>
+  applyOverrides(p, (catalog as CatalogFile).products[p.id])
+);
 
 // --------------------------------------------------
 // PRODUCT INFORMATION SECTIONS
