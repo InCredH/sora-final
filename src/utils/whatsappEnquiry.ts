@@ -15,6 +15,7 @@ interface EnquiryDetails {
   total: number;
   formatPrice: (amount: number) => string;
   customerName?: string;
+  customerEmail?: string;
   customerAddress?: string;
   customerCity?: string;
   customerPincode?: string;
@@ -30,6 +31,7 @@ export const buildEnquiryMessage = ({
   total,
   formatPrice,
   customerName,
+  customerEmail,
   customerAddress,
   customerCity,
   customerPincode,
@@ -52,6 +54,7 @@ export const buildEnquiryMessage = ({
     'Hello SORA, I would like to place an enquiry for the following:',
     '',
     ...(customerName?.trim() ? [`Name: ${customerName.trim()}`] : []),
+    ...(customerEmail?.trim() ? [`Email: ${customerEmail.trim()}`] : []),
     ...(customerAddress?.trim() ? [`Address: ${customerAddress.trim().replace(/\s*\n\s*/g, ', ')}`] : []),
     ...(customerCity?.trim() ? [`City: ${customerCity.trim()}`] : []),
     ...(customerPincode?.trim() ? [`Pincode: ${customerPincode.trim()}`] : []),

@@ -34,17 +34,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
   const [promoMessage, setPromoMessage] = useState<{ text: string; isError: boolean } | null>(null);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [customerName, setCustomerName] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
   const [customerAddress, setCustomerAddress] = useState('');
   const [customerPincode, setCustomerPincode] = useState('');
   const [customerCity, setCustomerCity] = useState('');
   const [showErrors, setShowErrors] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const addressRef = useRef<HTMLTextAreaElement>(null);
   const pincodeRef = useRef<HTMLInputElement>(null);
   const cityRef = useRef<HTMLInputElement>(null);
 
   // Field validity (Indian pincode: 6 digits, can't start with 0).
   const nameInvalid = !customerName.trim();
+  const emailInvalid = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(customerEmail.trim());
   const addressInvalid = customerAddress.trim().length < 8;
   const pincodeInvalid = !/^[1-9][0-9]{5}$/.test(customerPincode);
   const cityInvalid = customerCity.trim().length < 2;
@@ -82,6 +85,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
     // All delivery details are required before we open WhatsApp.
     const firstInvalid =
       (nameInvalid && nameRef.current) ||
+      (emailInvalid && emailRef.current) ||
       (addressInvalid && addressRef.current) ||
       (pincodeInvalid && pincodeRef.current) ||
       (cityInvalid && cityRef.current) ||
@@ -103,6 +107,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
       total: finalTotal,
       formatPrice,
       customerName,
+      customerEmail,
       customerAddress,
       customerCity,
       customerPincode,
@@ -390,6 +395,26 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onOpenPolicy }) => {
                         />
                         {showErrors && nameInvalid && (
                           <p className="mt-1 text-[10px] font-mono-tech text-[#861F3A]">Please enter your name.</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <input
+                          ref={emailRef}
+                          type="email"
+                          inputMode="email"
+                          value={customerEmail}
+                          onChange={(e) => setCustomerEmail(e.target.value)}
+                          placeholder="Email *"
+                          autoComplete="email"
+                          required
+                          aria-invalid={showErrors && emailInvalid}
+                          className={`w-full bg-white border px-3 py-2 text-xs font-mono-tech text-[#2C211B] placeholder-[#6B7055] rounded focus:outline-none focus:border-[#861F3A] ${
+                            showErrors && emailInvalid ? 'border-[#861F3A] ring-1 ring-[#861F3A]' : 'border-[#2C211B]/20'
+                          }`}
+                        />
+                        {showErrors && emailInvalid && (
+                          <p className="mt-1 text-[10px] font-mono-tech text-[#861F3A]">Please enter a valid email address.</p>
                         )}
                       </div>
 

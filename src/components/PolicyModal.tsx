@@ -72,7 +72,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ policyKey, onClose }) 
       content: (
         <div className="space-y-4 text-xs font-mono-tech text-[#F5EFE3]/80 leading-relaxed font-light">
           <p>
-            We only collect what we need to deliver your order: your name, address, city, pincode and WhatsApp number. We never sell, rent or trade it.
+            We only collect what we need to deliver your order: your name, email, address, city, pincode and WhatsApp number. We never sell, rent or trade it.
           </p>
           <ul className="list-disc pl-5 space-y-2 text-[#C8A96B]/90">
             <li>Payments go through a secure Razorpay link. We never see your card or bank details.</li>

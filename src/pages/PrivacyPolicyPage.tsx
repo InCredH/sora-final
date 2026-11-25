@@ -73,10 +73,10 @@ export const PrivacyPolicyPage: React.FC = () => {
             <div className="space-y-3 text-sm text-[#2C211B]/80 leading-relaxed">
               <p>We only collect what we need to deliver your order:</p>
               <ul className="list-disc pl-5 space-y-1.5">
-                <li><strong>Delivery details:</strong> your name, address, city and pincode. You type these in your bag and they are sent to us in your WhatsApp order message.</li>
+                <li><strong>Delivery details:</strong> your name, email address, delivery address, city and pincode. You type these in your bag and they are sent to us in your WhatsApp order message.</li>
                 <li><strong>Your WhatsApp number and name:</strong> we see these when you message us.</li>
                 <li><strong>Your order:</strong> the frames, colours, quantities and price.</li>
-                <li><strong>Emails:</strong> if you email us, your email address and message.</li>
+                <li><strong>Emails:</strong> if you email us, your message.</li>
               </ul>
               <p>This website never asks for your card or bank details. Once your order is confirmed, we send you a Razorpay payment link on WhatsApp. You pay on Razorpay&rsquo;s secure page (UPI, card or netbanking), and we never see your card or bank details.</p>
             </div>
